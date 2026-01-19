@@ -4,7 +4,7 @@
 <html lang="en">
 
 <!-- head -->
-{% include head.html title="Home - UChile Robotics" %}
+{% include head.html title="CIRTA" %}
 <style>
     #home-team-button-bender:hover {
         background-color: orangered;
@@ -28,9 +28,41 @@
     <!-- Main Content -->
     <div class="container">
 
-    	<hr>
+        <div class="row text-center">
+            <div class="col-sm-12">
+                <h3 style="margin-top: 10px; margin-bottom: 40px;">Objectivos 2030</h3>
+
+            </div>
+        </div>
 
         <div class="row">
+            <div class="col-sm-4">
+                <img class="img-circle img-responsive img-center" src="static/img/logo_innovacion.jpg" alt="" style="max-height: 300px; max-width: 290px; margin: 0 auto;">
+                <h3>Innovación con impacto social y económico</h3>
+                <p>Desarrollar y transferir proyectos que mejoren la competitividad y el bienestar del país..</p>
+            </div>
+
+            <div class="col-sm-4">
+                <img class="img-circle img-responsive img-center" src="static/img/logo_educacion.jpg" alt="" style="max-height: 300px; max-width: 290px; margin: 0 auto;">
+                <h3>Inclusión y formación en ciencia y tecnología</h3>
+                <p>Capacitar a miles de personas, priorizando grupos subrepresentados en áreas STEAM.</p>
+
+            </div>
+        
+            <div class="col-sm-4">
+                <img class="img-circle img-responsive img-center" src="static/img/logo_alianzas.png" alt="" style="max-height: 240px; max-width: 290px; margin: 0 auto;">
+                <h3>Fortalecimiento del ecosistema nacional de innovación</h3>
+                <p>Consolidar alianzas estratégicas entre universidades, empresas y organismos públicos y privados.</p>
+            </div>
+        </div>
+
+        <hr>
+
+
+        <div class="row">
+            <h3 style="margin-top: 40px; margin-bottom: 40px;">Encuentra inspiración</h3>
+
+
             <div class="col-sm-8">
                 <!-- Slider-->
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="background: transparent">
@@ -38,9 +70,6 @@
                     <ol class="carousel-indicators">
                         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="4"></li>
                     </ol>
                     <div class="row">
                     </div>
@@ -48,32 +77,12 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-                            <img src="static/img/2023_2024/BRC_2023_01.png" alt="" style="max-height: 400px; margin: 0 auto;">
-                            <!--<div class="carousel-caption">-->
-                            <!--</div>-->
+                            <img src="static/img/inspiracion/telexistence.jpg" alt="" style="max-height: 400px; margin: 0 auto;">
+                            <!--  <div class="carousel-caption"> Robot reabastecedor en tiendas </div> -->
                         </div>
                         <div class="item">
-                            <img src="static/img/2023_2024/BRC_2023_02.jpg" alt="" style="max-height: 400px; margin: 0 auto;">
-                            <!--<div class="carousel-caption">-->
-                            <!--</div>-->
-                        </div>
-                        <div class="item">
-                            <img src="static/img/bender/gallery/Gonzalo.jpg" alt="" style="max-height: 400px; margin: 0 auto;">
-                            <!--<div class="carousel-caption">-->
-                            <!--...-->
-                            <!--</div>-->
-                        </div>
-                        <div class="item">
-                            <img src="static/img/2023_2024/MAQUI 2.jpg" alt="" style="max-height: 400px; margin: 0 auto;">
-                            <!--<div class="carousel-caption">-->
-                            <!--...-->
-                            <!--</div>-->
-                        </div>
-                        <div class="item">
-                            <img src="static/img/2023_2024/working_rona.JPG" alt="" style="max-height: 400px; margin: 0 auto;">
-                            <!--<div class="carousel-caption">-->
-                            <!--...-->
-                            <!--</div>-->
+                          <img src="static/img/inspiracion/hospitals.avif" alt="" style="max-height: 400px; margin: 0 auto;">
+                          <!--      <div class="carousel-caption"> Robot diseñado para entregas 24/7 dentro del hospital de medicamentos, muestras de laboratorio, etc.  </div> -->
                         </div>
                     </div>
 
@@ -87,19 +96,16 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-                <blockquote>
-                    UChile Homebreakers Team
-                </blockquote>
             </div>
             
             <div class="col-sm-4 text-center">
-                <h2>Contact Us</h2>
+                <h3 style="margin-top: 120px; margin-bottom: 20px;">Contáctenos para explorar juntos su desafío de I+D</h3>
             </div>
             
             <div class="row">
                 <div class="col-sm-4">
                     <ul class="list-inline text-center">
-                        <li>
+                        <!-- <li>
                             <a href="https://www.instagram.com/uchile_homebreakers/" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -114,14 +120,14 @@
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a>
-                        </li>
+                        </li>-->
                         <li>
-                            <a href="mailto:homebreakers.uchile@gmail.com">
+                            <a href="mailto:cirta.contacto@gmail.com">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
                                 </span>
-                                <span class="email-text">homebreakers.uchile@gmail.com</span>
+                                <span class="email-text">cirta.contacto@gmail.com</span>
                             </a>
                         </li>
                     </ul>
@@ -135,58 +141,7 @@
             
             
         </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <div class="row text-center">
-            <div class="col-sm-12">
-                <h3 style="margin-top: 10px; margin-bottom: 20px;">Our Robots</h3>
-
-            </div>
-        </div>
-        
-        <div class="row">
-            
-        
-            
-            <div class="col-sm-4">
-                <a href="bender-index.html">
-                    <img class="img-circle img-responsive img-center" src="static/img/bender/thumbnail.png" alt="" style="max-height: 300px; max-width: 290px; margin: 0 auto;">
-                </a>
-                <h2>Bender</h2>
-                <p>Bender is a humanoid robot designed for human-robot interaction (HRI) in domestic environments. He uses his computer vision, manipulation, and navigation capabilities to help at home by completing a wide array of tasks.</p>
-                <p>Bender has been developed by the UChile Homebreakers team since 2007. He usually participates in the RoboCup @Home international robotics competition. He has reached the 5th place amongst 24 teams, and 1st for his design.</p>
-                <p>
-                    <a id="home-team-button-bender" class="btn btn-default btn-lg" href="bender-index.html">Bender &raquo;</a>
-                </p>
-            </div>
-
-            <div class="col-sm-4">
-                <a href="pepper-index.html">
-                    <img class="img-circle img-responsive img-center" src="static/img/pepper/thumbnail.png" alt="" style="max-height: 300px; max-width: 290px; margin: 0 auto;">
-                </a>
-                <h2>Pepper</h2>
-                <p>Pepper, or as we call her, Maqui, is a humanoid robot focused on human-robot interaction (HRI) for domestic environments.</p>
-                <p>The team has participated in several competitions, achieving second place in Robocup@home 2019 and first place in 2021.</p>
-                <p>
-                    <a id="home-team-button-pepper" class="btn btn-default btn-lg" href="pepper-index.html">Pepper &raquo;</a>
-                </p>
-            </div>
-        
-            <div class="col-sm-4">
-                <a href="https://uchile.cl/noticias/165189/u-de-chile-creo-robot-que-promueve-la-teleasistencia-en-pacientes" target="_blank">
-                    <img class="img-circle img-responsive img-center" src="static/img/jaime/thumbnail.png" alt="" style="max-height: 300px; max-width: 290px; margin: 0 auto;">
-                </a>
-                <h2>Jaime</h2>
-                <p>Jaime, the butler, is a mobile robotic arm whose main purpose is to navigate its environment and interact with people.</p>
-                <p>During the pandemic, his name was changed to Pudu and worked in hospitals as a teleassistance robot, helping to prevent the spread of Covid.</p>
-                <p>
-                    <a id="home-team-button-jaime" class="btn btn-default btn-lg" href="https://uchile.cl/noticias/165189/u-de-chile-creo-robot-que-promueve-la-teleasistencia-en-pacientes" target="_blank">Jaime &raquo;</a>
-                </p>
-            </div>
-        </div>
-
+        <!-- /.row -->       
         
         <!-- /.row -->
     </div>
@@ -194,9 +149,6 @@
     <hr>
 
     
-
-    <hr>
-
 
     <!-- Footer -->
     {% include footer.html %}

@@ -1,0 +1,78 @@
+---
+# this is an empty front matter
+---
+<html lang="en">
+
+<!-- head -->
+{% include head.html title="Contacto - CIRTA" %}
+
+<body>
+
+    <!-- Navigation -->
+    {% include navigation.html %}
+
+    <!-- Page Header -->
+    {% include header_img.html image="static/img/title/team-bg.jpg" title="Contáctanos" subtitle="¿Tienes alguna duda o propuesta?" meta="" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <p>Completa el siguiente formulario y nos pondremos en contacto contigo a la brevedad.</p>
+
+                <form>
+
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" name="nombre" placeholder="Tu nombre completo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" class="form-control" name="email" placeholder="nombre@ejemplo.com" required>
+                    </div>
+
+                    <div class="form-group">
+                         <label>Teléfono</label>
+                         <input type="tel" class="form-control" name="telefono" placeholder="+569 ...">
+                    </div>
+
+                    <div class="form-group">
+                         <label>Organización / Institución</label>
+                         <input type="text" class="form-control" name="Institucion">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Motivo</label>
+                        <select class="form-control" name="motivo">
+                            <option value="consulta">Consultas generales</option>
+                            <option value="colaboracion">Propuesta de colaboración</option>
+                            <option value="voluntariado">Voluntariado</option>
+                            <option value="donaciones">Donaciones</option>
+                            <option value="prensa">Medios / Prensa</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Mensaje</label>
+                        <textarea class="form-control" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Enviar Formulario</button>
+                </form>
+                </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    {% include footer.html %}
+    
+    <!-- bottom imports -->
+    {% include bottom.html %}
+
+</body>
+</html>

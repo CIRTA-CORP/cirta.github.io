@@ -33,7 +33,7 @@ const validateORG = (org) => {
 };
 const validateMSG = (mensaje) => {
     if (!mensaje) return true;
-    let lengthValid = mensaje.trim().length >= 10 && org.trim().length <= 500;
+    let lengthValid = mensaje.trim().length >= 10 && mensaje.trim().length <= 500;
     return lengthValid;
 };
 

@@ -1,5 +1,5 @@
 // =============================================
-// 1. FUNCIONES DE VALIDACIÓN 
+// FUNCIONES DE VALIDACIÓN 
 // =============================================
 const validateName = (nombre) => {
     if (!nombre) return false;
@@ -14,7 +14,8 @@ const validateEmail = (email) => {
 
 const validateTel = (tel) => {
     if (!tel) return true; // Opcional
-    let re = /^[0-9]+$/;
+    if (tel.length > 15) return false;
+    let re = /^\+?[0-9\s]+$/;
     return re.test(tel);
 };
 
@@ -29,7 +30,45 @@ const validateMSG = (mensaje) => {
 };
 
 // =============================================
-// 2. Validar Formulario
+// FUNCIONES DE CONTROL VISUAL 
+// =============================================
+
+// Función para mostrar el texto rojo debajo del input
+const mostrarError = (idInput, mensaje) => {
+    // Seleccionamos el contenedor del mensaje de error
+    const errorElement = document.getElementById(`error-${idInput}`);
+    // Seleccionamos el input que falló (para pintarle el borde rojo)
+    const inputElement = document.getElementById(idInput);
+    
+    // Le ponemos el texto y lo hacemos visible
+    if (errorElement) {
+        errorElement.innerText = mensaje;
+        errorElement.style.display = 'block';
+    }
+    // Pintamos el borde del input de rojo
+    if (inputElement) {
+        inputElement.style.border = '2px solid red';
+    }
+};
+
+// Función para limpiar todos los errores (se ejecuta al inicio de cada intento)
+const limpiarErrores = () => {
+    // Oculta todos los textos rojos
+    const errorMessages = document.querySelectorAll('.error-msg');
+    errorMessages.forEach(msg => {
+        msg.style.display = 'none';
+        msg.innerText = '';
+    });
+
+    // Le quita el borde rojo a los inputs
+    const inputs = document.querySelectorAll('.form-control');
+    inputs.forEach(input => {
+        input.style.border = ''; 
+    });
+};
+
+// =============================================
+//  Validar Formulario
 // =============================================
 document.addEventListener("DOMContentLoaded", function() {
     
@@ -42,29 +81,46 @@ document.addEventListener("DOMContentLoaded", function() {
             // Detenemos el envio automatico 
             event.preventDefault();
 
-            // 1. Capturamos valores
+            // Limpiamos errores anteriores
+            limpiarErrores();
+
+            // Capturamos valores
             const nombre = document.getElementById('nombre').value;
             const email = document.getElementById('email').value;
             const tel = document.getElementById('tel').value;
             const org = document.getElementById('org').value;
             const mensaje = document.getElementById('mensaje').value;
 
-            // 2. Validamos
-            let invalidInputs = [];
+            //  Validamos e inyectamos los mensajes visuales si fallan
+            let haveError = false;
             
-            if (!validateName(nombre)) invalidInputs.push("Nombre");
-            if (!validateEmail(email)) invalidInputs.push("Email");
-            if (!validateTel(tel)) invalidInputs.push("Teléfono");
-            if (!validateORG(org)) invalidInputs.push("Organización");
-            if (!validateMSG(mensaje)) invalidInputs.push("Mensaje");
-
-            // 3. Si hay errores, avisamos y NO hacemos nada más
-            if (invalidInputs.length > 0) {
-                alert("Por favor corrige los siguientes campos:\n- " + invalidInputs.join("\n- "));
-                return; // Se acaba la función aquí
+            if (!validateName(nombre)){
+                mostrarError('nombre','El nombre debe tener entre 2 y 50 caracteres.');
+                haveError=true
+            } 
+            if (!validateEmail(email)){
+                mostrarError('email','Por favor ingrese un correo electrónico válido');
+                haveError=true
+            } 
+            if (!validateTel(tel)){
+                mostrarError('tel','El teléfono/celular debe contener solo números.');
+                haveError=true
+            } 
+            if (!validateORG(org)){
+                mostrarError('org','El nombre de la organización es muy corto.');
+                haveError=true
+            }
+            if (!validateMSG(mensaje)){
+                mostrarError('mensaje','El mensaje debe tener entre 10 y 50 caracteres.')
+                haveError=true
             }
 
-            // 4. Si todo está bien, enviamos con AJAX (Fetch)
+            // Si hay errores nos detenemos
+            if (haveError) {
+                return;
+            }
+
+            //  Si todo está bien, enviamos con AJAX (Fetch)
             const confirmacion = confirm('¿Enviar mensaje a CIRTA?');
             
             if (confirmacion) {

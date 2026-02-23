@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 haveError=true
             } 
             if (!validateTel(tel)){
-                mostrarError('tel','El teléfono/celular debe contener solo números.');
+                mostrarError('tel','Por favor ingrese un numero de teléfono/celular válido');
                 haveError=true
             } 
             if (!validateORG(org)){
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 haveError=true
             }
             if (!validateMSG(mensaje)){
-                mostrarError('mensaje','El mensaje debe tener entre 10 y 50 caracteres.')
+                mostrarError('mensaje','El mensaje debe tener entre 10 y 500 caracteres.')
                 haveError=true
             }
 
@@ -120,33 +120,75 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
 
-            //  Si todo está bien, enviamos con AJAX (Fetch)
-            const confirmacion = confirm('¿Enviar mensaje a CIRTA?');
+            //  Si todo está bien, preparamos y mostramos el modal
+            const modalUI = document.getElementById('modalConfirmacion');
+            modalUI.querySelector('h3').innerText = '¿Estás seguro?';
+            modalUI.querySelector('p').innerText = 'Revisa que tus datos sean correctos antes de enviar tu mensaje a CIRTA.';
+            document.querySelector('.modal-buttons').style.display = 'flex'; // Aseguramos que los botones se vean
             
-            if (confirmacion) {
-                const data = new FormData(form);
-                
-                // Enviamos los datos "por debajo" sin recargar
-                fetch(form.action, {
-                    method: form.method,
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                }).then(response => {
-                    if (response.ok) {
-                        alert('¡Mensaje enviado con éxito! Volviendo al inicio...');
-                        form.reset();
-                        window.location.href = "/"; // <-- REDIRECCIÓN AL INICIO
-                    } else {
-                        alert("Hubo un error al enviar el formulario. Intenta nuevamente.");
-                    }
-                }).catch(error => {
-                    alert("Error de conexión. Revisa tu internet.");
-                });
-            }
+            modalUI.style.display = 'flex';
         });
     } else {
         console.error("Error: No se encontró el formulario con ID 'formularioContacto'");
     }
-});
+    // =============================================
+    // CONTROL DEL MODAL (Botones Volver y Mandar)
+    // =============================================
+    const modal = document.getElementById('modalConfirmacion');
+    const btnVolver = document.getElementById('btn-volver');
+    const btnMandar = document.getElementById('btn-mandar');
+
+    // Acción: El usuario se arrepiente y quiere editar
+    if (btnVolver) {
+        btnVolver.addEventListener('click', function() {
+            modal.style.display = 'none'; // Oculta el modal
+        });
+    }
+
+    // Acción: El usuario confirma el envío
+    if (btnMandar) {
+        btnMandar.addEventListener('click', function() {
+            //MODAL modo cargando ...
+            modal.querySelector('h3').innerText = 'Enviando mensaje...';
+            modal.querySelector('p').innerText = 'Por favor espera un momento.';
+            document.querySelector('.modal-buttons').style.display = 'none'; // Ocultamos botones para evitar doble clic
+
+            const data = new FormData(form);
+            
+            // Enviamos los datos a Google Apps Script
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    modal.querySelector('h3').innerText = '¡Mensaje enviado con éxito!';
+                    modal.querySelector('p').innerText = 'Serás redirigido al inicio...';
+                    // Redirigimos automáticamente después de 2 segundos (2000 ms)
+                    setTimeout(() => {
+                        form.reset();
+                        window.location.href = "/";
+                    }, 2000);
+                } else {
+                    // MODO ERROR
+                    modal.querySelector('h3').innerText = 'Hubo un error';
+                    modal.querySelector('p').innerText = 'No se pudo enviar. Intenta nuevamente.';
+                    
+                    // Restauramos los botones y cerramos el modal después de 3 segundos
+                    setTimeout(() => { 
+                        modal.style.display = 'none'; 
+                    }, 3000);
+                
+                }
+            }).catch(error => {
+                // MODO ERROR DE RED
+                modal.querySelector('h3').innerText = 'Error de conexión';
+                modal.querySelector('p').innerText = 'Revisa tu internet e intenta nuevamente.';
+                
+                setTimeout(() => { 
+                    modal.style.display = 'none'; 
+                }, 3000);
+            });
+        });
+    }
+});          

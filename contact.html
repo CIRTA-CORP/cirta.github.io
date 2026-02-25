@@ -1,0 +1,103 @@
+---
+# this is an empty front matter
+---
+<html lang="en">
+
+<!-- head -->
+{% include head.html title="Contacto - CIRTA" %}
+
+<!-- css -->
+ <link rel="stylesheet" href="static/css/form.css">
+
+<body>
+
+    <!-- Navigation -->
+    {% include navigation.html %}
+
+    <!-- Page Header -->
+    {% include header_img.html image="static/img/title/team-bg.jpg" title="Contáctanos" subtitle="¿Tienes alguna duda o propuesta?" meta="" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <p>Completa el siguiente formulario y nos pondremos en contacto contigo a la brevedad.</p>
+
+                <form id="formularioContacto" action="https://script.google.com/macros/s/AKfycbxHzTGSqbODNg-6Y53C1OAslzdl1FLsR5p5BFAgp4Kn0glu-utoFjd7sBE55oO5yTAr/exec" method="POST">
+
+                    <input type="hidden" name="_subject" value="Nuevo contacto desde web CIRTA">
+
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Tu nombre completo">
+                        <small id="error-nombre" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="nombre@ejemplo.com" >
+                        <small id="error-email" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                         <label>Teléfono</label>
+                         <input type="tel" class="form-control" name="telefono" id="tel" placeholder="+569 ...">
+                         <small id="error-tel" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                         <label>Organización / Institución</label>
+                         <input type="text" class="form-control" name="organizacion" id="org">
+                         <small id="error-org" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Motivo</label>
+                        <select class="form-control" name="motivo" id="motivo">
+                            <option value="consulta">Consultas generales</option>
+                            <option value="colaboracion">Propuesta de colaboración</option>
+                            <option value="voluntariado">Voluntariado</option>
+                            <option value="donaciones">Donaciones</option>
+                            <option value="prensa">Medios / Prensa</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </div>
+                    <br>
+                    
+                    <div class="form-group">
+                        <label>Mensaje</label>
+                        <textarea class="form-control" name="mensaje" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                        <small id="error-mensaje" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Enviar Formulario</button>
+                </form>
+                </div>
+        </div>
+    </div>
+
+    <!-- CONFIRMATION MODAL -->
+    <div id="modalConfirmacion" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+        <h3 style="margin-top: 0;">¿Estás seguro?</h3>
+        <p>Revisa que tus datos sean correctos antes de enviar tu mensaje a CIRTA.</p>
+        <div class="modal-buttons">
+            <button type="button" id="btn-volver" class="btn-secundario">Volver y editar</button>
+            <button type="button" id="btn-mandar" class="btn-principal">Sí, Mandar</button>
+        </div>
+    </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    {% include footer.html %}
+    
+    <!-- bottom imports -->
+    {% include bottom.html %}
+
+    <script src="/static/js/contact-validation.js"></script>
+
+</body>
+</html>

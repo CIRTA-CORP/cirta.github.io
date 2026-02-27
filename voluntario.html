@@ -1,0 +1,124 @@
+---
+# this is an empty front matter
+---
+<html lang="es">
+
+{% include head.html title="Participa - CIRTA" %}
+
+<link rel="stylesheet" href="static/css/form.css">
+
+<body>
+
+    {% include navigation.html %}
+
+    {% include header_img.html image="static/img/title/team-bg.jpg" title="Participa en CIRTA" subtitle="Súmate a nuestra corporación de ciencia y tecnología" meta="" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <h2 id="voluntariado">Voluntariado</h2>
+                <p>¿Quieres contribuir con tu tiempo, talento e ideas? En nuestra corporación valoramos muchísimo el compromiso de quienes quieren aportar de forma voluntaria. Ya sea participando en eventos, ayudando en proyectos de investigación, en actividades de difusión o en el apoyo a comunidades, tu aporte es clave.</p>
+                <p>Para sumarte como voluntario/a, completa el formulario más abajo. Nos pondremos en contacto contigo para conversar sobre las oportunidades disponibles según tus intereses y disponibilidad. ¡Te esperamos!</p>
+                <hr>
+
+                <form id="formularioParticipa" action="#" method="POST">
+                    
+                    <input type="hidden" name="_subject" value="Nuevo registro de Voluntariado CIRTA">
+
+                    <div class="form-group">
+                        <label>Nombre completo (obligatorio)</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Tu nombre y apellido">
+                        <small id="error-nombre" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Correo Electrónico (obligatorio)</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="nombre@ejemplo.com">
+                        <small id="error-email" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                         <label>Ciudad / Región</label>
+                         <input type="text" class="form-control" name="ubicacion" id="ubicacion" placeholder="Ej: Santiago, Región Metropolitana">
+                         <small id="error-ubicacion" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>¿En qué estás interesado/a colaborar?</label><br>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="intereses" value="Investigación y desarrollo"> Investigación y desarrollo</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="intereses" value="Difusión y educación STEAM"> Difusión / educación STEAM</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="intereses" value="Eventos y talleres"> Eventos / talleres</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="intereses" value="Administración y apoyo operativo"> Administración y apoyo operativo</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="check-otro" value="Otro"> Otro (especificar abajo)</label>
+                        </div>
+                        <input type="text" class="form-control" name="interes_otro" id="interes_otro" placeholder="Especifica otro interés" style="display:none; margin-top: 10px;">
+                        <small id="error-intereses" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                         <label>Disponibilidad horaria (horas semanales)</label>
+                         <input type="number" class="form-control" name="horas_semanales" id="horas" min="1" placeholder="Ej: 5">
+                         <small id="error-horas" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Experiencia previa (breve descripción)</label>
+                        <textarea class="form-control" name="experiencia" id="experiencia" rows="3" placeholder="Cuéntanos un poco sobre tu experiencia..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>¿Tienes habilidades específicas que te gustaría aportar?</label>
+                        <textarea class="form-control" name="habilidades" id="habilidades" rows="3" placeholder="Ej: programación, escritura, diseño, gestión de proyectos..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Comentarios adicionales / ¿Por qué quieres ser voluntario/a?</label>
+                        <textarea class="form-control" name="comentarios" id="comentarios" rows="3"></textarea>
+                    </div>
+
+                    <div class="checkbox" style="margin-top: 20px; margin-bottom: 20px;">
+                        <label>
+                            <input type="checkbox" name="terminos" id="terminos"> 
+                            Entiendo que esta es una postulación de carácter voluntario (ad honorem) y acepto el uso de mis datos para fines de contacto y gestión interna.
+                        </label>
+                        <small id="error-terminos" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar Postulación</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="modalConfirmacion" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+        <h3 style="margin-top: 0;">¿Estás seguro?</h3>
+        <p>Revisa que todos tus datos sean correctos antes de enviar tu postulación de voluntariado.</p>
+        <div class="modal-buttons">
+            <button type="button" id="btn-volver" class="btn-secundario">Volver y editar</button>
+            <button type="button" id="btn-mandar" class="btn-principal">Sí, Enviar</button>
+        </div>
+    </div>
+    </div>
+
+    <hr>
+
+    {% include footer.html %}
+    
+    {% include bottom.html %}
+
+    <script src="/static/js/voluntario-validation.js"></script>
+
+</body>
+</html>

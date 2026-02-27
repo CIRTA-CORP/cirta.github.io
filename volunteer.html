@@ -22,7 +22,7 @@
                 <p>Para sumarte como voluntario/a, completa el formulario más abajo. Nos pondremos en contacto contigo para conversar sobre las oportunidades disponibles según tus intereses y disponibilidad. ¡Te esperamos!</p>
                 <hr>
 
-                <form id="formularioParticipa" action="#" method="POST">
+                <form id="formularioVoluntario" action="#" method="POST">
                     
                     <input type="hidden" name="_subject" value="Nuevo registro de Voluntariado CIRTA">
 
@@ -66,9 +66,15 @@
                     </div>
 
                     <div class="form-group">
-                         <label>Disponibilidad horaria (horas semanales)</label>
-                         <input type="number" class="form-control" name="horas_semanales" id="horas" min="1" placeholder="Ej: 5">
-                         <small id="error-horas" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                         <label>Disponibilidad horaria</label>
+                         <input type="text" class="form-control" name="disponibilidad" id="disponibilidad" placeholder="Ej: Fines de semana, despues de las 4pm entre semana, etc.">
+                         <small id="error-disponibilidad" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                         <label>Horas semanales</label>
+                         <input type="number" class="form-control" name="horas_semanales" id="horas_semanales" min="1" placeholder="Ej: 5">
+                         <small id="error-horas_semanales" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
                     </div>
 
                     <div class="form-group">
@@ -89,7 +95,7 @@
                     <div class="checkbox" style="margin-top: 20px; margin-bottom: 20px;">
                         <label>
                             <input type="checkbox" name="terminos" id="terminos"> 
-                            Entiendo que esta es una postulación de carácter voluntario (ad honorem) y acepto el uso de mis datos para fines de contacto y gestión interna.
+                            Entiendo que esta es una postulación de carácter voluntario y acepto el uso de mis datos para fines de contacto y gestión interna.
                         </label>
                         <small id="error-terminos" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
                     </div>
@@ -118,7 +124,7 @@
     
     {% include bottom.html %}
 
-    <script src="/static/js/voluntario-validation.js"></script>
+    <script src="/static/js/volunteer-validation.js"></script>
 
 </body>
 </html>

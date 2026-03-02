@@ -52,7 +52,6 @@ const clearErrors = () => {
     const inputs = document.querySelectorAll('.form-control, input[type="checkbox"]');
     inputs.forEach(input => {
         input.style.border = ''; 
-        input.style.outline = ''; // for the checkboxes
     });
 };
 
@@ -133,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function() {
             // Validate that they accepted the terms
             if (!terminos) {
                 showError('terminos','Debes aceptar las condiciones de voluntariado y uso de datos para continuar.');
-                document.getElementById('terminos').style.outline = '2px solid red'; // Outline para checkboxes
                 haveError=true;
             }
 
@@ -180,7 +178,6 @@ document.addEventListener("DOMContentLoaded", function() {
             fetch(form.action, {
                 method: form.method,
                 body: data,
-                headers: { 'Accept': 'application/json' }
             }).then(response => {
                 if (response.ok) {
                     modal.querySelector('h3').innerText = '¡Postulación enviada con éxito!';

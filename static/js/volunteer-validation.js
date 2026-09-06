@@ -92,8 +92,19 @@ document.addEventListener("DOMContentLoaded", function() {
             const terminos = document.getElementById('terminos').checked;
             const interesesSeleccionados = document.querySelectorAll('input[name="intereses"]:checked');
 
+            // Honeypot: si un bot rellenó este campo oculto, descartamos el envío en silencio
+            const honeypot = document.getElementById('website');
+            if (honeypot && honeypot.value) {
+                return;
+            }
+
             let haveError = false;
-            
+
+            if (typeof turnstile !== 'undefined' && !turnstile.getResponse()) {
+                showError('turnstile', 'Por favor completa la verificación de seguridad.');
+                haveError = true;
+            }
+
             if (!validateName(nombre)){
                 showError('nombre','El nombre debe tener entre 2 y 50 caracteres.');
                 haveError=true;

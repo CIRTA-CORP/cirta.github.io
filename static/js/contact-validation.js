@@ -79,9 +79,20 @@ document.addEventListener("DOMContentLoaded", function() {
             const org = document.getElementById('org').value;
             const mensaje = document.getElementById('mensaje').value;
 
+            // Honeypot: si un bot rellenó este campo oculto, descartamos el envío en silencio
+            const honeypot = document.getElementById('website');
+            if (honeypot && honeypot.value) {
+                return;
+            }
+
             //  Validate and inject the visual messages if they fail
             let haveError = false;
-            
+
+            if (typeof turnstile !== 'undefined' && !turnstile.getResponse()) {
+                showError('turnstile', 'Por favor completa la verificación de seguridad.');
+                haveError = true;
+            }
+
             if (!validateName(nombre)){
                 showError('nombre','El nombre debe tener entre 2 y 50 caracteres.');
                 haveError=true

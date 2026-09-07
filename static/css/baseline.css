@@ -87,13 +87,13 @@ body {
     transform: none !important;
 }
 .navbar-custom .navbar-brand,
-.navbar-custom .nav li a {
+.navbar-custom .nav > li > a {
     color: #333 !important;
 }
 .navbar-custom .navbar-brand:hover,
 .navbar-custom .navbar-brand:focus,
-.navbar-custom .nav li a:hover,
-.navbar-custom .nav li a:focus {
+.navbar-custom .nav > li > a:hover,
+.navbar-custom .nav > li > a:focus {
     color: var(--cirta-purple) !important;
 }
 body {

@@ -77,6 +77,29 @@ body {
     -webkit-tap-highlight-color: var(--cirta-purple);
 }
 
+/* Navbar siempre en su estado "fijo" (fondo blanco + línea inferior),
+   en vez de mostrarse transparente hasta que el usuario scrollea */
+.navbar-custom {
+    position: fixed !important;
+    top: 0 !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid #f2f2f2 !important;
+    transform: none !important;
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .nav li a {
+    color: #333 !important;
+}
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus,
+.navbar-custom .nav li a:hover,
+.navbar-custom .nav li a:focus {
+    color: var(--cirta-purple) !important;
+}
+body {
+    padding-top: 71px;
+}
+
 .sub-navbar {
     margin-top: -50;
     background-color: transparent;

@@ -87,3 +87,15 @@ Para empujar los cambios a producción de manera segura, se debe seguir el proto
 4. Hacer clic en el botón **Implementar** en la parte inferior.
 
 *Nota Crítica: Si se omite el paso de crear una "Nueva versión", la URL en producción seguirá mostrando la versión almacenada en caché antes de las modificaciones, ignorando el nuevo código.*
+
+---
+
+## Pendiente: Endurecer `doPost` contra envíos automatizados (bots)
+
+El frontend (este repositorio) ya incorpora un campo honeypot (`website`) y el widget de Cloudflare Turnstile en `contact.html` y `volunteer.html`. Como el código `.gs` vive en Google Apps Script y no en este repositorio, estos cambios deben aplicarse manualmente en `Codigo.gs` (Contacto) y `API.gs` (Voluntariado) para que la protección sea efectiva — la validación del lado del cliente por sí sola no detiene a un bot que hace POST directo al endpoint:
+
+1. **Rechazar honeypot relleno:** al inicio de `doPost(e)`, si `e.parameter.website` no está vacío, retornar sin insertar la fila ni enviar correo (responder igual que un éxito para no delatar el filtro).
+2. **Verificar el token de Turnstile:** con `e.parameter['cf-turnstile-response']`, hacer un `UrlFetchApp.fetch('https://challenge.cloudflare.com/turnstile/v0/siteverify', {...})` enviando `secret` (Secret Key de Turnstile, guardada en **Propiedades del script**, no en el código) y el token recibido. Si `success` no es `true`, rechazar el envío.
+3. **Revalidar largos/formatos en el servidor** (no confiar solo en el JS del navegador): nombre, email con regex, mensaje con largo mínimo/máximo, igual que las reglas ya definidas en `static/js/contact-validation.js` y `static/js/volunteer-validation.js`.
+
+Falta además configurar el **Site Key** real de Turnstile: reemplazar `YOUR_TURNSTILE_SITE_KEY` en `contact.html` y `volunteer.html` por el Site Key generado en el dashboard de Cloudflare Turnstile (dominio `cirta.github.io` o el dominio final del sitio), y guardar el Secret Key correspondiente en las Propiedades del script de cada proyecto Apps Script.

@@ -7,6 +7,9 @@
 
 <link rel="stylesheet" href="static/css/form.css">
 
+<!-- Cloudflare Turnstile (anti-bot) -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 <body>
 
     {% include navigation.html %}
@@ -25,6 +28,12 @@
                 <form id="formularioVoluntario" action="https://script.google.com/macros/s/AKfycbxwC7hGeZJMCai-_osc4JR6hfQxGLKaBS8GhpPB02fUSTV6pvCtwAAqUPp2-W9E4o0x/exec" method="POST">
                     
                     <input type="hidden" name="_subject" value="Nuevo registro de Voluntariado CIRTA">
+
+                    <!-- Honeypot: campo trampa para bots, oculto visualmente pero visible para scrapers -->
+                    <div style="position:absolute; left:-9999px; top:-9999px;" aria-hidden="true">
+                        <label for="website">No completar este campo</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
 
                     <div class="form-group">
                         <label>Nombre completo (obligatorio)</label>
@@ -98,6 +107,11 @@
                             Entiendo que esta es una postulación de carácter voluntario y acepto el uso de mis datos para fines de contacto y gestión interna.
                         </label>
                         <small id="error-terminos" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAEqsQcQV1Y5MjFHj"></div>
+                        <small id="error-turnstile" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Enviar Postulación</button>

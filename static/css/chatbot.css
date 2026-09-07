@@ -1,0 +1,142 @@
+#cirta-chatbot {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#cirta-chatbot-toggle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background-color: #A475EA;
+    color: #fff;
+    font-size: 22px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+#cirta-chatbot-toggle:hover {
+    background-color: #7C4DD9;
+    transform: scale(1.08);
+}
+
+#cirta-chatbot-window {
+    position: absolute;
+    right: 0;
+    bottom: 68px;
+    width: 320px;
+    max-width: calc(100vw - 40px);
+    height: 420px;
+    max-height: calc(100vh - 120px);
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#cirta-chatbot-window[hidden] {
+    display: none;
+}
+
+#cirta-chatbot-header {
+    background-color: #A475EA;
+    color: #fff;
+    padding: 12px 15px;
+    font-weight: 800;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#cirta-chatbot-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#cirta-chatbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cirta-msg {
+    max-width: 85%;
+    padding: 8px 12px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.cirta-msg-bot {
+    background-color: #f0eafb;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+.cirta-msg-user {
+    background-color: #22D3EE;
+    color: #063a42;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+#cirta-chatbot-quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 12px 8px;
+}
+
+.cirta-quick-reply {
+    background-color: #fff;
+    border: 1px solid #A475EA;
+    color: #A475EA;
+    border-radius: 14px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.cirta-quick-reply:hover {
+    background-color: #A475EA;
+    color: #fff;
+}
+
+#cirta-chatbot-form {
+    display: flex;
+    border-top: 1px solid #eee;
+}
+
+#cirta-chatbot-input {
+    flex: 1;
+    border: none;
+    padding: 10px 12px;
+    font-size: 13px;
+    outline: none;
+}
+
+#cirta-chatbot-form button {
+    background-color: #A475EA;
+    color: #fff;
+    border: none;
+    width: 44px;
+    cursor: pointer;
+}
+
+#cirta-chatbot-form button:hover {
+    background-color: #7C4DD9;
+}

@@ -40,6 +40,10 @@
     overflow: hidden;
 }
 
+#cirta-chatbot-window[hidden] {
+    display: none;
+}
+
 #cirta-chatbot-header {
     background-color: #A475EA;
     color: #fff;

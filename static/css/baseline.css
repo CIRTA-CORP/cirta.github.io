@@ -96,3 +96,14 @@ body {
 header.intro-header .page-heading h1 {
     font-size: 60px;
 }
+
+/* Altura uniforme para el banner de título en todas las páginas,
+   independiente de cuánto texto tenga el subtítulo */
+header.intro-header {
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+}
+header.intro-header .page-heading {
+    padding: 20px 0;
+}

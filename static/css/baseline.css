@@ -1,3 +1,105 @@
+/* ===========================================================
+   Paleta de marca CIRTA (morado del logo)
+   Sobrescribe el acento teal (#0085A1) del theme clean-blog
+   por el morado del logo (#A475EA) para que el sitio combine
+   con el isotipo.
+   =========================================================== */
+:root {
+    --cirta-purple: #A475EA;
+    --cirta-purple-dark: #7C4DD9;
+}
+
+a:hover,
+a:focus {
+    color: var(--cirta-purple);
+}
+
+@media only screen and (min-width: 1170px) {
+    .navbar-custom.is-fixed .navbar-brand:hover,
+    .navbar-custom.is-fixed .navbar-brand:focus {
+        color: var(--cirta-purple);
+    }
+    .navbar-custom.is-fixed .nav li a:hover,
+    .navbar-custom.is-fixed .nav li a:focus {
+        color: var(--cirta-purple);
+    }
+}
+
+.post-preview > a:hover,
+.post-preview > a:focus {
+    color: var(--cirta-purple);
+}
+
+.post-preview > .post-meta > a:hover,
+.post-preview > .post-meta > a:focus {
+    color: var(--cirta-purple);
+}
+
+.floating-label-form-group-with-focus label {
+    color: var(--cirta-purple);
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-primary {
+    background-color: var(--cirta-purple);
+    border: 1px solid var(--cirta-purple);
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--cirta-purple-dark);
+    border: 1px solid var(--cirta-purple-dark);
+    color: white;
+}
+
+.pager li > a:hover,
+.pager li > a:focus {
+    color: white;
+    background-color: var(--cirta-purple);
+    border: 1px solid var(--cirta-purple);
+}
+
+::-moz-selection {
+    color: white;
+    text-shadow: none;
+    background: var(--cirta-purple);
+}
+
+::selection {
+    color: white;
+    text-shadow: none;
+    background: var(--cirta-purple);
+}
+
+body {
+    -webkit-tap-highlight-color: var(--cirta-purple);
+}
+
+/* Navbar siempre en su estado "fijo" (fondo blanco + línea inferior),
+   en vez de mostrarse transparente hasta que el usuario scrollea */
+.navbar-custom {
+    position: fixed !important;
+    top: 0 !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid #f2f2f2 !important;
+    transform: none !important;
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .nav > li > a {
+    color: #333 !important;
+}
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus,
+.navbar-custom .nav > li > a:hover,
+.navbar-custom .nav > li > a:focus {
+    color: var(--cirta-purple) !important;
+}
+body {
+    padding-top: 71px;
+}
+
 .sub-navbar {
     margin-top: -50;
     background-color: transparent;
@@ -16,4 +118,15 @@
 }
 header.intro-header .page-heading h1 {
     font-size: 60px;
+}
+
+/* Altura uniforme para el banner de título en todas las páginas,
+   independiente de cuánto texto tenga el subtítulo */
+header.intro-header {
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+}
+header.intro-header .page-heading {
+    padding: 20px 0;
 }

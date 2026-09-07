@@ -1,0 +1,22 @@
+<!-- Asistente CIRTA: chatbot de preguntas frecuentes, 100% local (sin costo, sin IA generativa) -->
+<div id="cirta-chatbot">
+    <button id="cirta-chatbot-toggle" aria-label="Abrir asistente CIRTA">
+        <i class="fa fa-comment"></i>
+    </button>
+
+    <div id="cirta-chatbot-window" hidden>
+        <div id="cirta-chatbot-header">
+            <span>Asistente CIRTA</span>
+            <button id="cirta-chatbot-close" aria-label="Cerrar asistente">&times;</button>
+        </div>
+        <div id="cirta-chatbot-messages"></div>
+        <div id="cirta-chatbot-quick-replies"></div>
+        <form id="cirta-chatbot-form">
+            <input type="text" id="cirta-chatbot-input" placeholder="Escribe tu pregunta..." autocomplete="off">
+            <button type="submit" aria-label="Enviar"><i class="fa fa-paper-plane"></i></button>
+        </form>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/static/css/chatbot.css">
+<script src="/static/js/chatbot.js"></script>

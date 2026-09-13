@@ -90,12 +90,25 @@ Para empujar los cambios a producción de manera segura, se debe seguir el proto
 
 ---
 
-## Pendiente: Endurecer `doPost` contra envíos automatizados (bots)
+## Endurecer `doPost` contra envíos automatizados (bots)
 
-El frontend (este repositorio) ya incorpora un campo honeypot (`website`) y el widget de Cloudflare Turnstile en `contact.html` y `volunteer.html`. Como el código `.gs` vive en Google Apps Script y no en este repositorio, estos cambios deben aplicarse manualmente en `Codigo.gs` (Contacto) y `API.gs` (Voluntariado) para que la protección sea efectiva — la validación del lado del cliente por sí sola no detiene a un bot que hace POST directo al endpoint:
+El frontend (este repositorio) ya incorpora un campo honeypot (`website`) y el widget de Cloudflare Turnstile en `contact.html` y `volunteer.html`. Como el código `.gs` vive en Google Apps Script y no en este repositorio, la validación del lado del cliente por sí sola no detiene a un bot que hace POST directo al endpoint — hace falta replicar el mismo chequeo en el servidor.
 
-1. **Rechazar honeypot relleno:** al inicio de `doPost(e)`, si `e.parameter.website` no está vacío, retornar sin insertar la fila ni enviar correo (responder igual que un éxito para no delatar el filtro).
-2. **Verificar el token de Turnstile:** con `e.parameter['cf-turnstile-response']`, hacer un `UrlFetchApp.fetch('https://challenge.cloudflare.com/turnstile/v0/siteverify', {...})` enviando `secret` (Secret Key de Turnstile, guardada en **Propiedades del script**, no en el código) y el token recibido. Si `success` no es `true`, rechazar el envío.
-3. **Revalidar largos/formatos en el servidor** (no confiar solo en el JS del navegador): nombre, email con regex, mensaje con largo mínimo/máximo, igual que las reglas ya definidas en `static/js/contact-validation.js` y `static/js/volunteer-validation.js`.
+La carpeta [`google-apps-script/`](google-apps-script/) de este repo trae ese código listo para copiar:
 
-Falta además configurar el **Site Key** real de Turnstile: reemplazar `YOUR_TURNSTILE_SITE_KEY` en `contact.html` y `volunteer.html` por el Site Key generado en el dashboard de Cloudflare Turnstile (dominio `cirta.github.io` o el dominio final del sitio), y guardar el Secret Key correspondiente en las Propiedades del script de cada proyecto Apps Script.
+* [`Codigo.gs`](google-apps-script/Codigo.gs): reemplazo completo de `doPost(e)` para el proyecto Apps Script de **Contacto**.
+* [`API-doPost-snippet.gs`](google-apps-script/API-doPost-snippet.gs): fragmento a insertar al inicio de `doPost(e)` en el proyecto Apps Script de **Voluntariado** (`API.gs`), antes de la lógica que ya guarda la postulación.
+
+Ambos:
+
+1. **Rechazan honeypot relleno:** si `e.parameter.website` no está vacío, responden como si fuera un éxito pero no insertan la fila ni envían correo (para no delatar el filtro).
+2. **Verifican el token de Turnstile:** con `e.parameter['cf-turnstile-response']`, hacen `UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {...})` enviando el `secret` (Secret Key de Turnstile) y el token recibido. Si `success` no es `true`, rechazan el envío.
+3. **Revalidan largos/formatos en el servidor**, igual que las reglas ya definidas en `static/js/contact-validation.js` y `static/js/volunteer-validation.js`.
+
+Pasos para aplicarlo:
+
+1. Abre el proyecto Apps Script correspondiente (Extensiones > Apps Script desde la hoja de cálculo) y pega el contenido del `.gs` correspondiente, reemplazando/insertando en `doPost(e)`.
+2. En **Configuración del proyecto > Propiedades del script**, agrega `TURNSTILE_SECRET_KEY` con el Secret Key de Cloudflare Turnstile (nunca lo pongas directo en el código).
+3. **Implementar > Gestionar implementaciones > editar (ícono lápiz) > Nueva versión > Implementar**, para que el cambio quede en producción.
+
+El Site Key público (`0x4AAAAAAEqr-65jKB4O4o8M`) ya está configurado en `contact.html` y `volunteer.html`; el Secret Key correspondiente es el que debe guardarse en las Propiedades del script de cada proyecto Apps Script.

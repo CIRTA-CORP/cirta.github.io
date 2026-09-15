@@ -1,0 +1,133 @@
+---
+lang: en
+---
+<html lang="en">
+
+<!-- head -->
+{% include head.html title="EduRobotics - CIRTA" %}
+
+<link rel="stylesheet" href="/static/css/edurobotics.css">
+
+<body>
+
+    <!-- Navigation -->
+    {% include navigation.html %}
+
+    <!-- Page Header -->
+    {% include header_img.html image="/static/img/title/edurobotics-bg.jpg" title="EduRobotics" subtitle="Learn robotics by programming in a 3D simulator, free and with nothing to install" meta="" %}
+
+    <!-- Main Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                    <p class="edu-lead">
+                        EduRobotics is CIRTA's robotics education platform: a 3D simulator that runs directly
+                        in the browser, with no software to install and no hardware to buy, so students and educators
+                        can learn to program robots from scratch.
+                    </p>
+
+                    <div class="edu-cta">
+                        <a href="https://www.edurobotics.cl/register" target="_blank" rel="noopener" class="btn btn-primary btn-lg btn-block">
+                            Try the simulator for free and create an account
+                        </a>
+                    </div>
+
+                    <img src="/static/img/edurobotics-simulador.png" alt="EduRobotics 3D simulator showing a UR5 robotic arm" class="edu-screenshot">
+
+                    <h2 class="section-heading">What is EduRobotics?</h2>
+                    <p>
+                        It's a fully online e-learning platform designed to lower the barriers to entry into
+                        robotics. Instead of relying on a physical robotic arm — expensive, fragile, and limited to those
+                        who can afford it — EduRobotics offers a 3D simulation environment in the browser where
+                        anyone can write code, watch a robot move in real time, and make mistakes
+                        as many times as they want, at no cost and no risk.
+                    </p>
+                    <p>
+                        The whole learning cycle happens in one place: the person writes or assembles their program,
+                        runs it on the robot's 3D model, and immediately sees whether the task was completed or what
+                        went wrong. That short trial-and-error cycle is key to learning robotics and programming without
+                        the friction or cost of a physical lab.
+                    </p>
+
+                    <h2 class="section-heading">How does it work?</h2>
+                    <div class="edu-features">
+                        <div class="edu-feature">
+                            <i class="fa fa-cube"></i>
+                            <h3>3D simulator in the browser</h3>
+                            <p>No installation required: it opens on any computer with a browser and an internet connection.</p>
+                        </div>
+                        <div class="edu-feature">
+                            <i class="fa fa-puzzle-piece"></i>
+                            <h3>Blocks and code</h3>
+                            <p>Courses are taught with block-based programming for beginners, or directly with code for more advanced learners.</p>
+                        </div>
+                        <div class="edu-feature">
+                            <i class="fa fa-android"></i>
+                            <h3>Collaborative robotics (UR5)</h3>
+                            <p>The simulator is modeled on a UR5-type collaborative robotic arm, the same kind of robot used in industry.</p>
+                        </div>
+                        <div class="edu-feature">
+                            <i class="fa fa-graduation-cap"></i>
+                            <h3>Free interactive courses</h3>
+                            <p>Guided learning paths designed to take a person from zero knowledge to programming real robot tasks.</p>
+                        </div>
+                    </div>
+
+                    <h2 class="section-heading">Who is it for?</h2>
+                    <p>
+                        For school and university students, educators who want to bring robotics into the classroom
+                        without a budget for equipment, and anyone curious who wants to learn to
+                        program robots from scratch. Being free and requiring no installation, it makes it possible to scale access to
+                        STEM robotics education to far more people than a physical lab could reach.
+                    </p>
+                    <p>
+                        It's also a useful tool for teachers who already work with robotics and need a reliable
+                        environment to practice before bringing an activity to the classroom, or to complement
+                        in-person classes with exercises students can repeat from home.
+                    </p>
+
+                    <h2 class="section-heading">What do you learn in the course track?</h2>
+                    <p>
+                        The courses start from the most basic concepts — what a collaborative robot is, how it moves
+                        through space, what its joints and end effector are — and progress toward more
+                        complex tasks such as picking up and placing objects, following defined trajectories, and chaining instructions
+                        together to solve a complete problem. Each course combines brief theory with hands-on exercises
+                        directly on the simulator, so learning is always validated by doing, not
+                        just reading.
+                    </p>
+
+                    <h2 class="section-heading">Why does CIRTA do this?</h2>
+                    <p>
+                        EduRobotics is part of CIRTA's goal of reducing educational gaps in science and
+                        technology: the simulator serves as a low-cost entry point for building robotics talent, and
+                        as a foundation on which — in future stages — it is possible to integrate real hardware for
+                        those who want to keep advancing.
+                    </p>
+                    <p>
+                        We believe access to robotics shouldn't depend on how much budget a school
+                        or university has to buy equipment. That's why EduRobotics is, and will remain, free for
+                        students and educators: the barrier to entry for learning robotics should be zero.
+                    </p>
+
+                    <p class="edu-visit">
+                        You can explore the full platform at <a href="https://www.edurobotics.cl/" target="_blank" rel="noopener">edurobotics.cl</a>.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    {% include footer.html %}
+
+    <!-- bottom imports -->
+    {% include bottom.html %}
+
+</body>
+
+</html>

@@ -1,3 +1,43 @@
+{% assign lang = page.lang | default: "es" %}
+{% assign prefix = "" %}
+{% if lang != "es" %}{% assign prefix = "/" | append: lang %}{% endif %}
+
+{% case lang %}
+{% when "en" %}
+    {% assign nav_home = "Home" %}
+    {% assign nav_about_menu = "About" %}
+    {% assign nav_about = "About us" %}
+    {% assign nav_team = "Team" %}
+    {% assign nav_transparency = "Transparency" %}
+    {% assign nav_projects = "Projects" %}
+    {% assign nav_education = "Education" %}
+    {% assign nav_participate = "Get involved" %}
+    {% assign nav_volunteer = "Volunteer" %}
+    {% assign nav_contact = "Contact" %}
+{% when "pt" %}
+    {% assign nav_home = "Início" %}
+    {% assign nav_about_menu = "Sobre nós" %}
+    {% assign nav_about = "Sobre nós" %}
+    {% assign nav_team = "Equipe" %}
+    {% assign nav_transparency = "Transparência" %}
+    {% assign nav_projects = "Projetos" %}
+    {% assign nav_education = "Educação" %}
+    {% assign nav_participate = "Participe" %}
+    {% assign nav_volunteer = "Voluntariado" %}
+    {% assign nav_contact = "Contato" %}
+{% else %}
+    {% assign nav_home = "Inicio" %}
+    {% assign nav_about_menu = "Nosotros" %}
+    {% assign nav_about = "Nosotros" %}
+    {% assign nav_team = "Equipo" %}
+    {% assign nav_transparency = "Transparencia" %}
+    {% assign nav_projects = "Proyectos" %}
+    {% assign nav_education = "Educación" %}
+    {% assign nav_participate = "Participa" %}
+    {% assign nav_volunteer = "Voluntariado" %}
+    {% assign nav_contact = "Contactar" %}
+{% endcase %}
+
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -6,53 +46,63 @@
                 <span class="sr-only">Toggle navigation</span>
                 Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="index.html"><img src="/static/img/cirta_logo.png" alt="CIRTA" class="navbar-brand-logo" style="height:40px;"></a>
+            <a class="navbar-brand" href="{{ prefix }}/index.html"><img src="/static/img/cirta_logo.png" alt="CIRTA" class="navbar-brand-logo" style="height:40px;"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="index.html">Inicio</a>
+                    <a href="{{ prefix }}/index.html">{{ nav_home }}</a>
                 </li>
 
                 <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nosotros<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nav_about_menu }}<span class="caret"></span></a>
                     <ul class="dropdown-menu" id="dropdown-nao">
                         <!--<li role="separator" class="divider"></li>-->
-                        <li> <a href="about.html">Nosotros</a> </li>
-                        <li><a href="team.html">Equipo</a></li>
-                        <li><a href="transparency.html">Transparencia</a></li>
+                        <li> <a href="{{ prefix }}/about.html">{{ nav_about }}</a> </li>
+                        <li><a href="{{ prefix }}/team.html">{{ nav_team }}</a></li>
+                        <li><a href="{{ prefix }}/transparency.html">{{ nav_transparency }}</a></li>
                     </ul>
                 </li>
-            
+
                 <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Proyectos<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nav_projects }}<span class="caret"></span></a>
                     <ul class="dropdown-menu" id="dropdown-bender">
-                        <li><a href="proyect-agrobot.html">AgroBot</a></li>
+                        <li><a href="{{ prefix }}/proyect-agrobot.html">AgroBot</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Educación<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nav_education }}<span class="caret"></span></a>
                     <ul class="dropdown-menu" id="dropdown-educacion">
-                        <li><a href="education-edurobotics.html">EduRobotics</a></li>
-                        <li><a href="education-workshops.html">Workshops</a></li>
+                        <li><a href="{{ prefix }}/education-edurobotics.html">EduRobotics</a></li>
+                        <li><a href="{{ prefix }}/education-workshops.html">Workshops</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Participa<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nav_participate }}<span class="caret"></span></a>
                     <ul class="dropdown-menu" id="dropdown-participa">
-                        <li><a href="volunteer.html">Voluntariado</a></li>
+                        <li><a href="{{ prefix }}/volunteer.html">{{ nav_volunteer }}</a></li>
                     </ul>
                 </li>
 
                 <li class="hidden-xs" style="border-left: 1px solid #ccc; height: 20px; margin-top: 15px; margin-left: 5px; margin-right: 5px;"></li>
                 <li>
-                    <a href="contact.html">Contactar</a>
-                </li> 
-                       
+                    <a href="{{ prefix }}/contact.html">{{ nav_contact }}</a>
+                </li>
+
+                <li class="hidden-xs" style="border-left: 1px solid #ccc; height: 20px; margin-top: 15px; margin-left: 5px; margin-right: 5px;"></li>
+                <li class="dropdown">
+                    {% assign basename = page.url | remove_first: prefix %}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ lang | upcase }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="dropdown-lang">
+                        <li><a href="{{ basename }}">ES</a></li>
+                        <li><a href="/en{{ basename }}">EN</a></li>
+                        <li><a href="/pt{{ basename }}">PT</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

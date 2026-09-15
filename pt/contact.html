@@ -1,10 +1,10 @@
 ---
-# this is an empty front matter
+lang: pt
 ---
-<html lang="en">
+<html lang="pt">
 
 <!-- head -->
-{% include head.html title="Contacto - CIRTA" %}
+{% include head.html title="Contato - CIRTA" %}
 
 <!-- css -->
  <link rel="stylesheet" href="/static/css/form.css">
@@ -18,13 +18,13 @@
     {% include navigation.html %}
 
     <!-- Page Header -->
-    {% include header_img.html image="/static/img/title/team-bg.jpg" title="Contáctanos" subtitle="¿Tienes alguna duda o propuesta?" meta="" %}
+    {% include header_img.html image="/static/img/title/team-bg.jpg" title="Fale Conosco" subtitle="Tem alguma dúvida ou proposta?" meta="" %}
 
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-                <p>Completa el siguiente formulario y nos pondremos en contacto contigo a la brevedad.</p>
+                <p>Preencha o formulário abaixo e entraremos em contato com você em breve.</p>
 
                 <form id="formularioContacto" action="https://script.google.com/macros/s/AKfycbzCRi6hDb4my1Cpgds8vRcyddxQTqU6X88Dyptg_xXszD6aqV6sOIuFyTL2T0VoyeRA/exec" method="POST">
 
@@ -32,30 +32,30 @@
 
                     <!-- Honeypot: campo trampa para bots, oculto visualmente pero visible para scrapers -->
                     <div style="position:absolute; left:-9999px; top:-9999px;" aria-hidden="true">
-                        <label for="website">No completar este campo</label>
+                        <label for="website">Não preencha este campo</label>
                         <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                     </div>
 
                     <div class="form-group">
-                        <label>Nombre</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Tu nombre completo">
+                        <label>Nome</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Seu nome completo">
                         <small id="error-nombre" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
                     </div>
 
                     <div class="form-group">
-                        <label>Correo Electrónico</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="nombre@ejemplo.com" >
+                        <label>E-mail</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="nome@exemplo.com" >
                         <small id="error-email" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
                     </div>
 
                     <div class="form-group">
-                         <label>Teléfono</label>
+                         <label>Telefone</label>
                          <input type="tel" class="form-control" name="telefono" id="tel" placeholder="+569 ...">
                          <small id="error-tel" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
                     </div>
 
                     <div class="form-group">
-                         <label>Organización / Institución</label>
+                         <label>Organização / Instituição</label>
                          <input type="text" class="form-control" name="organizacion" id="org">
                          <small id="error-org" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
                     </div>
@@ -63,19 +63,19 @@
                     <div class="form-group">
                         <label>Motivo</label>
                         <select class="form-control" name="motivo" id="motivo">
-                            <option value="consulta">Consultas generales</option>
-                            <option value="colaboracion">Propuesta de colaboración</option>
+                            <option value="consulta">Dúvidas gerais</option>
+                            <option value="colaboracion">Proposta de colaboração</option>
                             <option value="voluntariado">Voluntariado</option>
-                            <option value="donaciones">Donaciones</option>
-                            <option value="prensa">Medios / Prensa</option>
-                            <option value="otros">Otros</option>
+                            <option value="donaciones">Doações</option>
+                            <option value="prensa">Mídia / Imprensa</option>
+                            <option value="otros">Outros</option>
                         </select>
                     </div>
                     <br>
-                    
+
                     <div class="form-group">
-                        <label>Mensaje</label>
-                        <textarea class="form-control" name="mensaje" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                        <label>Mensagem</label>
+                        <textarea class="form-control" name="mensaje" id="mensaje" rows="5" placeholder="Escreva sua mensagem aqui..."></textarea>
                         <small id="error-mensaje" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
                     </div>
 
@@ -84,7 +84,7 @@
                         <small id="error-turnstile" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Enviar Formulario</button>
+                    <button type="submit" class="btn btn-primary">Enviar Formulário</button>
                 </form>
                 </div>
         </div>
@@ -93,11 +93,11 @@
     <!-- CONFIRMATION MODAL -->
     <div id="modalConfirmacion" class="modal-overlay" style="display: none;">
     <div class="modal-box">
-        <h3 style="margin-top: 0;">¿Estás seguro?</h3>
-        <p>Revisa que tus datos sean correctos antes de enviar tu mensaje a CIRTA.</p>
+        <h3 style="margin-top: 0;">Tem certeza?</h3>
+        <p>Verifique se seus dados estão corretos antes de enviar sua mensagem para a CIRTA.</p>
         <div class="modal-buttons">
-            <button type="button" id="btn-volver" class="btn-secundario">Volver y editar</button>
-            <button type="button" id="btn-mandar" class="btn-principal">Sí, Mandar</button>
+            <button type="button" id="btn-volver" class="btn-secundario">Voltar e editar</button>
+            <button type="button" id="btn-mandar" class="btn-principal">Sim, Enviar</button>
         </div>
     </div>
     </div>
@@ -106,7 +106,7 @@
 
     <!-- Footer -->
     {% include footer.html %}
-    
+
     <!-- bottom imports -->
     {% include bottom.html %}
 

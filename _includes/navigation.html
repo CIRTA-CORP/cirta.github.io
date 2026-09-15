@@ -94,13 +94,13 @@
                 </li>
 
                 <li class="hidden-xs" style="border-left: 1px solid #ccc; height: 20px; margin-top: 15px; margin-left: 5px; margin-right: 5px;"></li>
-                <li class="dropdown">
+                <li class="dropdown lang-switcher">
                     {% assign basename = page.url | remove_first: prefix %}
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ lang | upcase }}<span class="caret"></span></a>
-                    <ul class="dropdown-menu" id="dropdown-lang">
-                        <li><a href="{{ basename }}">ES</a></li>
-                        <li><a href="/en{{ basename }}">EN</a></li>
-                        <li><a href="/pt{{ basename }}">PT</a></li>
+                    <a href="#" class="dropdown-toggle lang-btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ lang | upcase }}</a>
+                    <ul class="dropdown-menu lang-menu" id="dropdown-lang">
+                        <li><a href="{{ basename }}" class="{% if lang == 'es' %}active{% endif %}">ES</a></li>
+                        <li><a href="/en{{ basename }}" class="{% if lang == 'en' %}active{% endif %}">EN</a></li>
+                        <li><a href="/pt{{ basename }}" class="{% if lang == 'pt' %}active{% endif %}">PT</a></li>
                     </ul>
                 </li>
             </ul>
@@ -130,5 +130,35 @@
 .navbar-custom .nav .dropdown-menu > li > a:focus {
     color: #fff;
     background-color: #A475EA;
+}
+
+.lang-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.lang-btn {
+    background-color: #A475EA;
+    color: #fff !important;
+    border-radius: 0;
+    padding: 8px 12px !important;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.lang-btn:hover,
+.lang-btn:focus {
+    background-color: #7C4DD9;
+    color: #fff !important;
+}
+
+.lang-menu {
+    border-radius: 0;
+    min-width: 0;
+}
+
+.lang-menu > li > a.active {
+    color: #fff;
+    background-color: #7C4DD9;
 }
 </style>

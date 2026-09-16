@@ -97,7 +97,7 @@ El frontend (este repositorio) ya incorpora un campo honeypot (`website`) y el w
 La carpeta [`google-apps-script/`](google-apps-script/) de este repo trae ese código listo para copiar:
 
 * [`Codigo.gs`](google-apps-script/Codigo.gs): reemplazo completo de `doPost(e)` para el proyecto Apps Script de **Contacto**.
-* [`API-doPost-snippet.gs`](google-apps-script/API-doPost-snippet.gs): fragmento a insertar al inicio de `doPost(e)` en el proyecto Apps Script de **Voluntariado** (`API.gs`), antes de la lógica que ya guarda la postulación.
+* [`API.gs`](google-apps-script/API.gs): reemplazo completo de `doPost(e)` para el proyecto Apps Script de **Voluntariado** (mismo archivo `API.gs` mencionado en el Módulo 2), con la lógica original de guardado en Sheets y envío de correo ya integrada.
 
 Ambos:
 

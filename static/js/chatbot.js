@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Historial que se envía a Claude (sin el saludo inicial, que es local).
     var history = [];
+    // ID aleatorio para agrupar los mensajes de esta visita en la planilla.
+    var sessionId = Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
     var waiting = false;
 
     function addMessage(text, from) {
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch(CHATBOT_ENDPOINT, {
             method: "POST",
             headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: JSON.stringify({ messages: history })
+            body: JSON.stringify({ messages: history, sessionId: sessionId, page: location.pathname })
         })
             .then(function (res) { return res.json(); })
             .then(function (data) {

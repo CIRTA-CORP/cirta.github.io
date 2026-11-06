@@ -1,12 +1,15 @@
 /**
  * Chatbot.gs — Backend del Asistente CIRTA con IA (Google Apps Script + API de Claude).
  *
- * Este archivo NO vive en el repo web (github.io es estático); va en un
- * proyecto Apps Script independiente (script.google.com > Nuevo proyecto).
- * Actúa como proxy: la API key de Claude queda guardada en el servidor y
- * nunca se expone en el navegador.
+ * Este archivo NO vive en el repo web (github.io es estático); vive en el
+ * proyecto Apps Script vinculado a una hoja de cálculo nueva "Chatbot",
+ * donde se registra cada mensaje. Actúa como proxy: la API key de Claude
+ * queda guardada en el servidor y nunca se expone en el navegador.
  *
  * Antes de desplegar:
+ * 0. Crea la hoja de cálculo "Chatbot" y abre Extensiones > Apps Script.
+ *    Encabezados sugeridos en la fila 1:
+ *      Fecha | ID conversación | Pregunta | Respuesta | Página
  * 1. Configuración del proyecto (ícono de engranaje) > "Propiedades del script":
  *      ANTHROPIC_API_KEY = <tu API key de https://console.anthropic.com>
  * 2. Implementar > Nueva implementación > Tipo "Aplicación web"
@@ -50,7 +53,9 @@ function doPost(e) {
     if (!withinRateLimit_()) {
       return respond_({ result: 'error', message: 'El asistente está muy ocupado. Intenta en unos minutos.' });
     }
-    return respond_({ result: 'success', reply: callClaude_(messages) });
+    var reply = callClaude_(messages);
+    logConversation_(body, messages[messages.length - 1].content, reply);
+    return respond_({ result: 'success', reply: reply });
   } catch (err) {
     console.error(err);
     return respond_({ result: 'error', message: 'No pude responder ahora. Intenta más tarde.' });
@@ -117,6 +122,22 @@ function callClaude_(messages) {
     .filter(function (block) { return block.type === 'text'; })
     .map(function (block) { return block.text; })
     .join('');
+}
+
+// Guarda una fila por mensaje. Si falla, no se interrumpe la respuesta al usuario.
+function logConversation_(body, question, reply) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    sheet.appendRow([
+      new Date(),
+      String(body.sessionId || '').slice(0, 40),
+      question,
+      reply,
+      String(body.page || '').slice(0, 200)
+    ]);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 function respond_(obj) {

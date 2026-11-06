@@ -149,3 +149,10 @@
 .cirta-msg {
     white-space: pre-wrap;
 }
+
+#cirta-chatbot-notice {
+    font-size: 10px;
+    color: #888;
+    text-align: center;
+    padding: 4px 10px 6px;
+}

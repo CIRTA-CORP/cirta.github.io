@@ -1,7 +1,7 @@
 // Asistente CIRTA: chat con IA (Claude) a través de un backend en Google Apps Script.
 // La API key vive en el servidor (google-apps-script/Chatbot.gs), nunca en el navegador.
 document.addEventListener("DOMContentLoaded", function () {
-    var CHATBOT_ENDPOINT = "https://script.google.com/macros/s/REEMPLAZAR_CON_ID_DE_IMPLEMENTACION/exec";
+    var CHATBOT_ENDPOINT = "https://script.google.com/macros/s/AKfycbzIi2wIYqckvux1lGfv54ij-24LYgchxsQxJlntHzcgFUAcKQicHGJ275tNYn9pBAiOfA/exec";
 
     var ERROR_MESSAGE = "No pude responder ahora. Intenta de nuevo o escríbenos desde la sección \"Contacto\".";
 

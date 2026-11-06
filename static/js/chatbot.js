@@ -1,80 +1,11 @@
-// Asistente CIRTA: responde preguntas frecuentes por coincidencia de palabras clave.
-// No usa ningún servicio de IA externo ni backend: corre 100% en el navegador.
+// Asistente CIRTA: chat con IA (Claude) a través de un backend en Google Apps Script.
+// La API key vive en el servidor (google-apps-script/Chatbot.gs), nunca en el navegador.
 document.addEventListener("DOMContentLoaded", function () {
-    var FAQS = [
-        {
-            keywords: ["hola", "buenas", "hey", "hi"],
-            answer: "¡Hola! Soy el asistente de CIRTA. Puedo ayudarte con información sobre nuestros proyectos, cómo ser voluntario/a, contacto o quiénes somos."
-        },
-        {
-            keywords: ["que es cirta", "qué es cirta", "quienes son", "quiénes son", "corporacion", "corporación"],
-            answer: "CIRTA es una corporación sin fines de lucro dedicada a la investigación y desarrollo tecnológico, con foco en robótica e inteligencia artificial aplicada."
-        },
-        {
-            keywords: ["mision", "misión"],
-            answer: "Nuestra misión: crear y aplicar conocimiento científico y tecnológico para generar innovaciones con impacto tangible y sostenible, promoviendo un progreso equitativo y colaborativo entre empresas, universidades y la sociedad."
-        },
-        {
-            keywords: ["vision", "visión"],
-            answer: "Nuestra visión: aspiramos a una sociedad más justa, resiliente y conectada, donde el avance científico y tecnológico contribuya al desarrollo sostenible y la inclusión social."
-        },
-        {
-            keywords: ["proyecto", "proyectos", "agrobot", "edurobotics"],
-            answer: "Tenemos dos proyectos principales: <b>AgroBot</b> (clasificación y empaquetamiento robótico de fruta de exportación) y <b>EduRobotics</b> (plataforma para aprender robótica desde cero). Puedes ver más en el menú \"Proyectos\"."
-        },
-        {
-            keywords: ["voluntari", "participar", "sumarme", "colaborar"],
-            answer: "¡Genial que quieras sumarte! Completa el formulario de voluntariado en la sección \"Participa\" y nos pondremos en contacto contigo según tus intereses y disponibilidad."
-        },
-        {
-            keywords: ["equipo", "quienes trabajan", "quiénes trabajan", "team"],
-            answer: "Puedes conocer a todo el equipo de CIRTA en la sección \"Nosotros\" &gt; \"Equipo\"."
-        },
-        {
-            keywords: ["contacto", "email", "correo", "telefono", "teléfono", "escribir"],
-            answer: "Puedes escribirnos por el formulario de \"Contacto\" en el menú, o directamente a cirta.contacto@gmail.com."
-        },
-        {
-            keywords: ["direccion", "dirección", "ubicacion", "ubicación", "donde estan", "dónde están"],
-            answer: "Nuestra dirección postal es Av. Rodelillo 4299, Valparaíso, Chile."
-        },
-        {
-            keywords: ["donacion", "donación", "donar", "aportar dinero"],
-            answer: "Puedes indicar tu interés en donaciones a través del formulario de \"Contacto\", seleccionando el motivo \"Donaciones\"."
-        },
-        {
-            keywords: ["transparencia", "legal", "rut", "directorio"],
-            answer: "La información legal y el directorio de CIRTA están disponibles en la sección \"Transparencia\"."
-        },
-        {
-            keywords: ["gracias", "genial", "perfecto"],
-            answer: "¡De nada! Si necesitas algo más, aquí estoy."
-        }
-    ];
+    var CHATBOT_ENDPOINT = "https://script.google.com/macros/s/REEMPLAZAR_CON_ID_DE_IMPLEMENTACION/exec";
 
-    var FALLBACK = "No tengo una respuesta para eso todavía. Prueba preguntando sobre nuestros proyectos, cómo ser voluntario/a, el equipo o cómo contactarnos, o escríbenos directamente desde la sección \"Contacto\".";
+    var ERROR_MESSAGE = "No pude responder ahora. Intenta de nuevo o escríbenos desde la sección \"Contacto\".";
 
     var QUICK_REPLIES = ["¿Qué es CIRTA?", "Proyectos", "Quiero ser voluntario/a", "Contacto"];
-
-    function normalize(text) {
-        return text
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
-    }
-
-    function findAnswer(text) {
-        var normalized = normalize(text);
-        for (var i = 0; i < FAQS.length; i++) {
-            var faq = FAQS[i];
-            for (var j = 0; j < faq.keywords.length; j++) {
-                if (normalized.indexOf(normalize(faq.keywords[j])) !== -1) {
-                    return faq.answer;
-                }
-            }
-        }
-        return FALLBACK;
-    }
 
     var toggleBtn = document.getElementById("cirta-chatbot-toggle");
     var closeBtn = document.getElementById("cirta-chatbot-close");
@@ -84,12 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
     var form = document.getElementById("cirta-chatbot-form");
     var input = document.getElementById("cirta-chatbot-input");
 
+    // Historial que se envía a Claude (sin el saludo inicial, que es local).
+    var history = [];
+    var waiting = false;
+
     function addMessage(text, from) {
         var el = document.createElement("div");
         el.className = "cirta-msg cirta-msg-" + from;
-        el.innerHTML = text;
+        // textContent: las respuestas de la IA nunca se interpretan como HTML.
+        el.textContent = text;
         messages.appendChild(el);
         messages.scrollTop = messages.scrollHeight;
+        return el;
     }
 
     function renderQuickReplies() {
@@ -107,12 +44,40 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function handleUserMessage(text) {
-        if (!text.trim()) return;
+        text = text.trim();
+        if (!text || waiting) return;
         addMessage(text, "user");
         input.value = "";
-        setTimeout(function () {
-            addMessage(findAnswer(text), "bot");
-        }, 300);
+        quickReplies.innerHTML = "";
+        history.push({ role: "user", content: text });
+
+        waiting = true;
+        var typing = addMessage("Escribiendo...", "bot");
+        typing.classList.add("cirta-msg-typing");
+
+        // text/plain evita el preflight CORS, que Apps Script no soporta.
+        fetch(CHATBOT_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({ messages: history })
+        })
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+                if (data.result !== "success") throw new Error(data.message || ERROR_MESSAGE);
+                history.push({ role: "assistant", content: data.reply });
+                typing.remove();
+                addMessage(data.reply, "bot");
+            })
+            .catch(function (err) {
+                // Se descarta la pregunta sin respuesta para mantener roles alternados.
+                history.pop();
+                typing.remove();
+                addMessage(err && err.message && err.message !== "Failed to fetch" ? err.message : ERROR_MESSAGE, "bot");
+            })
+            .finally(function () {
+                waiting = false;
+                input.focus();
+            });
     }
 
     var initialized = false;

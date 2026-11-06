@@ -1,4 +1,4 @@
-<!-- Asistente CIRTA: chatbot de preguntas frecuentes, 100% local (sin costo, sin IA generativa) -->
+<!-- Asistente CIRTA: chat con IA (Claude) vía backend en Google Apps Script (google-apps-script/Chatbot.gs) -->
 <div id="cirta-chatbot">
     <button id="cirta-chatbot-toggle" aria-label="Abrir asistente CIRTA">
         <i class="fa fa-comment"></i>
@@ -12,7 +12,7 @@
         <div id="cirta-chatbot-messages"></div>
         <div id="cirta-chatbot-quick-replies"></div>
         <form id="cirta-chatbot-form">
-            <input type="text" id="cirta-chatbot-input" placeholder="Escribe tu pregunta..." autocomplete="off">
+            <input type="text" id="cirta-chatbot-input" placeholder="Escribe tu pregunta..." autocomplete="off" maxlength="500">
             <button type="submit" aria-label="Enviar"><i class="fa fa-paper-plane"></i></button>
         </form>
     </div>

@@ -62,7 +62,7 @@ function doPost(e) {
   ]);
 
   MailApp.sendEmail({
-    to: 'cirta.contacto@gmail.com',
+    to: 'contacto@cirta.cl',
     replyTo: email,
     subject: params._subject || 'Nuevo contacto desde web CIRTA',
     body: 'Nombre: ' + nombre + '\n' +

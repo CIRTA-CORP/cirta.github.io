@@ -16,7 +16,7 @@ Si se accede al entorno de desarrollo (Extensiones > Apps Script) desde la hoja 
 * **`Codigo.gs`**: Contiene la función principal (`doPost`) encargada de interceptar el paquete de datos enviado por el usuario desde la web. Su lógica operativa consiste en:
     1. Extraer los parámetros del formulario (Nombre, Email, Teléfono, Organización, Motivo y Mensaje).
     2. Insertar un nuevo registro automatizado en la base de datos con una marca de tiempo (timestamp).
-    3. Ejecutar el servicio `MailApp` para despachar un correo electrónico a `cirta.contacto@gmail.com` con el resumen de la consulta. Este correo configura el atributo `replyTo` con el email del usuario, permitiendo a la administración responder directamente a la persona con un solo clic.
+    3. Ejecutar el servicio `MailApp` para despachar un correo electrónico a `contacto@cirta.cl` con el resumen de la consulta. Este correo configura el atributo `replyTo` con el email del usuario, permitiendo a la administración responder directamente a la persona con un solo clic.
 
 ---
 

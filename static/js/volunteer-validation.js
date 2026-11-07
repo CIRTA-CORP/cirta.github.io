@@ -189,8 +189,9 @@ document.addEventListener("DOMContentLoaded", function() {
             fetch(form.action, {
                 method: form.method,
                 body: data,
-            }).then(response => {
-                if (response.ok) {
+            }).then(response => response.json()).then(res => {
+                // Apps Script siempre responde HTTP 200: el éxito real viene en res.result
+                if (res && res.result === 'success') {
                     modal.querySelector('h3').innerText = '¡Postulación enviada con éxito!';
                     modal.querySelector('p').innerText = 'Nos pondremos en contacto contigo pronto. Serás redirigido...';
                     
@@ -200,7 +201,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     }, 3000); 
                 } else {
                     modal.querySelector('h3').innerText = 'Hubo un error';
-                    modal.querySelector('p').innerText = 'No se pudo enviar. Intenta nuevamente.';
+                    modal.querySelector('p').innerText = (res && (res.message || res.error)) || 'No se pudo enviar. Intenta nuevamente.';
+                    // El token de Turnstile es de un solo uso: pedir uno nuevo para reintentar
+                    if (window.turnstile) { window.turnstile.reset(); }
                     
                     setTimeout(() => { 
                         modal.style.display = 'none'; 

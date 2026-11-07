@@ -90,7 +90,7 @@ function doPost(e) {
     sheet.appendRow(rowData);
 
     // Enviar correo automático a los administradores
-    var correoDestino = "cirta.contacto@gmail.com";
+    var correoDestino = "contacto@cirta.cl";
     var asunto = "Postulante a Voluntariado: " + nombre;
     var cuerpo = "Tienes una nueva postulación de voluntariado desde la web:\n\n" +
                  "Nombre: " + nombre + "\n" +

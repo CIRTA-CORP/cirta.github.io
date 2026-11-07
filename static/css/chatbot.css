@@ -140,3 +140,19 @@
 #cirta-chatbot-form button:hover {
     background-color: #7C4DD9;
 }
+
+.cirta-msg-typing {
+    font-style: italic;
+    opacity: 0.7;
+}
+
+.cirta-msg {
+    white-space: pre-wrap;
+}
+
+#cirta-chatbot-notice {
+    font-size: 10px;
+    color: #888;
+    text-align: center;
+    padding: 4px 10px 6px;
+}

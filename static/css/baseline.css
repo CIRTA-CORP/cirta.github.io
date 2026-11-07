@@ -160,3 +160,8 @@ header.intro-header {
 header.intro-header .page-heading {
     padding: 20px 0;
 }
+/* CTA de la portada: margen superior solo en escritorio (en móvil la columna va apilada) */
+.home-cta-title { margin-top: 30px; margin-bottom: 20px; }
+@media (min-width: 768px) {
+    .home-cta-title { margin-top: 120px; }
+}

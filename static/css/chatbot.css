@@ -3,7 +3,7 @@
     right: 20px;
     bottom: 20px;
     z-index: 1000;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: var(--cirta-font-body);
 }
 
 #cirta-chatbot-toggle {
@@ -155,4 +155,26 @@
     color: #888;
     text-align: center;
     padding: 4px 10px 6px;
+}
+
+/* Foco visible al navegar con teclado (el input quita el outline por defecto). */
+#cirta-chatbot-form:focus-within {
+    box-shadow: inset 0 0 0 2px #A475EA;
+}
+#cirta-chatbot button:focus-visible {
+    outline: 2px solid #7C4DD9;
+    outline-offset: 2px;
+}
+
+/* Móvil: el chat ocupa la pantalla completa en vez de tapar parte del contenido. */
+@media (max-width: 767px) {
+    #cirta-chatbot-window {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        max-height: none;
+        border-radius: 0;
+    }
 }

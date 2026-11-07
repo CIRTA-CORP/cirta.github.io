@@ -3,9 +3,30 @@
 document.addEventListener("DOMContentLoaded", function () {
     var CHATBOT_ENDPOINT = "https://script.google.com/macros/s/AKfycbzJRYvJXe45a5GP2hdry3ymOOpP-ZYzZDAwjvh53MAUeuA4EAIavykbuWgk8FTIVDCNXg/exec";
 
-    var ERROR_MESSAGE = "No pude responder ahora. Intenta de nuevo o escríbenos desde la sección \"Contacto\".";
-
-    var QUICK_REPLIES = ["¿Qué es CIRTA?", "Proyectos", "Tengo un proyecto", "Quiero ser voluntario/a", "Contacto"];
+    // Textos según el idioma de la página (<html lang="es|en|pt">).
+    var I18N = {
+        es: {
+            error: "No pude responder ahora. Intenta de nuevo o escríbenos desde la sección \"Contacto\".",
+            greeting: "¡Hola! Soy el asistente de CIRTA. ¿En qué te puedo ayudar?",
+            typing: "Escribiendo...",
+            quickReplies: ["¿Qué es CIRTA?", "Proyectos", "Tengo un proyecto", "Quiero ser voluntario/a", "Contacto"]
+        },
+        en: {
+            error: "I couldn't answer right now. Please try again or write to us from the \"Contact\" page.",
+            greeting: "Hi! I'm the CIRTA assistant. How can I help you?",
+            typing: "Typing...",
+            quickReplies: ["What is CIRTA?", "Projects", "I have a project", "I want to volunteer", "Contact"]
+        },
+        pt: {
+            error: "Não consegui responder agora. Tente novamente ou escreva para nós pela página \"Contato\".",
+            greeting: "Olá! Sou o assistente da CIRTA. Como posso ajudar?",
+            typing: "Digitando...",
+            quickReplies: ["O que é a CIRTA?", "Projetos", "Tenho um projeto", "Quero ser voluntário/a", "Contato"]
+        }
+    };
+    var T = I18N[(document.documentElement.lang || "es").slice(0, 2)] || I18N.es;
+    var ERROR_MESSAGE = T.error;
+    var QUICK_REPLIES = T.quickReplies;
 
     var toggleBtn = document.getElementById("cirta-chatbot-toggle");
     var closeBtn = document.getElementById("cirta-chatbot-close");
@@ -54,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         history.push({ role: "user", content: text });
 
         waiting = true;
-        var typing = addMessage("Escribiendo...", "bot");
+        var typing = addMessage(T.typing, "bot");
         typing.classList.add("cirta-msg-typing");
 
         // text/plain evita el preflight CORS, que Apps Script no soporta.
@@ -86,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function openChat() {
         win.hidden = false;
         if (!initialized) {
-            addMessage("¡Hola! Soy el asistente de CIRTA. ¿En qué te puedo ayudar?", "bot");
+            addMessage(T.greeting, "bot");
             renderQuickReplies();
             initialized = true;
         }

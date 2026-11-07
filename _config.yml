@@ -23,3 +23,9 @@ exclude:
   - Backend-Forms.md
   - google-apps-script
   - LICENSE
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /static/img/cirta_logo.png

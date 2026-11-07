@@ -4,6 +4,9 @@
 
 {% case lang %}
 {% when "en" %}
+    {% assign nav_services = "Services" %}
+    {% assign nav_all_projects = "All projects" %}
+    {% assign nav_rov = "Maritime monitoring (ROV)" %}
     {% assign nav_home = "Home" %}
     {% assign nav_about_menu = "About" %}
     {% assign nav_about = "About us" %}
@@ -15,6 +18,9 @@
     {% assign nav_volunteer = "Volunteer" %}
     {% assign nav_contact = "Contact" %}
 {% when "pt" %}
+    {% assign nav_services = "Serviços" %}
+    {% assign nav_all_projects = "Todos os projetos" %}
+    {% assign nav_rov = "Monitoramento marítimo (ROV)" %}
     {% assign nav_home = "Início" %}
     {% assign nav_about_menu = "Sobre nós" %}
     {% assign nav_about = "Sobre nós" %}
@@ -26,6 +32,9 @@
     {% assign nav_volunteer = "Voluntariado" %}
     {% assign nav_contact = "Contato" %}
 {% else %}
+    {% assign nav_services = "Servicios" %}
+    {% assign nav_all_projects = "Todos los proyectos" %}
+    {% assign nav_rov = "Monitoreo marítimo (ROV)" %}
     {% assign nav_home = "Inicio" %}
     {% assign nav_about_menu = "Nosotros" %}
     {% assign nav_about = "Nosotros" %}
@@ -69,8 +78,15 @@
                 <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nav_projects }}<span class="caret"></span></a>
                     <ul class="dropdown-menu" id="dropdown-bender">
+                        <li><a href="{{ prefix }}/projects.html">{{ nav_all_projects }}</a></li>
+                        <li role="separator" class="divider"></li>
                         <li><a href="{{ prefix }}/proyect-agrobot.html">AgroBot</a></li>
+                        <li><a href="{{ prefix }}/project-rov.html">{{ nav_rov }}</a></li>
                     </ul>
+                </li>
+
+                <li>
+                    <a href="{{ prefix }}/services.html">{{ nav_services }}</a>
                 </li>
 
                 <li>

@@ -195,3 +195,11 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });          
+// Preselecciona el motivo desde la URL (p. ej. contact.html?motivo=proyecto desde "Tengo un proyecto").
+document.addEventListener("DOMContentLoaded", function() {
+    const motivo = new URLSearchParams(window.location.search).get('motivo');
+    const select = document.getElementById('motivo');
+    if (motivo && select && select.querySelector('option[value="' + CSS.escape(motivo) + '"]')) {
+        select.value = motivo;
+    }
+});

@@ -2,7 +2,7 @@ title: CIRTA
 description: >-
   CIRTA es una corporación chilena sin fines de lucro dedicada a la investigación,
   robótica y tecnología aplicada, con foco en reducir brechas educativas en ciencia
-  y tecnología a través de proyectos como EduRobotics y AgroBot.
+  y tecnología a través de proyectos como EduRobotics y Zorzal.
 url: "https://www.cirta.cl"
 lang: es
 logo: /static/img/cirta_logo.png
@@ -11,6 +11,10 @@ social:
   links:
     - https://www.instagram.com/cirtacorp/
     - https://www.linkedin.com/company/cirta-corp
+
+# URL /exec del Apps Script de google-apps-script/Newsletter.gs.
+# Mientras esté vacía, el formulario de newsletter no se muestra.
+newsletter_endpoint: ""
 
 plugins:
   - jekyll-sitemap

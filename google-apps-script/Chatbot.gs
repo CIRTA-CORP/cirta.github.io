@@ -34,12 +34,13 @@ var SYSTEM_PROMPT = [
   '- CIRTA es una corporación sin fines de lucro dedicada a la investigación y desarrollo tecnológico, con foco en robótica e inteligencia artificial aplicada.',
   '- Misión: crear y aplicar conocimiento científico y tecnológico para generar innovaciones con impacto tangible y sostenible, promoviendo un progreso equitativo y colaborativo entre empresas, universidades y la sociedad.',
   '- Visión: una sociedad más justa, resiliente y conectada, donde el avance científico y tecnológico contribuya al desarrollo sostenible y la inclusión social.',
-  '- Proyectos: AgroBot (clasificación y empaquetamiento robótico de fruta de exportación) y EduRobotics (plataforma para aprender robótica desde cero). También ofrecemos talleres (menú "Educación").',
+  '- Proyectos: Zorzal (clasificación y empaquetamiento robótico de fruta de exportación), monitoreo marítimo con un ROV Chasing M2 S, y EduRobotics (plataforma para aprender robótica desde cero). También ofrecemos talleres (menú "Educación").',
   '- Voluntariado: completar el formulario en la sección "Participa"; el equipo contacta según intereses y disponibilidad.',
   '- Equipo: sección "Nosotros" > "Equipo".',
   '- Contacto: formulario de "Contacto" o contacto@cirta.cl.',
   '- Dirección postal: Av. Rodelillo 4299, Valparaíso, Chile.',
-  '- Donaciones: formulario de "Contacto", motivo "Donaciones".',
+  '- Donaciones: página "Dona" (menú "Participa"), con transferencia bancaria; para aportes mensuales, de empresas o comprobantes, formulario de "Contacto" con motivo "Donaciones".',
+  '- Servicios: página "Servicios" (prototipos robóticos, visión computacional, inspección submarina con ROV, I+D aplicada y formación). Para proponer un proyecto, formulario de "Contacto" con motivo "Tengo un proyecto".',
   '- Información legal y directorio: sección "Transparencia".'
 ].join('\n');
 

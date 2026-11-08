@@ -309,3 +309,19 @@ header.intro-header.intro-header-home { min-height: 300px; margin-bottom: 30px; 
     .impact-strip .num { font-size: 28px; }
     .impact-strip .label { font-size: 13px; overflow-wrap: break-word; }
 }
+
+/* Footer: newsletter y botón de donación */
+.newsletter-form { text-align: center; margin-bottom: 20px; }
+.newsletter-form h4 { margin-bottom: 4px; }
+.newsletter-form p { text-align: center; }
+.newsletter-row { display: flex; gap: 8px; max-width: 460px; margin: 0 auto; }
+.newsletter-row input[type=email] {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.newsletter-hp { position: absolute; left: -9999px; width: 1px; height: 1px; }
+.newsletter-status { min-height: 1.4em; font-size: 15px; }
+.footer-donate { margin: 10px 0 20px; text-align: center; }

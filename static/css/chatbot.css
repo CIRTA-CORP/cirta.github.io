@@ -178,3 +178,18 @@
         border-radius: 0;
     }
 }
+
+/* Botón de acción dentro de un mensaje del bot (agendar reunión). */
+.cirta-msg-action {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 14px;
+    background-color: #7C4DD9;
+    color: #fff !important;
+    font-weight: 600;
+    text-decoration: none !important;
+}
+.cirta-msg-action:hover, .cirta-msg-action:focus {
+    background-color: #6236C0;
+}

@@ -1,6 +1,10 @@
 // Asistente CIRTA: chat con IA (Claude) a través de un backend en Google Apps Script.
 // La API key vive en el servidor (google-apps-script/Chatbot.gs), nunca en el navegador.
 document.addEventListener("DOMContentLoaded", function () {
+    // Enlace para agendar reunión (p. ej. página de citas de Google Calendar o Calendly).
+    // Si está vacío, el chatbot ofrece el formulario de contacto con el motivo "proyecto".
+    var MEETING_URL = "";
+
     var CHATBOT_ENDPOINT = "https://script.google.com/macros/s/AKfycbzJRYvJXe45a5GP2hdry3ymOOpP-ZYzZDAwjvh53MAUeuA4EAIavykbuWgk8FTIVDCNXg/exec";
 
     // Textos según el idioma de la página (<html lang="es|en|pt">).
@@ -9,22 +13,35 @@ document.addEventListener("DOMContentLoaded", function () {
             error: "No pude responder ahora. Intenta de nuevo o escríbenos desde la sección \"Contacto\".",
             greeting: "¡Hola! Soy el asistente de CIRTA. ¿En qué te puedo ayudar?",
             typing: "Escribiendo...",
+            meetingText: "¿Quieres conversarlo con nuestro equipo?",
+            meetingBtn: "Agendar una reunión",
+            contactBtn: "Contarnos tu proyecto",
             quickReplies: ["¿Qué es CIRTA?", "Proyectos", "Tengo un proyecto", "Quiero ser voluntario/a", "Contacto"]
         },
         en: {
             error: "I couldn't answer right now. Please try again or write to us from the \"Contact\" page.",
             greeting: "Hi! I'm the CIRTA assistant. How can I help you?",
             typing: "Typing...",
+            meetingText: "Would you like to talk it through with our team?",
+            meetingBtn: "Book a meeting",
+            contactBtn: "Tell us about your project",
             quickReplies: ["What is CIRTA?", "Projects", "I have a project", "I want to volunteer", "Contact"]
         },
         pt: {
             error: "Não consegui responder agora. Tente novamente ou escreva para nós pela página \"Contato\".",
             greeting: "Olá! Sou o assistente da CIRTA. Como posso ajudar?",
             typing: "Digitando...",
+            meetingText: "Quer conversar sobre isso com a nossa equipe?",
+            meetingBtn: "Agendar uma reunião",
+            contactBtn: "Conte-nos sobre seu projeto",
             quickReplies: ["O que é a CIRTA?", "Projetos", "Tenho um projeto", "Quero ser voluntário/a", "Contato"]
         }
     };
-    var T = I18N[(document.documentElement.lang || "es").slice(0, 2)] || I18N.es;
+    var LANG = (document.documentElement.lang || "es").slice(0, 2);
+    var T = I18N[LANG] || I18N.es;
+    var LANG_PREFIX = (LANG === "en" || LANG === "pt") ? "/" + LANG : "";
+    var PROJECT_REPLY = T.quickReplies[2]; // "Tengo un proyecto"
+    var meetingOffered = false;
     var ERROR_MESSAGE = T.error;
     var QUICK_REPLIES = T.quickReplies;
 
@@ -50,6 +67,27 @@ document.addEventListener("DOMContentLoaded", function () {
         messages.appendChild(el);
         messages.scrollTop = messages.scrollHeight;
         return el;
+    }
+
+    // Al final del flujo "Tengo un proyecto": botón para agendar reunión (o ir al formulario).
+    function offerMeeting() {
+        if (meetingOffered) return;
+        meetingOffered = true;
+        var el = addMessage(T.meetingText, "bot");
+        var link = document.createElement("a");
+        link.className = "cirta-msg-action";
+        if (MEETING_URL) {
+            link.href = MEETING_URL;
+            link.target = "_blank";
+            link.rel = "noopener";
+            link.textContent = T.meetingBtn;
+        } else {
+            link.href = LANG_PREFIX + "/contact.html?motivo=proyecto";
+            link.textContent = T.contactBtn;
+        }
+        el.appendChild(document.createElement("br"));
+        el.appendChild(link);
+        messages.scrollTop = messages.scrollHeight;
     }
 
     function renderQuickReplies() {
@@ -90,6 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 history.push({ role: "assistant", content: data.reply });
                 typing.remove();
                 addMessage(data.reply, "bot");
+                if (text === PROJECT_REPLY) offerMeeting();
             })
             .catch(function (err) {
                 // Se descarta la pregunta sin respuesta para mantener roles alternados.

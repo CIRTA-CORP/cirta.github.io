@@ -4,6 +4,7 @@
 
 {% case lang %}
 {% when "en" %}
+    {% assign nav_donate = "Donate" %}
     {% assign nav_services = "Services" %}
     {% assign nav_all_projects = "All projects" %}
     {% assign nav_rov = "Maritime monitoring (ROV)" %}
@@ -18,6 +19,7 @@
     {% assign nav_volunteer = "Volunteer" %}
     {% assign nav_contact = "Contact" %}
 {% when "pt" %}
+    {% assign nav_donate = "Doe" %}
     {% assign nav_services = "Serviços" %}
     {% assign nav_all_projects = "Todos os projetos" %}
     {% assign nav_rov = "Monitoramento marítimo (ROV)" %}
@@ -32,6 +34,7 @@
     {% assign nav_volunteer = "Voluntariado" %}
     {% assign nav_contact = "Contato" %}
 {% else %}
+    {% assign nav_donate = "Dona" %}
     {% assign nav_services = "Servicios" %}
     {% assign nav_all_projects = "Todos los proyectos" %}
     {% assign nav_rov = "Monitoreo marítimo (ROV)" %}
@@ -80,7 +83,7 @@
                     <ul class="dropdown-menu" id="dropdown-bender">
                         <li><a href="{{ prefix }}/projects.html">{{ nav_all_projects }}</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="{{ prefix }}/proyect-agrobot.html">AgroBot</a></li>
+                        <li><a href="{{ prefix }}/proyect-agrobot.html">Zorzal</a></li>
                         <li><a href="{{ prefix }}/project-rov.html">{{ nav_rov }}</a></li>
                     </ul>
                 </li>
@@ -101,6 +104,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nav_participate }}<span class="caret"></span></a>
                     <ul class="dropdown-menu" id="dropdown-participa">
                         <li><a href="{{ prefix }}/volunteer.html">{{ nav_volunteer }}</a></li>
+                        <li><a href="{{ prefix }}/donate.html">{{ nav_donate }}</a></li>
                     </ul>
                 </li>
 

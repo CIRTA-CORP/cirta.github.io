@@ -1,7 +1,7 @@
 ---
 lang: en
 title: "CIRTA"
-description: "CIRTA is a Chilean non-profit for robotics and applied technology: we build projects like AgroBot and EduRobotics and bring science closer to the community."
+description: "CIRTA is a Chilean non-profit for robotics and applied technology: we build projects like Zorzal and EduRobotics and bring science closer to the community."
 ---
 <html lang="en">
 
@@ -14,96 +14,180 @@ description: "CIRTA is a Chilean non-profit for robotics and applied technology:
     {% include navigation.html %}
 
     <!-- Page Header -->
-    {% include header_img.html image="/static/img/title/team-bg.jpg" title="<img src='/static/img/cirta_logo.png' alt='CIRTA' style='height:110px;'>" subtitle="Center for Research, Robotics and Applied Technology" meta="<i class=\"fa fa-child fa-stack-1x fa-inverse\"></i>" %}
+    {% include header_img.html class="intro-header-home" image="/static/img/title/team-bg.jpg" title="<img src='/static/img/cirta_logo.png' alt='CIRTA' class='header-logo'>" subtitle="Center for Research, Robotics and Applied Technology" meta="" %}
 
     <!-- Main Content -->
     <div class="container">
 
-        <div class="row text-center">
-            <div class="col-sm-12">
-                <h3 style="margin-top: 10px; margin-bottom: 40px;">2030 Goals</h3>
-
+        <!-- Propuesta de valor -->
+        <section class="home-hero">
+            <p class="lead">We develop applied robotics and artificial intelligence to solve real challenges for companies and communities, and bring technology closer to more people through free education.</p>
+            <div class="cta-row">
+                <a href="/en/projects.html" class="btn btn-primary btn-lg">See projects</a>
+                <a href="/en/contact.html?motivo=proyecto" class="btn btn-lg btn-cirta-outline">I have a project</a>
             </div>
-        </div>
+        </section>
 
-        <div class="row">
-            <div class="col-sm-4">
-                <img loading="lazy" class="img-circle img-responsive img-center" src="/static/img/logo_innovacion.jpg" alt="" style="max-height: 300px; max-width: 290px; margin: 0 auto;">
-                <h3>Innovation with social and economic impact</h3>
-                <p>Develop and transfer projects that improve the country's competitiveness and well-being.</p>
+        <!-- Cifras de impacto -->
+        <section class="impact-strip" aria-label="CIRTA in numbers">
+            <div><span class="num">2026</span><span class="label">Year founded</span></div>
+            <div><span class="num">3</span><span class="label">Workshops held</span></div>
+            <div><span class="num">76</span><span class="label">People trained</span></div>
+        </section>
+
+        <!-- Proyectos destacados -->
+        <h3 class="text-center">Our projects</h3>
+        <div class="card-grid">
+            <div class="cirta-card">
+                <img loading="lazy" src="/static/img/title/agrobot-bg.jpg" alt="">
+                <h3>Zorzal</h3>
+                <p>Robotic sorting and packaging of export fruit with computer vision.</p>
+                <a class="card-link" href="/en/proyect-agrobot.html">See project →</a>
             </div>
-
-            <div class="col-sm-4">
-                <img loading="lazy" class="img-circle img-responsive img-center" src="/static/img/logo_educacion.jpg" alt="" style="max-height: 300px; max-width: 290px; margin: 0 auto;">
-                <h3>Inclusion and training in science and technology</h3>
-                <p>Train thousands of people, prioritizing underrepresented groups in STEAM fields.</p>
-
+            <div class="cirta-card">
+                <img loading="lazy" src="/static/img/title/team-bg.jpg" alt="">
+                <h3>Maritime monitoring</h3>
+                <p>Underwater inspection and monitoring with a remotely operated vehicle (ROV).</p>
+                <a class="card-link" href="/en/project-rov.html">See project →</a>
             </div>
-
-            <div class="col-sm-4">
-                <img loading="lazy" class="img-circle img-responsive img-center" src="/static/img/logo_alianzas.webp" alt="" style="max-height: 240px; max-width: 290px; margin: 0 auto;">
-                <h3>Strengthening the national innovation ecosystem</h3>
-                <p>Build strategic alliances between universities, companies, and public and private organizations.</p>
+            <div class="cirta-card">
+                <img loading="lazy" src="/static/img/title/edurobotics-bg.jpg" alt="">
+                <h3>EduRobotics</h3>
+                <p>Free 3D simulator to learn robotics from scratch in the browser.</p>
+                <a class="card-link" href="/en/education-edurobotics.html">See program →</a>
             </div>
         </div>
 
         <hr>
 
-
-        <div class="row">
-            <h3 style="margin-top: 40px; margin-bottom: 40px;">Find inspiration</h3>
-
-
-            <div class="col-sm-8">
-                <!-- Slider-->
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="background: transparent">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    </ol>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img loading="lazy" src="/static/img/inspiracion/telexistence.jpg" alt="Restocking robot in a store" style="max-height: 400px; margin: 0 auto;">
-                            <!--  <div class="carousel-caption"> Robot reabastecedor en tiendas </div> -->
-                        </div>
-                        <div class="item">
-                          <img loading="lazy" src="/static/img/inspiracion/hospitals.avif" alt="Delivery robot inside a hospital" style="max-height: 400px; margin: 0 auto;">
-                          <!--      <div class="carousel-caption"> Robot diseñado para entregas 24/7 dentro del hospital de medicamentos, muestras de laboratorio, etc.  </div> -->
-                        </div>
+        <!-- Objetivos 2030 -->
+        <section class="goals" aria-labelledby="goals-title">
+            <p class="goals-eyebrow">Where we're headed</p>
+            <h2 id="goals-title" class="goals-title">2030 Goals</h2>
+            <ul class="row list-unstyled goals-list">
+                <li class="col-sm-4 goal">
+                    <div class="goal-card">
+                        <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                        <h3>Innovation with impact</h3>
+                        <p>Develop and transfer projects that improve the country's competitiveness and well-being.</p>
                     </div>
+                </li>
+                <li class="col-sm-4 goal">
+                    <div class="goal-card">
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        <h3>Inclusive training</h3>
+                        <p>Train thousands of people, prioritizing underrepresented groups in STEAM fields.</p>
+                    </div>
+                </li>
+                <li class="col-sm-4 goal">
+                    <div class="goal-card">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <h3>Innovation ecosystem</h3>
+                        <p>Build strategic alliances between universities, companies, and public and private organizations.</p>
+                    </div>
+                </li>
+            </ul>
+            <p class="goals-more"><a href="/en/about.html">Learn about our mission and vision&nbsp;→</a></p>
+        </section>
 
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"  style="background: transparent">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next" style="background: transparent">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+        <hr>
+
+
+        <section class="row inspo" aria-labelledby="inspo-title">
+            <div class="col-xs-12">
+            <h2 id="inspo-title" class="inspo-title">Our team's experience</h2>
+            <p class="inspo-lead">Robotics projects that CIRTA members have taken part in at other institutions. They are not CIRTA projects: they show the experience we can bring to your company.</p>
+            <!-- PENDIENTE: confirmar permiso para usar las imágenes. -->
+            <div class="inspo-carousel">
+            <button type="button" class="inspo-nav inspo-prev" aria-label="Previous" aria-controls="inspo-track"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+            <ul class="inspo-grid inspo-track" id="inspo-track" tabindex="0" aria-label="Team projects and experience">
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-top" src="/static/img/equipo/ace-sony-ai.webp" alt="Autonomous table tennis robot playing against a person">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">Sony AI</span>
+                        <h3>ACE: table tennis robot</h3>
+                        <p>Autonomous robot that combines event-based sensing and deep reinforcement learning to play against elite players. The research made the cover of Nature.</p>
+                        <p class="inspo-credit">Image: <a href="https://ace.ai.sony/" target="_blank" rel="noopener">Sony AI</a></p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-center" src="/static/img/equipo/perro-robot-lemur.webp" alt="KILTRO, a red and black quadruped robot dog, standing outdoors">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">LEMUR Lab, Universidad de Chile</span>
+                        <h3>Robot dog with a robotic arm</h3>
+                        <p>Quadruped robot dog from the Mechatronics and Robotics Laboratory at Universidad de Chile, which is being fitted with a robotic arm.</p>
+                        <p class="inspo-credit">Image: <a href="https://laboratoriolemur.cl/" target="_blank" rel="noopener">LEMUR Lab</a></p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-top" src="/static/img/equipo/bender-uchile.webp" alt="Bender humanoid robot with a white head and red antennas">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">UChile Homebreakers</span>
+                        <h3>Bender: service robot</h3>
+                        <p>Humanoid service robot for human-robot interaction in homes: it recognizes faces and voice, handles objects and navigates around obstacles. It competes in RoboCup@Home.</p>
+                        <p class="inspo-credit">Image: <a href="https://uchile-robotics.github.io/" target="_blank" rel="noopener">UChile Homebreakers</a></p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-top" src="/static/img/equipo/maqui-pepper-uchile.webp" alt="Pepper humanoid robot with a screen on its chest">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">UChile Homebreakers</span>
+                        <h3>Maqui: Pepper robot</h3>
+                        <p>Pepper humanoid robot programmed for human-robot interaction in homes. With it, the team won 1st place at RoboCup@Home SSPL in 2021.</p>
+                        <p class="inspo-credit">Image: <a href="https://uchile-robotics.github.io/pepper-robocup.html" target="_blank" rel="noopener">UChile Homebreakers</a></p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-center" src="/static/img/equipo/ur5-robotiq.webp" alt="UR5 collaborative arm with a Robotiq gripper">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">Manipulation</span>
+                        <h3>UR5 cobots with Robotiq grippers</h3>
+                        <p>Object manipulation with UR5 collaborative arms and Robotiq grippers, the same type of robot we use in our EduRobotics simulator.</p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-center" src="/static/img/equipo/robot-industrial.webp" alt="Seven-axis industrial robot arm">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">Industrial robotics</span>
+                        <h3>Industrial robots</h3>
+                        <p>Programming and operating industrial robot arms for manipulation tasks.</p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-center" src="/static/img/equipo/bimanipulacion.webp" alt="Dual-arm industrial robot in a lab">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">Bimanual manipulation</span>
+                        <h3>Dual-arm robots</h3>
+                        <p>Robots that coordinate two arms to handle objects, the way a person would with both hands.</p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-center" src="/static/img/equipo/rov-monitoreo.webp" alt="Remotely operated underwater vehicle">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">Underwater robotics</span>
+                        <h3>ROVs for monitoring</h3>
+                        <p>Operating remotely operated underwater vehicles (ROVs) for underwater monitoring tasks.</p>
+                        <p class="inspo-credit">See <a href="/en/project-rov.html">maritime monitoring</a></p>
+                    </div>
+                </li>
+            </ul>
+            <button type="button" class="inspo-nav inspo-next" aria-label="Next" aria-controls="inspo-track"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+            </div>
+            <p class="inspo-ref-note">Some images are for reference only and do not show the projects the team worked on.</p>
+            <script src="/static/js/inspo-carousel.js" defer></script>
+            <div class="inspo-cta">
+                <div class="inspo-cta-text">
+                    <h3>Want to bring this experience to your company?</h3>
+                    <p>Through our Consulting and integration service, we help you assess which robotics or AI solution fits your operation and integrate it.</p>
+                </div>
+                <div class="inspo-cta-actions">
+                    <a href="/en/contact.html?motivo=consultoria" class="btn btn-lg inspo-btn">Request a consulting quote</a>
+                    <a href="/en/services.html" class="btn btn-lg btn-cirta-outline">See services</a>
                 </div>
             </div>
-
-            <!-- Buttons to redirect to the Form -->
-            <div class="col-sm-4 text-center">
-                <h3 class="home-cta-title">Contact us to explore your R&D challenge together</h3>
-                <a href="contact.html" class="btn btn-lg" style="padding: 15px 30px; font-size: 16px; border-radius: 4px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); border: 1px solid #444444; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">
-                    <img loading="lazy" src="/favicon.png" alt="CIRTA Icon" style="height: 28px; margin-right: 12px;">
-                    Contact
-                </a>
             </div>
-
-
-
-
-
-
-
-        </div>
-        <!-- /.row -->
+        </section>
+        <!-- /.inspo -->
 
         <!-- /.row -->
     </div>

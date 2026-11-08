@@ -64,6 +64,13 @@ const clearErrors = () => {
 // =============================================
 
 document.addEventListener("DOMContentLoaded", function() {
+    // Preselecciona el motivo desde la URL (p. ej. contact.html?motivo=proyecto desde "Tengo un proyecto").
+    const motivoParam = new URLSearchParams(window.location.search).get('motivo');
+    const motivoSelect = document.getElementById('motivo');
+    if (motivoParam && motivoSelect && motivoSelect.querySelector('option[value="' + CSS.escape(motivoParam) + '"]')) {
+        motivoSelect.value = motivoParam;
+    }
+
     
     const form = document.getElementById('formularioContacto');
 
@@ -194,4 +201,4 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
-});          
+});

@@ -1,10 +1,35 @@
+{% assign ft_lang = page.lang | default: "es" %}
+{% assign ft_prefix = "" %}{% if ft_lang != "es" %}{% assign ft_prefix = "/" | append: ft_lang %}{% endif %}
+{% if ft_lang == "en" %}{% assign ft_nl_title = "Subscribe to our newsletter" %}{% assign ft_nl_text = "News about our projects, workshops and activities." %}{% assign ft_nl_ph = "Your email" %}{% assign ft_nl_btn = "Subscribe" %}{% assign ft_nl_ok = "Thanks! You are subscribed." %}{% assign ft_nl_err = "We couldn't subscribe you. Please try again." %}{% assign ft_donate = "Donate" %}
+{% elsif ft_lang == "pt" %}{% assign ft_nl_title = "Assine nossa newsletter" %}{% assign ft_nl_text = "Novidades sobre nossos projetos, oficinas e atividades." %}{% assign ft_nl_ph = "Seu e-mail" %}{% assign ft_nl_btn = "Assinar" %}{% assign ft_nl_ok = "Obrigado! Inscrição feita." %}{% assign ft_nl_err = "Não foi possível fazer a inscrição. Tente novamente." %}{% assign ft_donate = "Doe" %}
+{% else %}{% assign ft_nl_title = "Suscríbete a nuestro newsletter" %}{% assign ft_nl_text = "Novedades de nuestros proyectos, talleres y actividades." %}{% assign ft_nl_ph = "Tu correo" %}{% assign ft_nl_btn = "Suscribirme" %}{% assign ft_nl_ok = "¡Gracias! Ya estás suscrito/a." %}{% assign ft_nl_err = "No pudimos suscribirte. Intenta de nuevo." %}{% assign ft_donate = "Dona" %}{% endif %}
 <footer>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% if site.newsletter_endpoint and site.newsletter_endpoint != "" %}
+                <!-- Newsletter: backend en google-apps-script/Newsletter.gs -->
+                <form id="newsletter-form" class="newsletter-form" action="{{ site.newsletter_endpoint }}" method="POST"
+                      data-ok="{{ ft_nl_ok }}" data-err="{{ ft_nl_err }}">
+                    <h4>{{ ft_nl_title }}</h4>
+                    <p>{{ ft_nl_text }}</p>
+                    <div class="newsletter-row">
+                        <label for="newsletter-email" class="sr-only">{{ ft_nl_ph }}</label>
+                        <input type="email" id="newsletter-email" name="email" placeholder="{{ ft_nl_ph }}" required maxlength="100" autocomplete="email">
+                        <input type="text" name="website" tabindex="-1" autocomplete="off" class="newsletter-hp" aria-hidden="true">
+                        <input type="hidden" name="lang" value="{{ ft_lang }}">
+                        <button type="submit" class="btn btn-primary">{{ ft_nl_btn }}</button>
+                    </div>
+                    <p class="newsletter-status" role="status" aria-live="polite"></p>
+                </form>
+                <script src="/static/js/newsletter.js" defer></script>
+                {% endif %}
+
+                <p class="text-center footer-donate"><a href="{{ ft_prefix }}/donate.html" class="btn btn-cirta-outline"><i class="fa fa-heart" aria-hidden="true"></i> {{ ft_donate }}</a></p>
+
                 <ul class="list-inline text-center">
                     <li>
-                        <a href="https://www.instagram.com/cirtacorp/" target="_blank">
+                        <a href="https://www.instagram.com/cirtacorp/" target="_blank" rel="noopener" aria-label="Instagram">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
@@ -12,10 +37,18 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com/company/cirta-corp" target="_blank">
+                        <a href="https://www.linkedin.com/company/cirta-corp" target="_blank" rel="noopener" aria-label="LinkedIn">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:contacto@cirta.cl" aria-label="contacto@cirta.cl" title="contacto@cirta.cl">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
                             </span>
                         </a>
                     </li>

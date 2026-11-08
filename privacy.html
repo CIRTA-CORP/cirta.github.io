@@ -21,8 +21,8 @@ description: "Cómo CIRTA trata tus datos personales: qué recopilamos, para qu�
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 privacy">
 
-                    <!-- PENDIENTE: revisión legal antes de publicar (Ley 21.719). Los plazos de conservación son una propuesta. -->
-                    <p class="privacy-updated">Última actualización: noviembre de 2026</p>
+                    <!-- PENDIENTE: revisión legal antes de publicar (Ley 21.719). -->
+                    <p class="privacy-updated">Versión 1.0 · Última actualización: noviembre de 2026</p>
 
                     <p>En CIRTA respetamos tu privacidad. Esta política explica qué datos personales recopilamos en este sitio, para qué los usamos, con quién los compartimos y cómo puedes ejercer tus derechos, de acuerdo con la Ley 21.719 sobre protección de datos personales.</p>
 
@@ -31,6 +31,7 @@ description: "Cómo CIRTA trata tus datos personales: qué recopilamos, para qu�
                         <dl>
                             <dt>Responsable</dt><dd>CORPORACION CIRTA</dd>
                             <dt>RUT</dt><dd>65.272.022-6</dd>
+                            <dt>Representante legal</dt><dd>Luz Martínez</dd>
                             <dt>Dirección</dt><dd>Av. Rodelillo 4299, Valparaíso, Chile</dd>
                             <dt>Contacto</dt><dd><a href="mailto:contacto@cirta.cl">contacto@cirta.cl</a></dd>
                         </dl>
@@ -41,15 +42,17 @@ description: "Cómo CIRTA trata tus datos personales: qué recopilamos, para qu�
                         <table class="table privacy-table">
                             <thead><tr><th scope="col">Dónde</th><th scope="col">Datos</th><th scope="col">Para qué</th><th scope="col">Base</th></tr></thead>
                             <tbody>
-                                <tr><th scope="row">Formulario de contacto</th><td>Nombre, correo, teléfono (opcional), organización (opcional), motivo y mensaje</td><td>Responder tu consulta, cotización, propuesta o solicitud</td><td>Tu solicitud</td></tr>
-                                <tr><th scope="row">Formulario de voluntariado</th><td>Nombre, correo, ciudad o región, intereses, disponibilidad, experiencia, habilidades y comentarios</td><td>Evaluar tu postulación y contactarte sobre oportunidades de voluntariado</td><td>Tu consentimiento</td></tr>
-                                <tr><th scope="row">Newsletter</th><td>Correo, idioma y página desde donde te suscribiste</td><td>Enviarte novedades de nuestros proyectos, talleres y actividades</td><td>Tu consentimiento</td></tr>
-                                <tr><th scope="row">Asistente del sitio (chatbot)</th><td>Los mensajes que escribes, un identificador aleatorio de la conversación y la página</td><td>Responder tus preguntas y mejorar el asistente</td><td>Tu consentimiento al usarlo</td></tr>
+                                <tr><th scope="row">Formulario de contacto</th><td>Nombre, correo, teléfono (opcional), organización (opcional), motivo y mensaje</td><td>Responder tu consulta, cotización, propuesta o solicitud</td><td>Gestionar la solicitud que tú nos haces (pasos previos que nos pides) y nuestro interés legítimo en responderte</td></tr>
+                                <tr><th scope="row">Formulario de voluntariado</th><td>Nombre, correo, ciudad o región, intereses, disponibilidad, horas disponibles, experiencia, habilidades y comentarios</td><td>Evaluar tu postulación y contactarte sobre oportunidades de voluntariado</td><td>Tu postulación (gestionar la solicitud que nos haces)</td></tr>
+                                <tr><th scope="row">Newsletter</th><td>Correo, idioma y página desde donde te suscribiste</td><td>Enviarte novedades de nuestros proyectos, talleres y actividades</td><td>Tu consentimiento <span class="pendiente">[implementar confirmación por correo (doble opt-in) y registro de la fecha del consentimiento]</span></td></tr>
+                                <tr><th scope="row">Asistente del sitio (chatbot)</th><td>Los mensajes que escribes, un identificador aleatorio de la conversación y la página</td><td>Responder tus preguntas</td><td>Tu solicitud al escribirnos</td></tr>
+                                <tr><th scope="row">Registro del asistente</th><td>Los mismos mensajes, el identificador de la conversación y la página</td><td>Guardarlos 6 meses para revisar y mejorar el asistente</td><td><span class="pendiente">[definir si la base es interés legítimo, con ponderación documentada, o consentimiento mediante una casilla en el asistente]</span></td></tr>
                                 <tr><th scope="row">Navegación</th><td>Datos técnicos como tu dirección IP, que reciben los proveedores que hacen funcionar el sitio</td><td>Mostrar el sitio, cargar las tipografías y proteger los formularios contra bots</td><td>Interés legítimo en el funcionamiento y la seguridad del sitio</td></tr>
                             </tbody>
                         </table>
                     </div>
                     <p>Este sitio no usa cookies de publicidad ni herramientas de seguimiento. Te pedimos no compartir datos sensibles (salud, origen, creencias, etc.) en los formularios ni en el asistente.</p>
+                    <p>El asistente genera respuestas con inteligencia artificial, pero no toma decisiones sobre ti ni crea perfiles. Las postulaciones y solicitudes las revisa siempre una persona del equipo. <span class="pendiente">[confirmar que esto es exacto]</span></p>
 
                     <h2 class="section-heading">3. Con quién compartimos tus datos</h2>
                     <p>No vendemos ni cedemos tus datos. Para que el sitio funcione usamos estos proveedores, que tratan los datos por encargo nuestro:</p>
@@ -62,14 +65,16 @@ description: "Cómo CIRTA trata tus datos personales: qué recopilamos, para qu�
                     <p>Si eliges agendar una reunión desde el asistente, serás dirigido a <strong>Calendly</strong>, que trata tus datos según su propia política de privacidad.</p>
 
                     <h2 class="section-heading">4. Transferencias internacionales</h2>
-                    <p>Estos proveedores pueden tratar tus datos fuera de Chile, principalmente en Estados Unidos. <span class="pendiente">[indicar si el país de destino cuenta con nivel adecuado de protección según la Agencia de Protección de Datos Personales y qué garantías contractuales aplican con cada proveedor]</span></p>
+                    <p>Estos proveedores pueden tratar tus datos fuera de Chile, principalmente en Estados Unidos. Con Anthropic, Cloudflare y GitHub tenemos acuerdos de tratamiento de datos que incluyen garantías contractuales para proteger tu información. Mientras la Agencia de Protección de Datos Personales no publique la lista de países con nivel adecuado de protección, estas transferencias se basan en dichas garantías.</p>
+                    <p>Google: <span class="pendiente">[migrar las hojas de cálculo y los scripts a una cuenta de Google Workspace y aceptar su acuerdo de tratamiento de datos (hoy están en una cuenta personal de Gmail, que no lo ofrece)]</span></p>
 
                     <h2 class="section-heading">5. Cuánto tiempo guardamos tus datos</h2>
                     <ul>
-                        <li><strong>Mensajes de contacto:</strong> <span class="pendiente">[propuesta: 2 años desde el último contacto]</span></li>
-                        <li><strong>Postulaciones de voluntariado:</strong> <span class="pendiente">[propuesta: mientras dure el voluntariado y 1 año después; si la postulación no avanza, 1 año]</span></li>
+                        <li><strong>Mensajes de contacto:</strong> 2 años desde tu mensaje. <span class="pendiente">[definir cómo se borran también las copias que llegan por correo a CIRTA]</span></li>
+                        <li><strong>Postulaciones de voluntariado:</strong> Mientras dure el voluntariado y 1 año después; si la postulación no avanza, 1 año. <span class="pendiente">[definir cómo se registra el fin del voluntariado y activar el borrado automático de postulaciones y de sus copias por correo]</span></li>
                         <li><strong>Newsletter:</strong> hasta que te des de baja.</li>
-                        <li><strong>Conversaciones con el asistente:</strong> <span class="pendiente">[propuesta: 6 meses]</span></li>
+                        <li><strong>Conversaciones con el asistente:</strong> 6 meses.</li>
+                        <li><strong>Datos de navegación:</strong> CIRTA no los guarda; los proveedores los conservan según sus propias políticas.</li>
                     </ul>
                     <p>Cumplido el plazo, eliminamos los datos o los anonimizamos.</p>
 
@@ -81,9 +86,11 @@ description: "Cómo CIRTA trata tus datos personales: qué recopilamos, para qu�
                         <li><strong>Supresión:</strong> que eliminemos tus datos.</li>
                         <li><strong>Oposición:</strong> que dejemos de usarlos para un fin determinado.</li>
                         <li><strong>Portabilidad:</strong> recibir tus datos en un formato que puedas llevar a otro lugar.</li>
-                        <li><strong>Bloqueo:</strong> que suspendamos temporalmente su uso mientras revisamos tu solicitud.</li>
+                        <li><strong>Bloqueo:</strong> que suspendamos temporalmente el uso de tus datos, por ejemplo mientras revisamos una solicitud de rectificación, supresión u oposición.</li>
                     </ul>
-                    <p>También puedes retirar tu consentimiento cuando quieras. Escríbenos a <a href="mailto:contacto@cirta.cl">contacto@cirta.cl</a> indicando qué necesitas; te responderemos dentro de los plazos que establece la ley. Si no quedas conforme con nuestra respuesta, puedes reclamar ante la Agencia de Protección de Datos Personales.</p>
+                    <p>También puedes retirar tu consentimiento cuando quieras. Escríbenos a <a href="mailto:contacto@cirta.cl">contacto@cirta.cl</a> indicando qué necesitas; si es sobre una conversación con el asistente, indícanos la fecha, la hora aproximada y la página para encontrarla. Ejercer tus derechos es gratis.</p>
+                    <p>Te responderemos dentro de 30 días corridos, plazo que podemos extender una sola vez por otros 30 días corridos si es necesario, y te avisaremos. Si rechazamos tu solicitud o no te respondemos a tiempo, puedes reclamar ante la Agencia de Protección de Datos Personales.</p>
+                    <p>También tienes derecho a no ser objeto de decisiones basadas solo en un tratamiento automatizado, incluida la creación de perfiles. Como explicamos en la sección 2, no tomamos decisiones de ese tipo.</p>
 
                     <h2 class="section-heading" id="baja-newsletter">7. Darte de baja del newsletter</h2>
                     <p>Escribe el correo con el que te suscribiste y lo eliminaremos de la lista.</p>
@@ -105,10 +112,10 @@ description: "Cómo CIRTA trata tus datos personales: qué recopilamos, para qu�
                     <p>Los formularios de este sitio están pensados para personas adultas. Si tienes menos de 14 años, pide a tu madre, padre o tutor que nos escriba. Si participas en un workshop a través de tu colegio u organización, la institución coordina con nosotros los datos necesarios.</p>
 
                     <h2 class="section-heading">9. Seguridad</h2>
-                    <p>Limitamos el acceso a tus datos a las personas del equipo que los necesitan, usamos cuentas protegidas y verificación contra bots en los formularios. Si ocurre un incidente de seguridad que afecte tus datos, lo informaremos según lo exige la ley.</p>
+                    <p>Limitamos el acceso a tus datos a las personas del equipo que los necesitan, usamos cuentas protegidas y verificación contra bots en los formularios. Si ocurre un incidente que afecte tus datos, lo informaremos a la Agencia de Protección de Datos Personales y, cuando corresponda, a ti. <span class="pendiente">[procedimiento interno de gestión de incidentes y persona responsable]</span></p>
 
                     <h2 class="section-heading">10. Cambios a esta política</h2>
-                    <p>Podemos actualizar esta política. Publicaremos cada cambio en esta página con su fecha de actualización.</p>
+                    <p>Podemos actualizar esta política. Publicaremos cada cambio en esta página con su fecha de actualización. Si hacemos un cambio importante, lo destacaremos en esta página y, si cambia para qué usamos tus datos, te pediremos de nuevo tu consentimiento cuando corresponda.</p>
 
                 </div>
             </div>

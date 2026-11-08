@@ -14,7 +14,7 @@ social:
 
 # URL /exec del Apps Script de google-apps-script/Newsletter.gs.
 # Mientras esté vacía, el formulario de newsletter no se muestra.
-newsletter_endpoint: ""
+newsletter_endpoint: "https://script.google.com/macros/s/AKfycbyQi9EXzQx7O1N5_l_8Z6CwSnQ_KkUGqf7Haq90uZ-Qkf6xNXIE1mJHLROLIrEre1p5/exec"
 
 plugins:
   - jekyll-sitemap

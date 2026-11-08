@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Enlace para agendar reunión (p. ej. página de citas de Google Calendar o Calendly).
     // Si está vacío, el chatbot ofrece el formulario de contacto con el motivo "proyecto".
-    var MEETING_URL = "";
+    var MEETING_URL = "https://calendly.com/lmmartiner/30min";
 
     var CHATBOT_ENDPOINT = "https://script.google.com/macros/s/AKfycbzJRYvJXe45a5GP2hdry3ymOOpP-ZYzZDAwjvh53MAUeuA4EAIavykbuWgk8FTIVDCNXg/exec";
 

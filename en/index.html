@@ -95,59 +95,66 @@ description: "CIRTA is a Chilean non-profit for robotics and applied technology:
         <hr>
 
 
-        <div class="row">
-            <h3 class="col-xs-12 home-inspiration-title">Find inspiration</h3>
-
-
-            <div class="col-sm-8">
-                <!-- Slider-->
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="background: transparent">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    </ol>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img loading="lazy" src="/static/img/inspiracion/telexistence.jpg" alt="Restocking robot in a store" style="max-height: 400px; margin: 0 auto;">
-                            <!--  <div class="carousel-caption"> Robot reabastecedor en tiendas </div> -->
-                        </div>
-                        <div class="item">
-                          <img loading="lazy" src="/static/img/inspiracion/hospitals.avif" alt="Delivery robot inside a hospital" style="max-height: 400px; margin: 0 auto;">
-                          <!--      <div class="carousel-caption"> Robot diseñado para entregas 24/7 dentro del hospital de medicamentos, muestras de laboratorio, etc.  </div> -->
-                        </div>
+        <section class="row inspo" aria-labelledby="inspo-title">
+            <div class="col-xs-12">
+            <h2 id="inspo-title" class="inspo-title">Our team's experience</h2>
+            <p class="inspo-lead">Robotics projects that CIRTA members have taken part in at other institutions. They are not CIRTA projects: they show the experience we can bring to your company.</p>
+            <!-- PENDIENTE: indicar qué integrante participó en cada proyecto y con qué rol, y confirmar permiso para usar las imágenes. -->
+            <ul class="inspo-grid">
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-top" src="/static/img/equipo/ace-sony-ai.webp" alt="Autonomous table tennis robot playing against a person">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">Sony AI</span>
+                        <h3>ACE: table tennis robot</h3>
+                        <p>Autonomous robot that combines event-based sensing and deep reinforcement learning to play against elite players. The research made the cover of Nature.</p>
+                        <p class="inspo-member">Team member: <span class="pendiente">[member and role]</span></p>
+                        <p class="inspo-credit">Image: <a href="https://ace.ai.sony/" target="_blank" rel="noopener">Sony AI</a></p>
                     </div>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"  style="background: transparent">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next" style="background: transparent">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-center" src="/static/img/equipo/perro-robot-lemur.webp" alt="Red and black quadruped robot dog in the lab">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">LEMUR Lab, Universidad de Chile</span>
+                        <h3>Robot dog with a robotic arm</h3>
+                        <p>Quadruped robot dog from the Mechatronics and Robotics Laboratory at Universidad de Chile, which is being fitted with a robotic arm.</p>
+                        <p class="inspo-member">Team member: <span class="pendiente">[member and role]</span></p>
+                        <p class="inspo-credit">Image: <a href="https://laboratoriolemur.cl/" target="_blank" rel="noopener">LEMUR Lab</a></p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-top" src="/static/img/equipo/bender-uchile.webp" alt="Bender humanoid robot with a white head and red antennas">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">UChile Homebreakers</span>
+                        <h3>Bender: service robot</h3>
+                        <p>Humanoid service robot for human-robot interaction in homes: it recognizes faces and voice, handles objects and navigates around obstacles. It competes in RoboCup@Home.</p>
+                        <p class="inspo-member">Team member: <span class="pendiente">[member and role]</span></p>
+                        <p class="inspo-credit">Image: <a href="https://uchile-robotics.github.io/" target="_blank" rel="noopener">UChile Homebreakers</a></p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-top" src="/static/img/equipo/maqui-pepper-uchile.webp" alt="Pepper humanoid robot with a screen on its chest">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">UChile Homebreakers</span>
+                        <h3>Maqui: Pepper robot</h3>
+                        <p>Pepper humanoid robot programmed for human-robot interaction in homes. With it, the team won 1st place at RoboCup@Home SSPL in 2021.</p>
+                        <p class="inspo-member">Team member: <span class="pendiente">[member and role]</span></p>
+                        <p class="inspo-credit">Image: <a href="https://uchile-robotics.github.io/pepper-robocup.html" target="_blank" rel="noopener">UChile Homebreakers</a></p>
+                    </div>
+                </li>
+            </ul>
+            <div class="inspo-cta">
+                <div class="inspo-cta-text">
+                    <h3>Want to bring this experience to your company?</h3>
+                    <p>Through our Consulting and integration service, we help you assess which robotics or AI solution fits your operation and integrate it.</p>
+                </div>
+                <div class="inspo-cta-actions">
+                    <a href="/en/contact.html?motivo=consultoria" class="btn btn-lg inspo-btn">Request a consulting quote</a>
+                    <a href="/en/services.html" class="btn btn-lg btn-cirta-outline">See services</a>
                 </div>
             </div>
-
-            <!-- Buttons to redirect to the Form -->
-            <div class="col-sm-4 text-center">
-                <h3 class="home-cta-title">Contact us to explore your R&D challenge together</h3>
-                <a href="/en/contact.html?motivo=proyecto" class="btn btn-lg btn-cirta-outline">
-                    Contact
-                </a>
             </div>
-
-
-
-
-
-
-
-        </div>
-        <!-- /.row -->
+        </section>
+        <!-- /.inspo -->
 
         <!-- /.row -->
     </div>

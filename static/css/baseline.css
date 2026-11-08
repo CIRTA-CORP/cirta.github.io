@@ -421,3 +421,55 @@ hr:has(+ .goals), .goals + hr { display: none; }
 
 /* "Encuentra inspiración": el título estaba directo en .row y quedaba pegado al borde en móvil */
 .home-inspiration-title { margin-top: 40px; margin-bottom: 40px; }
+
+/* "Encuentra inspiración": ejemplos de la industria + llamado a Consultoría e integración */
+.inspo { margin-top: 40px; margin-bottom: 50px; }
+.inspo-title { margin: 0 0 10px; font-size: 30px; }
+.inspo-lead { font-size: 18px; color: #444; max-width: 760px; margin: 0 0 25px; }
+.inspo-grid {
+    list-style: none; padding: 0; margin: 0 0 30px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;
+}
+.inspo-card {
+    border: 1px solid #e6e0f2; border-radius: 8px; background: #fff;
+    overflow: hidden; display: flex; flex-direction: column;
+}
+.inspo-img { width: 100%; height: 170px; object-fit: cover; display: block; }
+.inspo-icon {
+    height: 170px; display: flex; align-items: center; justify-content: center;
+    background: #f3eefc; color: var(--cirta-purple-darker); font-size: 56px;
+}
+.inspo-body { padding: 16px 20px 20px; }
+.inspo-tag {
+    display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .03em;
+    text-transform: uppercase; color: var(--cirta-purple-darker);
+    background: #f3eefc; border-radius: 12px; padding: 3px 10px;
+}
+.inspo-card h3 { font-size: 20px; margin: 10px 0 6px; }
+.inspo-card p { font-size: 16px; margin: 0; color: #333; }
+.inspo-cta {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+    background: #f3eefc; border-left: 5px solid var(--cirta-purple-dark);
+    border-radius: 8px; padding: 24px 28px;
+}
+.inspo-cta-text { flex: 1 1 380px; }
+.inspo-cta h3 { margin: 0 0 6px; font-size: 22px; }
+.inspo-cta p { margin: 0; font-size: 16px; color: #333; }
+.inspo-cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.inspo-btn { background: var(--cirta-purple-darker); color: #fff; border: 2px solid var(--cirta-purple-darker); }
+.inspo-btn:hover, .inspo-btn:focus { background: var(--cirta-purple-dark); border-color: var(--cirta-purple-dark); color: #fff; }
+@media (max-width: 480px) {
+    .inspo-title { font-size: 26px; }
+    .inspo-cta { padding: 20px; }
+    .inspo-icon { height: 120px; font-size: 46px; }
+    .inspo-cta-actions, .inspo-cta-actions .btn { width: 100%; white-space: normal; }
+}
+
+/* Experiencia del equipo: encuadre de fotos, integrante y crédito de imagen */
+.inspo-img-top { object-position: center top; }
+.inspo-img-center { object-position: center; }
+.inspo-member { font-size: 14px; margin: 8px 0 0; color: #444; }
+.inspo-credit { font-size: 12px; color: #666; margin: 6px 0 0; }
+.inspo-credit a { color: #555; }
+/* Fotos en marco 4:3 (antes alto fijo de 170 px, que en móvil recortaba demasiado) */
+.inspo-img { height: auto; aspect-ratio: 4 / 3; }

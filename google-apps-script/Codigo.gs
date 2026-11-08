@@ -100,3 +100,35 @@ function respond_(obj) {
     .createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+// Plazo de conservación propuesto (mensajes de contacto: 2 años). Ajústalo según la política de privacidad.
+var RETENTION_DAYS = 730;
+
+// ---------------------------------------------------------------------------
+// Conservación de datos (Ley 21.719): borra filas más antiguas que RETENTION_DAYS.
+// La columna A debe tener la fecha de cada fila. Para activarlo, ejecuta una vez
+// instalarLimpiezaDiaria() desde el editor de Apps Script (crea un disparador diario).
+// ---------------------------------------------------------------------------
+function limpiarDatosAntiguos() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var last = sheet.getLastRow();
+  if (last < 2) return;
+  var limite = new Date(Date.now() - RETENTION_DAYS * 24 * 60 * 60 * 1000);
+  var fechas = sheet.getRange(2, 1, last - 1, 1).getValues();
+  var borradas = 0;
+  for (var i = fechas.length - 1; i >= 0; i--) {
+    var f = fechas[i][0];
+    if (f instanceof Date && f < limite) {
+      sheet.deleteRow(i + 2);
+      borradas++;
+    }
+  }
+  console.log('Filas eliminadas por antigüedad: ' + borradas);
+}
+
+function instalarLimpiezaDiaria() {
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (t.getHandlerFunction() === 'limpiarDatosAntiguos') ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger('limpiarDatosAntiguos').timeBased().everyDays(1).atHour(3).create();
+}

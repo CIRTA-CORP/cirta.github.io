@@ -1,8 +1,10 @@
 <!-- Asistente CIRTA: chat con IA (Claude) vía backend en Google Apps Script (google-apps-script/Chatbot.gs) -->
 {% assign cb_lang = page.lang | default: "es" %}
-{% if cb_lang == "en" %}{% assign cb_open = "Open CIRTA assistant" %}{% assign cb_title = "CIRTA Assistant" %}{% assign cb_close = "Close assistant" %}{% assign cb_ph = "Type your question..." %}{% assign cb_send = "Send" %}{% assign cb_notice = "Conversations are stored to improve the assistant. Please don't share personal data." %}
-{% elsif cb_lang == "pt" %}{% assign cb_open = "Abrir assistente CIRTA" %}{% assign cb_title = "Assistente CIRTA" %}{% assign cb_close = "Fechar assistente" %}{% assign cb_ph = "Escreva sua pergunta..." %}{% assign cb_send = "Enviar" %}{% assign cb_notice = "As conversas são armazenadas para melhorar o assistente. Não compartilhe dados pessoais." %}
-{% else %}{% assign cb_open = "Abrir asistente CIRTA" %}{% assign cb_title = "Asistente CIRTA" %}{% assign cb_close = "Cerrar asistente" %}{% assign cb_ph = "Escribe tu pregunta..." %}{% assign cb_send = "Enviar" %}{% assign cb_notice = "Las conversaciones se guardan para mejorar el asistente. No compartas datos personales." %}{% endif %}
+{% assign cb_prefix = "" %}{% if cb_lang != "es" %}{% assign cb_prefix = "/" | append: cb_lang %}{% endif %}
+{% if cb_lang == "en" %}{% assign cb_more = "Privacy" %}{% elsif cb_lang == "pt" %}{% assign cb_more = "Privacidade" %}{% else %}{% assign cb_more = "Privacidad" %}{% endif %}
+{% if cb_lang == "en" %}{% assign cb_open = "Open CIRTA assistant" %}{% assign cb_title = "CIRTA Assistant" %}{% assign cb_close = "Close assistant" %}{% assign cb_ph = "Type your question..." %}{% assign cb_send = "Send" %}{% assign cb_notice = "Your messages are processed by Anthropic (USA) to answer you, and we keep them for 6 months to improve the assistant. Avoid including personal or sensitive data." %}
+{% elsif cb_lang == "pt" %}{% assign cb_open = "Abrir assistente CIRTA" %}{% assign cb_title = "Assistente CIRTA" %}{% assign cb_close = "Fechar assistente" %}{% assign cb_ph = "Escreva sua pergunta..." %}{% assign cb_send = "Enviar" %}{% assign cb_notice = "Suas mensagens são processadas pela Anthropic (EUA) para responder a você, e as guardamos por 6 meses para melhorar o assistente. Evite incluir dados pessoais ou sensíveis." %}
+{% else %}{% assign cb_open = "Abrir asistente CIRTA" %}{% assign cb_title = "Asistente CIRTA" %}{% assign cb_close = "Cerrar asistente" %}{% assign cb_ph = "Escribe tu pregunta..." %}{% assign cb_send = "Enviar" %}{% assign cb_notice = "Tus mensajes los procesa Anthropic (EE. UU.) para responderte y los guardamos 6 meses para mejorar el asistente. Evita incluir datos personales o sensibles." %}{% endif %}
 <div id="cirta-chatbot">
     <button id="cirta-chatbot-toggle" aria-label="{{ cb_open }}">
         <i class="fa fa-comment"></i>
@@ -19,7 +21,7 @@
             <input type="text" id="cirta-chatbot-input" placeholder="{{ cb_ph }}" aria-label="{{ cb_ph }}" autocomplete="off" maxlength="500">
             <button type="submit" aria-label="{{ cb_send }}"><i class="fa fa-paper-plane"></i></button>
         </form>
-        <div id="cirta-chatbot-notice">{{ cb_notice }}</div>
+        <div id="cirta-chatbot-notice">{{ cb_notice }} <a href="{{ cb_prefix }}/privacy.html">{{ cb_more }}</a></div>
     </div>
 </div>
 

@@ -43,6 +43,7 @@ var SYSTEM_PROMPT = [
   '- Servicios (página "Servicios"): tres modalidades. (1) Consultoría e integración para empresas (diagnóstico tecnológico, integración de robótica, visión computacional e IA, capacitación de equipos): servicio pagado, con cotización según el alcance. (2) Proyectos en colaboración de I+D con universidades, organismos públicos e instituciones, con financiamiento conjunto (fondos concursables, cofinanciamiento o aportes de los socios). (3) Desafíos para la comunidad CIRTA: ONG y startups que recién comienzan envían un desafío y un equipo de voluntarios en formación, guiado por profesionales de CIRTA y con la garantía de la corporación de que el prototipo funcionará como se acordó, lo trabaja como proyecto formativo (cupos limitados); se pide un aporte para materiales básicos y una donación a la corporación; respondemos en 2 días con una estimación de tiempo, pero como lo hacen voluntarios no hay plazo de desarrollo fijo; el código es de CIRTA, la organización recibe el prototipo y CIRTA puede mostrarlo en su portafolio; si hay interés puede pasar a colaboración. Áreas: prototipos robóticos, visión computacional, inspección submarina con ROV y formación.',
   '- La conversación inicial con CIRTA es sin costo hasta definir juntos el problema y las necesidades del proyecto.',
   '- Formulario de "Contacto": motivo "Consultoría / cotización para empresas", "Propuesta de colaboración" o "Enviar un desafío (ONG / startup)" según el caso. No des precios para consultoría: la cotización depende del alcance.',
+  '- Privacidad: la página "Política de privacidad" (enlace en el pie de página) explica qué datos se recopilan, con quién se comparten y cómo ejercer los derechos de acceso, rectificación, supresión, oposición y portabilidad escribiendo a contacto@cirta.cl. Desde ahí también se puede dar de baja del newsletter.',
   '- Información legal y directorio: sección "Transparencia".'
 ].join('\n');
 
@@ -146,4 +147,36 @@ function logConversation_(body, question, reply) {
 function respond_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+// Plazo de conservación propuesto (conversaciones del asistente: 6 meses). Ajústalo según la política de privacidad.
+var RETENTION_DAYS = 180;
+
+// ---------------------------------------------------------------------------
+// Conservación de datos (Ley 21.719): borra filas más antiguas que RETENTION_DAYS.
+// La columna A debe tener la fecha de cada fila. Para activarlo, ejecuta una vez
+// instalarLimpiezaDiaria() desde el editor de Apps Script (crea un disparador diario).
+// ---------------------------------------------------------------------------
+function limpiarDatosAntiguos() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var last = sheet.getLastRow();
+  if (last < 2) return;
+  var limite = new Date(Date.now() - RETENTION_DAYS * 24 * 60 * 60 * 1000);
+  var fechas = sheet.getRange(2, 1, last - 1, 1).getValues();
+  var borradas = 0;
+  for (var i = fechas.length - 1; i >= 0; i--) {
+    var f = fechas[i][0];
+    if (f instanceof Date && f < limite) {
+      sheet.deleteRow(i + 2);
+      borradas++;
+    }
+  }
+  console.log('Filas eliminadas por antigüedad: ' + borradas);
+}
+
+function instalarLimpiezaDiaria() {
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (t.getHandlerFunction() === 'limpiarDatosAntiguos') ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger('limpiarDatosAntiguos').timeBased().everyDays(1).atHour(3).create();
 }

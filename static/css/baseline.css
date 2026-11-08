@@ -509,3 +509,4 @@ hr:has(+ .goals), .goals + hr { display: none; }
 .inspo-prev { left: -14px; }
 .inspo-next { right: -14px; }
 @media (max-width: 600px) { .inspo-prev { left: 2px; } .inspo-next { right: 2px; } }
+.inspo-ref-note { font-size: 13px; color: #666; margin: -18px 0 24px; }

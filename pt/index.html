@@ -97,15 +97,16 @@ description: "A CIRTA é uma organização chilena sem fins lucrativos de robót
             <div class="col-xs-12">
             <h2 id="inspo-title" class="inspo-title">Experiência da nossa equipe</h2>
             <p class="inspo-lead">Projetos de robótica dos quais integrantes da CIRTA participaram em outras instituições. Não são projetos da CIRTA: mostram a experiência que podemos levar à sua empresa.</p>
-            <!-- PENDIENTE: indicar qué integrante participó en cada proyecto y con qué rol, y confirmar permiso para usar las imágenes. -->
-            <ul class="inspo-grid">
+            <!-- PENDIENTE: confirmar permiso para usar las imágenes. -->
+            <div class="inspo-carousel">
+            <button type="button" class="inspo-nav inspo-prev" aria-label="Anterior" aria-controls="inspo-track"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+            <ul class="inspo-grid inspo-track" id="inspo-track" tabindex="0" aria-label="Projetos e experiência da equipe">
                 <li class="inspo-card">
                     <img loading="lazy" class="inspo-img inspo-img-top" src="/static/img/equipo/ace-sony-ai.webp" alt="Robô autônomo de tênis de mesa jogando contra uma pessoa">
                     <div class="inspo-body">
                         <span class="inspo-tag">Sony AI</span>
                         <h3>ACE: robô de tênis de mesa</h3>
                         <p>Robô autônomo que combina sensores baseados em eventos e aprendizado por reforço profundo para jogar contra jogadores de elite. A pesquisa foi capa da revista Nature.</p>
-                        <p class="inspo-member">Participou: <span class="pendiente">[integrante e função]</span></p>
                         <p class="inspo-credit">Imagem: <a href="https://ace.ai.sony/" target="_blank" rel="noopener">Sony AI</a></p>
                     </div>
                 </li>
@@ -115,7 +116,6 @@ description: "A CIRTA é uma organização chilena sem fins lucrativos de robót
                         <span class="inspo-tag">Laboratório LEMUR, Universidad de Chile</span>
                         <h3>Cão robô com braço robótico</h3>
                         <p>Cão robô quadrúpede do Laboratório de Mecatrônica e Robótica da Universidad de Chile, no qual está sendo integrado um braço robótico.</p>
-                        <p class="inspo-member">Participou: <span class="pendiente">[integrante e função]</span></p>
                         <p class="inspo-credit">Imagem: <a href="https://laboratoriolemur.cl/" target="_blank" rel="noopener">Laboratório LEMUR</a></p>
                     </div>
                 </li>
@@ -125,7 +125,6 @@ description: "A CIRTA é uma organização chilena sem fins lucrativos de robót
                         <span class="inspo-tag">UChile Homebreakers</span>
                         <h3>Bender: robô de serviço</h3>
                         <p>Robô humanoide de serviço para interação humano-robô em ambientes domésticos: reconhece rostos e voz, manipula objetos e navega desviando de obstáculos. Compete na RoboCup@Home.</p>
-                        <p class="inspo-member">Participou: <span class="pendiente">[integrante e função]</span></p>
                         <p class="inspo-credit">Imagem: <a href="https://uchile-robotics.github.io/" target="_blank" rel="noopener">UChile Homebreakers</a></p>
                     </div>
                 </li>
@@ -135,21 +134,50 @@ description: "A CIRTA é uma organização chilena sem fins lucrativos de robót
                         <span class="inspo-tag">UChile Homebreakers</span>
                         <h3>Maqui: robô Pepper</h3>
                         <p>Robô humanoide Pepper programado para interação humano-robô em ambientes domésticos. Com ele, a equipe conquistou o 1.º lugar na RoboCup@Home SSPL em 2021.</p>
-                        <p class="inspo-member">Participou: <span class="pendiente">[integrante e função]</span></p>
                         <p class="inspo-credit">Imagem: <a href="https://uchile-robotics.github.io/pepper-robocup.html" target="_blank" rel="noopener">UChile Homebreakers</a></p>
                     </div>
                 </li>
                 <li class="inspo-card">
-                    <img loading="lazy" class="inspo-img inspo-img-center" src="/static/img/equipo/ur5-robotiq-edurobotics.webp" alt="Braço robótico colaborativo UR5 com garra Robotiq no simulador EduRobotics">
+                    <img loading="lazy" class="inspo-img inspo-img-center" src="/static/img/equipo/ur5-robotiq.webp" alt="Braço colaborativo UR5 com garra Robotiq">
                     <div class="inspo-body">
-                        <span class="inspo-tag">Robótica colaborativa</span>
+                        <span class="inspo-tag">Manipulação</span>
                         <h3>Cobots UR5 com garra Robotiq</h3>
-                        <p>Braços robóticos colaborativos, projetados para trabalhar ao lado de pessoas, equipados com garras Robotiq para pegar e manipular objetos. É o mesmo tipo de robô que usamos no nosso simulador EduRobotics.</p>
-                        <p class="inspo-member">Participou: <span class="pendiente">[integrante, instituição e função]</span></p>
-                        <p class="inspo-credit">Imagem: <a href="/pt/education-edurobotics.html">simulador EduRobotics (CIRTA)</a></p>
+                        <p>Manipulação de objetos com braços colaborativos UR5 e garras Robotiq, o mesmo tipo de robô que usamos no nosso simulador EduRobotics.</p>
+                        <p class="inspo-credit">Imagem de referência: Universal Robots / Robotiq</p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-center" src="/static/img/equipo/robot-industrial.webp" alt="Braço robótico industrial de sete eixos">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">Robótica industrial</span>
+                        <h3>Robôs industriais</h3>
+                        <p>Programação e operação de braços robóticos industriais em tarefas de manipulação.</p>
+                        <p class="inspo-credit">Imagem de referência: KUKA</p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-center" src="/static/img/equipo/bimanipulacion.webp" alt="Robô industrial de dois braços em um laboratório">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">Bimanipulação</span>
+                        <h3>Robôs de dois braços</h3>
+                        <p>Robôs que coordenam dois braços para manipular objetos, como uma pessoa faria com as duas mãos.</p>
+                        <p class="inspo-credit">Imagem de referência</p>
+                    </div>
+                </li>
+                <li class="inspo-card">
+                    <img loading="lazy" class="inspo-img inspo-img-center" src="/static/img/equipo/rov-monitoreo.webp" alt="Veículo subaquático operado remotamente debaixo d'água">
+                    <div class="inspo-body">
+                        <span class="inspo-tag">Robótica subaquática</span>
+                        <h3>ROVs para monitoramento</h3>
+                        <p>Operação de veículos subaquáticos operados remotamente (ROV) em tarefas de monitoramento debaixo d'água.</p>
+                        <p class="inspo-credit">Veja <a href="/pt/project-rov.html">monitoramento marítimo</a></p>
+                        <p class="inspo-credit">Imagem de referência</p>
                     </div>
                 </li>
             </ul>
+            <button type="button" class="inspo-nav inspo-next" aria-label="Próximo" aria-controls="inspo-track"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+            </div>
+            <script src="/static/js/inspo-carousel.js" defer></script>
             <div class="inspo-cta">
                 <div class="inspo-cta-text">
                     <h3>Quer levar essa experiência para a sua empresa?</h3>

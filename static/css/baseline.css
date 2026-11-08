@@ -473,3 +473,39 @@ hr:has(+ .goals), .goals + hr { display: none; }
 .inspo-credit a { color: #555; }
 /* Fotos en marco 4:3 (antes alto fijo de 170 px, que en móvil recortaba demasiado) */
 .inspo-img { height: auto; aspect-ratio: 4 / 3; }
+
+/* Experiencia del equipo: carrusel manual (scroll horizontal con flechas, sin autoplay) */
+.inspo-carousel { position: relative; margin-bottom: 30px; }
+.inspo-grid.inspo-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 4px 2px 12px;
+    margin: 0;
+}
+.inspo-track > .inspo-card { flex: 0 0 calc((100% - 40px) / 3); scroll-snap-align: start; }
+@media (max-width: 991px) { .inspo-track > .inspo-card { flex-basis: calc((100% - 20px) / 2); } }
+@media (max-width: 600px) { .inspo-track > .inspo-card { flex-basis: 85%; } }
+.inspo-track:focus-visible { outline: 2px solid var(--cirta-purple-dark); outline-offset: 4px; }
+.inspo-nav {
+    position: absolute;
+    top: 38%;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--cirta-purple-dark);
+    color: #fff;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(98, 54, 192, .3);
+    cursor: pointer;
+}
+.inspo-nav:hover, .inspo-nav:focus-visible { background: var(--cirta-purple-darker); }
+.inspo-nav:focus-visible { outline: 2px solid #fff; outline-offset: -5px; }
+.inspo-nav:disabled { opacity: .35; cursor: default; }
+.inspo-prev { left: -14px; }
+.inspo-next { right: -14px; }
+@media (max-width: 600px) { .inspo-prev { left: 2px; } .inspo-next { right: 2px; } }

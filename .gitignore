@@ -1,3 +1,5 @@
 _site
 .idea
 .jekyll-cache
+vendor/bundle
+.bundle

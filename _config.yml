@@ -23,6 +23,8 @@ exclude:
   - Backend-Forms.md
   - google-apps-script
   - LICENSE
+  - vendor/bundle
+  - .bundle
 
 defaults:
   - scope:

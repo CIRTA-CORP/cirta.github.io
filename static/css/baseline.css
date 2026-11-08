@@ -325,3 +325,13 @@ header.intro-header.intro-header-home { min-height: 300px; margin-bottom: 30px; 
 .newsletter-hp { position: absolute; left: -9999px; width: 1px; height: 1px; }
 .newsletter-status { min-height: 1.4em; font-size: 15px; }
 .footer-donate { margin: 10px 0 20px; text-align: center; }
+
+/* Servicios: modalidades de trabajo y tabla comparativa */
+.service-modes { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.service-mode { border: 2px solid #e6e0f2; }
+.service-mode h4 { font-size: 16px; margin: 12px 0 4px; }
+.service-mode ul { padding-left: 20px; margin: 0 0 8px; font-size: 16px; }
+.service-mode .card-link { align-self: flex-start; color: #fff; margin-top: auto; white-space: normal; max-width: 100%; }
+.service-note { font-size: 15px; color: #555; background: #f8f5fd; padding: 8px 10px; border-radius: 6px; }
+.service-compare th[scope=row] { white-space: nowrap; }
+.service-compare thead th { background: #f1ebfb; }

@@ -40,7 +40,8 @@ var SYSTEM_PROMPT = [
   '- Contacto: formulario de "Contacto" o contacto@cirta.cl.',
   '- Dirección postal: Av. Rodelillo 4299, Valparaíso, Chile.',
   '- Donaciones: página "Dona" (menú "Participa"), con transferencia bancaria; para aportes mensuales, de empresas o comprobantes, formulario de "Contacto" con motivo "Donaciones".',
-  '- Servicios: página "Servicios" (prototipos robóticos, visión computacional, inspección submarina con ROV, I+D aplicada y formación). Para proponer un proyecto, formulario de "Contacto" con motivo "Tengo un proyecto".',
+  '- Servicios (página "Servicios"): tres modalidades. (1) Consultoría e integración para empresas (diagnóstico tecnológico, integración de robótica, visión computacional e IA, capacitación de equipos): servicio pagado, con cotización según el alcance. (2) Proyectos en colaboración de I+D con universidades, organismos públicos e instituciones, con financiamiento conjunto (fondos concursables, cofinanciamiento o aportes de los socios). (3) Desafíos para la comunidad CIRTA: ONG y startups que recién comienzan envían un desafío y un equipo en formación, guiado por mentores, lo trabaja como proyecto formativo (sin plazos ni garantías de producción; cupos limitados); si hay interés puede pasar a colaboración. Áreas: prototipos robóticos, visión computacional, inspección submarina con ROV y formación.',
+  '- Formulario de "Contacto": motivo "Consultoría / cotización para empresas", "Propuesta de colaboración" o "Enviar un desafío (ONG / startup)" según el caso. No des precios ni prometas que los desafíos son gratuitos: eso lo confirma el equipo.',
   '- Información legal y directorio: sección "Transparencia".'
 ].join('\n');
 

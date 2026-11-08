@@ -7,6 +7,8 @@
 :root {
     --cirta-purple: #A475EA;
     --cirta-purple-dark: #7C4DD9;
+    /* Fondo de botones con texto blanco: #7C4DD9 da ~5.4:1 (WCAG AA). #A475EA solo daba ~3.3:1. */
+    --cirta-purple-darker: #6236C0;
     --cirta-font-body: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --cirta-font-heading: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -72,15 +74,15 @@ a:focus {
 .btn-default:hover,
 .btn-default:focus,
 .btn-primary {
-    background-color: var(--cirta-purple);
-    border: 1px solid var(--cirta-purple);
+    background-color: var(--cirta-purple-dark);
+    border: 1px solid var(--cirta-purple-dark);
     color: white;
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
-    background-color: var(--cirta-purple-dark);
-    border: 1px solid var(--cirta-purple-dark);
+    background-color: var(--cirta-purple-darker);
+    border: 1px solid var(--cirta-purple-darker);
     color: white;
 }
 
@@ -143,8 +145,9 @@ body {
   color: #fff;
 }
 
+/* Texto alineado a la izquierda: el justificado deja huecos grandes en móvil y dificulta la lectura. */
 .container p{
-    text-align: justify
+    text-align: left;
 }
 header.intro-header .page-heading h1 {
     font-size: 60px;
@@ -285,5 +288,24 @@ header.intro-header .page-heading {
     margin: 40px 0 10px;
 }
 .cta-box h3 { margin-top: 0; }
-.cirta-card p, .steps li, .cta-box p, .home-hero .lead { text-align: left; }
 .cta-box p, .home-hero .lead { text-align: center; }
+
+/* Títulos de encabezado: se ajustan al ancho en móvil en vez de salirse de la pantalla. */
+header.intro-header .page-heading h1 {
+    font-size: clamp(36px, 10vw, 60px);
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Portada: encabezado más bajo para que la propuesta de valor y los botones queden en la primera pantalla. */
+header.intro-header.intro-header-home { min-height: 300px; margin-bottom: 30px; }
+@media (min-width: 768px) {
+    header.intro-header.intro-header-home { min-height: 380px; }
+}
+/* Logo en blanco sobre el encabezado morado (el logo morado casi no contrastaba). */
+.header-logo { height: 110px; max-width: 100%; filter: brightness(0) invert(1); }
+@media (max-width: 480px) {
+    .header-logo { height: 80px; }
+    .impact-strip .num { font-size: 28px; }
+    .impact-strip .label { font-size: 13px; overflow-wrap: break-word; }
+}

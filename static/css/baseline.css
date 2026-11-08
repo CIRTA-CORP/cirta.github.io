@@ -339,20 +339,85 @@ header.intro-header.intro-header-home { min-height: 300px; margin-bottom: 30px; 
 footer .container p { text-align: center; }
 .footer-donate a { text-decoration: none; }
 
-/* Portada: Objetivos 2030 como franja compacta (íconos, título corto y una línea) */
-.goals { padding: 10px 0 20px; text-align: center; }
-.goals-title { font-size: 28px; margin: 10px 0 28px; }
-.goals .goal { margin-bottom: 20px; }
-.goals .goal .fa {
-    font-size: 24px;
-    color: var(--cirta-purple-dark);
-    width: 56px;
-    height: 56px;
-    line-height: 56px;
-    border-radius: 50%;
-    background: #f1ebfb;
+/* Portada: Objetivos 2030 — franja lila a todo el ancho con tarjetas e íconos morados */
+.goals {
+    position: relative;
+    margin: 30px 0 10px;
+    padding: 48px 0 36px;
+    text-align: center;
+    isolation: isolate;
 }
-.goals .goal h3 { font-size: 18px; font-weight: 600; margin: 12px 0 6px; }
+.goals::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #f4eefd;
+    /* sombras desplazadas: extienden el fondo a todo el ancho sin generar scroll horizontal */
+    box-shadow: -300px 0 0 #f4eefd, 300px 0 0 #f4eefd, -600px 0 0 #f4eefd, 600px 0 0 #f4eefd,
+                -1200px 0 0 #f4eefd, 1200px 0 0 #f4eefd, -1800px 0 0 #f4eefd, 1800px 0 0 #f4eefd;
+    z-index: -1;
+}
+.goals .goals-eyebrow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--cirta-purple-darker);
+    text-align: center;
+    margin: 0 0 6px;
+}
+.goals-title { font-size: 30px; margin: 0 0 34px; }
+.goals-title::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 3px;
+    margin: 14px auto 0;
+    border-radius: 2px;
+    background: var(--cirta-purple);
+}
+.goals .goals-list { margin-bottom: 8px; }
+.goals .goal { margin-bottom: 24px; }
+.goals .goal-card {
+    padding: 30px 22px 26px;
+    background: #fff;
+    border-radius: 14px;
+    border-top: 4px solid var(--cirta-purple);
+    box-shadow: 0 6px 20px rgba(98, 54, 192, .10);
+}
+@media (min-width: 768px) {
+    .goals .goals-list { display: flex; flex-wrap: wrap; }
+    .goals .goals-list::before, .goals .goals-list::after { display: none; }
+    .goals .goals-list > .goal { float: none; display: flex; }
+    .goals .goal-card { width: 100%; }
+}
+.goals .goal .fa {
+    font-size: 30px;
+    color: #fff;
+    width: 68px;
+    height: 68px;
+    line-height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--cirta-purple), var(--cirta-purple-darker));
+    box-shadow: 0 6px 14px rgba(98, 54, 192, .25);
+}
+.goals .goal h3 { font-size: 19px; font-weight: 600; margin: 18px 0 8px; color: #2b2340; }
 .goals .goal p, .goals .goals-more { text-align: center; }
 .goals .goal p { font-size: 16px; color: #555; max-width: 320px; margin: 0 auto; }
-.goals .goals-more { font-weight: 600; margin-top: 4px; }
+.goals .goals-more { font-weight: 600; margin: 6px 0 0; }
+.goals .goals-more a { color: var(--cirta-purple-darker); }
+/* La franja ya separa las secciones: ocultar las <hr> vecinas */
+hr:has(+ .goals), .goals + hr { display: none; }
+/* Ajustes menores sugeridos por el panel */
+.goals .goal-card { border-radius: 8px 8px 14px 14px; }
+@media (max-width: 767px) {
+    .goals .goal-card { padding: 24px 18px 20px; }
+}
+.goals .goals-more a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+/* "Encuentra inspiración": el título estaba directo en .row y quedaba pegado al borde en móvil */
+.home-inspiration-title { margin-top: 40px; margin-bottom: 40px; }

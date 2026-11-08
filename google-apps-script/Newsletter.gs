@@ -14,6 +14,9 @@
  * 3. Copia la URL /exec en `newsletter_endpoint` de _config.yml.
  *    Mientras ese valor esté vacío, el formulario no se muestra en el sitio.
  *
+ * Baja: un POST con action=unsubscribe y el email elimina la fila
+ * (formulario en privacy.html, sección "Darte de baja del newsletter").
+ *
  * Protección anti-spam: campo trampa (honeypot), validación del email,
  * deduplicación y un tope de suscripciones por hora.
  */
@@ -32,6 +35,11 @@ function doPost(e) {
     var email = String(params.email || '').trim().toLowerCase();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 100) {
       return respond_({ result: 'error', message: 'Email inválido.' });
+    }
+
+    // Baja del newsletter (formulario de la política de privacidad).
+    if (params.action === 'unsubscribe') {
+      return unsubscribe_(email);
     }
 
     if (!withinRateLimit_()) {
@@ -67,6 +75,28 @@ function doPost(e) {
     console.error(err);
     return respond_({ result: 'error', message: 'No se pudo completar la suscripción.' });
   }
+}
+
+// Elimina el correo de la lista. Responde éxito aunque no exista, para no revelar quién está suscrito.
+function unsubscribe_(email) {
+  var lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var last = sheet.getLastRow();
+    if (last > 1) {
+      var emails = sheet.getRange(2, 2, last - 1, 1).getValues();
+      // De abajo hacia arriba para que borrar filas no desplace las que faltan revisar.
+      for (var i = emails.length - 1; i >= 0; i--) {
+        if (String(emails[i][0]).toLowerCase() === email) {
+          sheet.deleteRow(i + 2);
+        }
+      }
+    }
+  } finally {
+    lock.releaseLock();
+  }
+  return respond_({ result: 'success' });
 }
 
 function withinRateLimit_() {

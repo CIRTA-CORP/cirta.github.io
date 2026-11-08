@@ -510,3 +510,13 @@ hr:has(+ .goals), .goals + hr { display: none; }
 .inspo-next { right: -14px; }
 @media (max-width: 600px) { .inspo-prev { left: 2px; } .inspo-next { right: 2px; } }
 .inspo-ref-note { font-size: 13px; color: #666; margin: -18px 0 24px; }
+
+/* Protección de datos: avisos en formularios, footer y política */
+.form-privacy, .newsletter-privacy { font-size: 13px; color: #555; }
+.newsletter-privacy { text-align: center; margin-top: 4px; }
+#cirta-chatbot-notice a { color: inherit; text-decoration: underline; }
+.privacy-updated { font-size: 14px; color: #666; }
+.privacy-table th[scope=row] { white-space: nowrap; }
+.privacy-table thead th { background: #f1ebfb; }
+.privacy-unsubscribe { margin: 10px 0 4px; max-width: 460px; }
+@media (max-width: 600px) { .privacy-table th[scope=row] { white-space: normal; } }

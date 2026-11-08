@@ -1,0 +1,129 @@
+---
+lang: en
+title: "Privacy policy - CIRTA"
+description: "How CIRTA handles your personal data: what we collect, why, who we share it with, how long we keep it and how to exercise your rights."
+---
+<html lang="en">
+
+<!-- head -->
+{% include head.html title="Privacy policy - CIRTA" %}
+
+<body>
+
+    <!-- Navigation -->
+    {% include navigation.html %}
+
+    <!-- Page Header -->
+    {% include header_img.html image="/static/img/title/team-bg.jpg" title="Privacy policy" subtitle="How we look after your personal data" meta="" %}
+
+    <!-- Main Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 privacy">
+
+                    <!-- PENDIENTE: revisión legal antes de publicar (Ley 21.719). Los plazos de conservación son una propuesta. -->
+                    <p class="privacy-updated">Last updated: November 2026</p>
+
+                    <p>At CIRTA we respect your privacy. This policy explains what personal data we collect on this site, what we use it for, who we share it with and how you can exercise your rights, in accordance with Chilean Law 21.719 on personal data protection.</p>
+
+                    <h2 class="section-heading">1. Who is responsible for your data</h2>
+                    <div class="fact-sheet">
+                        <dl>
+                            <dt>Data controller</dt><dd>CORPORACION CIRTA</dd>
+                            <dt>RUT (tax ID)</dt><dd>65.272.022-6</dd>
+                            <dt>Address</dt><dd>Av. Rodelillo 4299, Valparaíso, Chile</dd>
+                            <dt>Contact</dt><dd><a href="mailto:contacto@cirta.cl">contacto@cirta.cl</a></dd>
+                        </dl>
+                    </div>
+
+                    <h2 class="section-heading">2. What data we collect and why</h2>
+                    <div class="table-responsive">
+                        <table class="table privacy-table">
+                            <thead><tr><th scope="col">Where</th><th scope="col">Data</th><th scope="col">Purpose</th><th scope="col">Legal basis</th></tr></thead>
+                            <tbody>
+                                <tr><th scope="row">Contact form</th><td>Name, email, phone (optional), organization (optional), reason and message</td><td>To answer your inquiry, quote request, proposal or request</td><td>Your request</td></tr>
+                                <tr><th scope="row">Volunteer form</th><td>Name, email, city or region, interests, availability, experience, skills and comments</td><td>To review your application and contact you about volunteer opportunities</td><td>Your consent</td></tr>
+                                <tr><th scope="row">Newsletter</th><td>Email, language and the page you subscribed from</td><td>To send you news about our projects, workshops and activities</td><td>Your consent</td></tr>
+                                <tr><th scope="row">Site assistant (chatbot)</th><td>The messages you write, a random conversation identifier and the page</td><td>To answer your questions and improve the assistant</td><td>Your consent when you use it</td></tr>
+                                <tr><th scope="row">Browsing</th><td>Technical data such as your IP address, received by the providers that run the site</td><td>To display the site, load the fonts and protect the forms against bots</td><td>Legitimate interest in the operation and security of the site</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>This site does not use advertising cookies or tracking tools. Please do not share sensitive data (health, origin, beliefs, etc.) in the forms or with the assistant.</p>
+
+                    <h2 class="section-heading">3. Who we share your data with</h2>
+                    <p>We do not sell or transfer your data. To run the site we use these providers, which process data on our behalf:</p>
+                    <ul>
+                        <li><strong>Google</strong> (Google Workspace, Apps Script, Sheets, Gmail and Google Fonts): receives and stores the forms, the newsletter and the assistant log, and serves the site's fonts.</li>
+                        <li><strong>Anthropic</strong> (Claude API): processes the messages you write to the assistant to generate replies.</li>
+                        <li><strong>Cloudflare</strong> (Turnstile): checks that whoever submits the forms is not a bot.</li>
+                        <li><strong>GitHub</strong> (GitHub Pages): hosts the website.</li>
+                    </ul>
+                    <p>If you choose to book a meeting from the assistant, you will be taken to <strong>Calendly</strong>, which handles your data under its own privacy policy.</p>
+
+                    <h2 class="section-heading">4. International transfers</h2>
+                    <p>These providers may process your data outside Chile, mainly in the United States. <span class="pendiente">[state whether the destination country has an adequate level of protection according to the Agencia de Protección de Datos Personales (Personal Data Protection Agency) and which contractual safeguards apply with each provider]</span></p>
+
+                    <h2 class="section-heading">5. How long we keep your data</h2>
+                    <ul>
+                        <li><strong>Contact messages:</strong> <span class="pendiente">[proposal: 2 years from the last contact]</span></li>
+                        <li><strong>Volunteer applications:</strong> <span class="pendiente">[proposal: for the duration of the volunteering and 1 year after; if the application does not move forward, 1 year]</span></li>
+                        <li><strong>Newsletter:</strong> until you unsubscribe.</li>
+                        <li><strong>Conversations with the assistant:</strong> <span class="pendiente">[proposal: 6 months]</span></li>
+                    </ul>
+                    <p>Once the period ends, we delete or anonymize the data.</p>
+
+                    <h2 class="section-heading">6. Your rights</h2>
+                    <p>You can ask us at any time for:</p>
+                    <ul>
+                        <li><strong>Access:</strong> to know what data we hold about you and how we use it.</li>
+                        <li><strong>Rectification:</strong> to correct inaccurate or incomplete data.</li>
+                        <li><strong>Erasure:</strong> to have us delete your data.</li>
+                        <li><strong>Objection:</strong> to have us stop using it for a specific purpose.</li>
+                        <li><strong>Portability:</strong> to receive your data in a format you can take elsewhere.</li>
+                        <li><strong>Blocking:</strong> to have us temporarily suspend its use while we review your request.</li>
+                    </ul>
+                    <p>You can also withdraw your consent whenever you want. Write to us at <a href="mailto:contacto@cirta.cl">contacto@cirta.cl</a> saying what you need; we will reply within the time limits set by law. If you are not satisfied with our reply, you can file a complaint with the Agencia de Protección de Datos Personales (Personal Data Protection Agency).</p>
+
+                    <h2 class="section-heading" id="baja-newsletter">7. Unsubscribe from the newsletter</h2>
+                    <p>Enter the email you subscribed with and we will remove it from the list.</p>
+                    {% if site.newsletter_endpoint and site.newsletter_endpoint != "" %}
+                    <form id="newsletter-unsubscribe" class="newsletter-row privacy-unsubscribe" action="{{ site.newsletter_endpoint }}" method="POST"
+                          data-ok="Done: your email has been removed from the list." data-err="We could not process your request. Write to us at contacto@cirta.cl.">
+                        <label for="unsubscribe-email" class="sr-only">Your email</label>
+                        <input type="email" id="unsubscribe-email" name="email" placeholder="Your email" required maxlength="100" autocomplete="email">
+                        <input type="hidden" name="action" value="unsubscribe">
+                        <input type="text" name="website" tabindex="-1" autocomplete="off" class="newsletter-hp" aria-hidden="true">
+                        <button type="submit" class="btn btn-primary">Unsubscribe</button>
+                    </form>
+                    <p class="newsletter-status" id="unsubscribe-status" role="status" aria-live="polite"></p>
+                    <script src="/static/js/newsletter-unsubscribe.js" defer></script>
+                    {% endif %}
+                    <p>You can also ask to unsubscribe by writing to <a href="mailto:contacto@cirta.cl">contacto@cirta.cl</a>.</p>
+
+                    <h2 class="section-heading">8. Children and adolescents</h2>
+                    <p>The forms on this site are intended for adults. If you are under 14, ask your mother, father or guardian to write to us. If you take part in a workshop through your school or organization, the institution coordinates the necessary data with us.</p>
+
+                    <h2 class="section-heading">9. Security</h2>
+                    <p>We limit access to your data to the team members who need it, and we use protected accounts and bot verification on the forms. If a security incident affects your data, we will report it as required by law.</p>
+
+                    <h2 class="section-heading">10. Changes to this policy</h2>
+                    <p>We may update this policy. We will publish every change on this page with its update date.</p>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    {% include footer.html %}
+
+    <!-- bottom imports -->
+    {% include bottom.html %}
+
+</body>
+
+</html>

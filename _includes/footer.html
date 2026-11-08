@@ -1,8 +1,8 @@
 {% assign ft_lang = page.lang | default: "es" %}
 {% assign ft_prefix = "" %}{% if ft_lang != "es" %}{% assign ft_prefix = "/" | append: ft_lang %}{% endif %}
-{% if ft_lang == "en" %}{% assign ft_nl_title = "Subscribe to our newsletter" %}{% assign ft_nl_text = "News about our projects, workshops and activities." %}{% assign ft_nl_ph = "Your email" %}{% assign ft_nl_btn = "Subscribe" %}{% assign ft_nl_ok = "Thanks! You are subscribed." %}{% assign ft_nl_err = "We couldn't subscribe you. Please try again." %}{% assign ft_donate = "Donate" %}
-{% elsif ft_lang == "pt" %}{% assign ft_nl_title = "Assine nossa newsletter" %}{% assign ft_nl_text = "Novidades sobre nossos projetos, oficinas e atividades." %}{% assign ft_nl_ph = "Seu e-mail" %}{% assign ft_nl_btn = "Assinar" %}{% assign ft_nl_ok = "Obrigado! Inscrição feita." %}{% assign ft_nl_err = "Não foi possível fazer a inscrição. Tente novamente." %}{% assign ft_donate = "Doe" %}
-{% else %}{% assign ft_nl_title = "Suscríbete a nuestro newsletter" %}{% assign ft_nl_text = "Novedades de nuestros proyectos, talleres y actividades." %}{% assign ft_nl_ph = "Tu correo" %}{% assign ft_nl_btn = "Suscribirme" %}{% assign ft_nl_ok = "¡Gracias! Ya estás suscrito/a." %}{% assign ft_nl_err = "No pudimos suscribirte. Intenta de nuevo." %}{% assign ft_donate = "Dona" %}{% endif %}
+{% if ft_lang == "en" %}{% assign ft_nl_title = "Subscribe to our newsletter" %}{% assign ft_nl_text = "News about our projects, workshops and activities." %}{% assign ft_nl_ph = "Your email" %}{% assign ft_nl_btn = "Subscribe" %}{% assign ft_nl_ok = "Thanks! You are subscribed." %}{% assign ft_nl_err = "We couldn't subscribe you. Please try again." %}{% assign ft_donate = "Donate" %}{% assign ft_priv = "Privacy policy" %}{% assign ft_nl_priv = "We only use your email to send you the newsletter. You can unsubscribe at any time." %}
+{% elsif ft_lang == "pt" %}{% assign ft_nl_title = "Assine nossa newsletter" %}{% assign ft_nl_text = "Novidades sobre nossos projetos, oficinas e atividades." %}{% assign ft_nl_ph = "Seu e-mail" %}{% assign ft_nl_btn = "Assinar" %}{% assign ft_nl_ok = "Obrigado! Inscrição feita." %}{% assign ft_nl_err = "Não foi possível fazer a inscrição. Tente novamente." %}{% assign ft_donate = "Doe" %}{% assign ft_priv = "Política de privacidade" %}{% assign ft_nl_priv = "Usamos seu e-mail apenas para enviar a newsletter. Você pode cancelar a inscrição quando quiser." %}
+{% else %}{% assign ft_nl_title = "Suscríbete a nuestro newsletter" %}{% assign ft_nl_text = "Novedades de nuestros proyectos, talleres y actividades." %}{% assign ft_nl_ph = "Tu correo" %}{% assign ft_nl_btn = "Suscribirme" %}{% assign ft_nl_ok = "¡Gracias! Ya estás suscrito/a." %}{% assign ft_nl_err = "No pudimos suscribirte. Intenta de nuevo." %}{% assign ft_donate = "Dona" %}{% assign ft_priv = "Política de privacidad" %}{% assign ft_nl_priv = "Usamos tu correo solo para enviarte el newsletter. Puedes darte de baja cuando quieras." %}{% endif %}
 <footer>
     <div class="container">
         <div class="row">
@@ -21,6 +21,7 @@
                         <button type="submit" class="btn btn-primary">{{ ft_nl_btn }}</button>
                     </div>
                     <p class="newsletter-status" role="status" aria-live="polite"></p>
+                    <p class="newsletter-privacy">{{ ft_nl_priv }} <a href="{{ ft_prefix }}/privacy.html">{{ ft_priv }}</a>.</p>
                 </form>
                 <script src="/static/js/newsletter.js" defer></script>
                 {% endif %}
@@ -53,7 +54,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; CIRTA, 2025</p>
+                <p class="copyright text-muted">Copyright &copy; CIRTA, 2026 · <a href="{{ ft_prefix }}/privacy.html">{{ ft_priv }}</a></p>
             </div>
         </div>
     </div>

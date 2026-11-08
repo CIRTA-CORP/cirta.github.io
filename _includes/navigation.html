@@ -116,10 +116,11 @@
                 <li class="dropdown lang-switcher">
                     {% assign basename = page.url | remove_first: prefix %}
                     <a href="#" class="dropdown-toggle lang-btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ lang | upcase }}</a>
-                    <ul class="dropdown-menu lang-menu" id="dropdown-lang">
-                        <li><a href="{{ basename }}" class="{% if lang == 'es' %}active{% endif %}">ES</a></li>
-                        <li><a href="/en{{ basename }}" class="{% if lang == 'en' %}active{% endif %}">EN</a></li>
-                        <li><a href="/pt{{ basename }}" class="{% if lang == 'pt' %}active{% endif %}">PT</a></li>
+                    <ul class="dropdown-menu dropdown-menu-right lang-menu" id="dropdown-lang">
+                        <!-- Cada idioma con su propio nombre, para que quien lo habla lo reconozca. -->
+                        <li><a href="{{ basename }}" hreflang="es" lang="es" class="{% if lang == 'es' %}active{% endif %}">Español</a></li>
+                        <li><a href="/en{{ basename }}" hreflang="en" lang="en" class="{% if lang == 'en' %}active{% endif %}">English</a></li>
+                        <li><a href="/pt{{ basename }}" hreflang="pt" lang="pt" class="{% if lang == 'pt' %}active{% endif %}">Português</a></li>
                     </ul>
                 </li>
             </ul>
@@ -176,7 +177,14 @@
     min-width: 0;
 }
 
-.lang-menu > li > a.active {
+.navbar-custom .nav .lang-menu > li > a {
+    text-transform: none;
+    white-space: nowrap;
+}
+
+.navbar-custom .nav .lang-menu > li > a.active,
+.navbar-custom .nav .lang-menu > li > a.active:hover,
+.navbar-custom .nav .lang-menu > li > a.active:focus {
     color: #fff;
     background-color: #7C4DD9;
 }

@@ -428,7 +428,7 @@ hr:has(+ .goals), .goals + hr { display: none; }
 .inspo-lead { font-size: 18px; color: #444; max-width: 760px; margin: 0 0 25px; }
 .inspo-grid {
     list-style: none; padding: 0; margin: 0 0 30px;
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
 }
 .inspo-card {
     border: 1px solid #e6e0f2; border-radius: 8px; background: #fff;

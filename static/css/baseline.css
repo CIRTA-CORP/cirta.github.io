@@ -338,3 +338,21 @@ header.intro-header.intro-header-home { min-height: 300px; margin-bottom: 30px; 
 /* El footer va centrado (la regla general .container p lo dejaba a la izquierda). */
 footer .container p { text-align: center; }
 .footer-donate a { text-decoration: none; }
+
+/* Portada: Objetivos 2030 como franja compacta (íconos, título corto y una línea) */
+.goals { padding: 10px 0 20px; text-align: center; }
+.goals-title { font-size: 28px; margin: 10px 0 28px; }
+.goals .goal { margin-bottom: 20px; }
+.goals .goal .fa {
+    font-size: 24px;
+    color: var(--cirta-purple-dark);
+    width: 56px;
+    height: 56px;
+    line-height: 56px;
+    border-radius: 50%;
+    background: #f1ebfb;
+}
+.goals .goal h3 { font-size: 18px; font-weight: 600; margin: 12px 0 6px; }
+.goals .goal p, .goals .goals-more { text-align: center; }
+.goals .goal p { font-size: 16px; color: #555; max-width: 320px; margin: 0 auto; }
+.goals .goals-more { font-weight: 600; margin-top: 4px; }

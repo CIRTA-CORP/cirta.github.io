@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Si está vacío, el chatbot ofrece el formulario de contacto con el motivo "proyecto".
     var MEETING_URL = "https://calendly.com/lmmartiner/30min";
 
-    var CHATBOT_ENDPOINT = "https://script.google.com/macros/s/AKfycbzJRYvJXe45a5GP2hdry3ymOOpP-ZYzZDAwjvh53MAUeuA4EAIavykbuWgk8FTIVDCNXg/exec";
+    var CHATBOT_ENDPOINT = "https://script.google.com/macros/s/AKfycbyS3XfPfrcaUDNvJvU6MRdm7rEWDLn52DqdcaCtLPYE398GxMWiIq0yuu9Eoi6YWpnq/exec";
 
     // Textos según el idioma de la página (<html lang="es|en|pt">).
     var I18N = {
@@ -40,7 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var LANG = (document.documentElement.lang || "es").slice(0, 2);
     var T = I18N[LANG] || I18N.es;
     var LANG_PREFIX = (LANG === "en" || LANG === "pt") ? "/" + LANG : "";
-    var PROJECT_REPLY = T.quickReplies[2]; // "Tengo un proyecto"
+    // Marca que agrega la IA cuando ya entendió el caso y tiene nombre y empresa:
+    // [[REUNION|Nombre|Empresa]]. El nombre se usa para prellenar Calendly.
+    var MEETING_RE = /\[\[REUNION(?:\|([^|\]]*))?(?:\|([^\]]*))?\]\]/;
     var meetingOffered = false;
     var ERROR_MESSAGE = T.error;
     var QUICK_REPLIES = T.quickReplies;
@@ -69,15 +71,16 @@ document.addEventListener("DOMContentLoaded", function () {
         return el;
     }
 
-    // Al final del flujo "Tengo un proyecto": botón para agendar reunión (o ir al formulario).
-    function offerMeeting() {
+    // Botón para agendar reunión (o ir al formulario). Solo se muestra cuando la IA,
+    // tras entender el problema, agrega la marca [[REUNION|Nombre|Empresa]] a su respuesta.
+    function offerMeeting(name) {
         if (meetingOffered) return;
         meetingOffered = true;
         var el = addMessage(T.meetingText, "bot");
         var link = document.createElement("a");
         link.className = "cirta-msg-action";
         if (MEETING_URL) {
-            link.href = MEETING_URL;
+            link.href = MEETING_URL + (name ? (MEETING_URL.indexOf("?") === -1 ? "?" : "&") + "name=" + encodeURIComponent(name) : "");
             link.target = "_blank";
             link.rel = "noopener";
             link.textContent = T.meetingBtn;
@@ -125,10 +128,17 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(function (res) { return res.json(); })
             .then(function (data) {
                 if (data.result !== "success") throw new Error(data.message || ERROR_MESSAGE);
-                history.push({ role: "assistant", content: data.reply });
+                var raw = String(data.reply || "");
+                var meeting = raw.match(MEETING_RE);
+                // En el historial se conserva la marca para que la IA sepa que ya ofreció
+                // la reunión; en pantalla se quita, junto con cualquier enlace de agenda.
+                history.push({ role: "assistant", content: raw });
+                var shown = raw.replace(MEETING_RE, "")
+                    .replace(/https?:\/\/(www\.)?calendly\.com\/\S*/gi, "")
+                    .trim();
                 typing.remove();
-                addMessage(data.reply, "bot");
-                if (text === PROJECT_REPLY) offerMeeting();
+                addMessage(shown, "bot");
+                if (meeting) offerMeeting((meeting[1] || "").trim());
             })
             .catch(function (err) {
                 // Se descarta la pregunta sin respuesta para mantener roles alternados.

@@ -117,6 +117,8 @@ function callClaude_(messages) {
     payload: JSON.stringify({
       model: MODEL,
       max_tokens: MAX_TOKENS,
+      // Esfuerzo bajo: menos tokens de razonamiento (se cobran como salida) y respuestas más rápidas.
+      output_config: { effort: 'low' },
       system: SYSTEM_PROMPT,
       messages: messages
     }),

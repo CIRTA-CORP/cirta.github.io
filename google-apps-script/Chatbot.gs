@@ -37,7 +37,6 @@ var SYSTEM_PROMPT = [
   '- Voluntariado: completar el formulario en la sección "Participa"; el equipo contacta según intereses y disponibilidad. Se buscan personas autodidactas y dispuestas al aprendizaje dirigido, principalmente en los proyectos; la dedicación depende de cada persona y cada uno se pone sus metas.',
   '- Equipo: sección "Nosotros" > "Equipo".',
   '- Contacto: formulario de "Contacto" o contacto@cirta.cl.',
-  '- Dirección postal: Av. Rodelillo 4299, Valparaíso, Chile.',
   '- Donaciones: página "Dona" (menú "Participa"). Por seguridad los datos bancarios no se publican: se piden por el formulario de "Contacto" con motivo "Donaciones"; para aportes mensuales, de empresas o comprobantes, formulario de "Contacto" con motivo "Donaciones".',
   '- Servicios (página "Servicios"): tres modalidades. (1) Consultoría e integración para empresas (diagnóstico tecnológico, integración de robótica, visión computacional e IA, capacitación de equipos): servicio pagado, con cotización según el alcance. (2) Proyectos en colaboración de I+D con universidades, organismos públicos e instituciones, con financiamiento conjunto (fondos concursables, cofinanciamiento o aportes de los socios). (3) Desafíos para la comunidad CIRTA: ONG y startups que recién comienzan envían un desafío y un equipo de voluntarios en formación, guiado por profesionales de CIRTA y con la garantía de la corporación de que el prototipo funcionará como se acordó, lo trabaja como proyecto formativo (cupos limitados); se pide un aporte para materiales básicos y una donación a la corporación; respondemos en 2 días con una estimación de tiempo, pero como lo hacen voluntarios no hay plazo de desarrollo fijo; el código es de CIRTA, la organización recibe el prototipo y CIRTA puede mostrarlo en su portafolio; si hay interés puede pasar a colaboración. Áreas: prototipos robóticos, visión computacional, inspección submarina con ROV y formación.',
   '- La conversación inicial con CIRTA es sin costo hasta definir juntos el problema y las necesidades del proyecto.',
@@ -63,8 +62,8 @@ function doPost(e) {
       return respond_({ result: 'error', message: 'El asistente está muy ocupado. Intenta en unos minutos.' });
     }
     var reply = callClaude_(messages);
-    logConversation_(body, messages[messages.length - 1].content, reply);
-    return respond_({ result: 'success', reply: reply });
+    var logStatus = logConversation_(body, messages[messages.length - 1].content, reply);
+    return respond_({ result: 'success', reply: reply, log: logStatus });
   } catch (err) {
     console.error(err);
     return respond_({ result: 'error', message: 'No pude responder ahora. Intenta más tarde.' });
@@ -117,6 +116,8 @@ function callClaude_(messages) {
     payload: JSON.stringify({
       model: MODEL,
       max_tokens: MAX_TOKENS,
+      // Esfuerzo bajo: menos tokens de razonamiento (se cobran como salida) y respuestas más rápidas.
+      output_config: { effort: 'low' },
       system: SYSTEM_PROMPT,
       messages: messages
     }),
@@ -147,7 +148,11 @@ function logConversation_(body, question, reply) {
   var lock = LockService.getScriptLock();
   try {
     lock.waitLock(10000);
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    // Planilla: la vinculada al proyecto, o la indicada en la propiedad
+    // del script CHATBOT_SHEET_ID (si el proyecto no está vinculado a una hoja).
+    var sheetId = PropertiesService.getScriptProperties().getProperty('CHATBOT_SHEET_ID');
+    var ss = sheetId ? SpreadsheetApp.openById(sheetId.trim()) : SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) return 'error: el proyecto no está vinculado a una planilla (define CHATBOT_SHEET_ID)';
     var sheet = ss.getSheetByName(LOG_SHEET);
     if (!sheet) {
       sheet = ss.insertSheet(LOG_SHEET, 0);
@@ -173,7 +178,7 @@ function logConversation_(body, question, reply) {
         1,
         turn
       ]);
-      return;
+      return 'ok';
     }
 
     var row = found.getRow();
@@ -188,8 +193,10 @@ function logConversation_(body, question, reply) {
     // Una celda admite ~50.000 caracteres: se conserva lo más reciente.
     values[8] = (String(values[8] || '') + '\n\n' + turn).slice(-49000);
     sheet.getRange(row, 1, 1, LOG_HEADERS.length).setValues([values]);
+    return 'ok';
   } catch (err) {
     console.error(err);
+    return 'error: ' + String(err && err.message || err).slice(0, 200);
   } finally {
     lock.releaseLock();
   }
@@ -198,4 +205,17 @@ function logConversation_(body, question, reply) {
 function respond_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * Ejecutar UNA VEZ desde el editor (seleccionar "autorizar" > Ejecutar) para
+ * conceder los permisos de Hojas de cálculo y de conexión externa (API de Claude).
+ * Luego publicar una nueva versión de la implementación.
+ */
+function autorizar() {
+  var sheetId = PropertiesService.getScriptProperties().getProperty('CHATBOT_SHEET_ID');
+  var ss = sheetId ? SpreadsheetApp.openById(sheetId.trim()) : SpreadsheetApp.getActiveSpreadsheet();
+  Logger.log(ss ? 'Planilla OK: ' + ss.getName() : 'No hay planilla: define CHATBOT_SHEET_ID');
+  UrlFetchApp.fetch('https://api.anthropic.com/v1/models', { muteHttpExceptions: true });
+  Logger.log('Conexión externa OK');
 }

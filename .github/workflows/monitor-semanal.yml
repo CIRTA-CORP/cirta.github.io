@@ -1,0 +1,31 @@
+name: Monitor semanal del sitio
+
+# Revisa www.cirta.cl todos los domingos. El informe queda en el resumen de la
+# ejecución (pestaña Actions). Si algo falla, la ejecución queda en rojo y GitHub
+# envía su aviso por correo (según la configuración de notificaciones de la cuenta).
+# También se puede ejecutar a mano: pestaña Actions > "Monitor semanal del sitio" > Run workflow.
+
+on:
+  schedule:
+    - cron: "0 12 * * 0"   # domingos 12:00 UTC (9:00 en Chile)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Revisar el sitio
+        env:
+          SITE_URL: https://www.cirta.cl
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python3 -I .github/scripts/monitor.py

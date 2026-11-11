@@ -3,13 +3,12 @@
  *
  * Este archivo NO vive en el repo web (github.io es estático); vive en el
  * proyecto Apps Script vinculado a una hoja de cálculo nueva "Chatbot",
- * donde se registra cada mensaje. Actúa como proxy: la API key de Claude
+ * donde se registra UNA FILA POR CONVERSACIÓN en la pestaña "Conversaciones"
+ * (se crea sola con sus encabezados la primera vez). Actúa como proxy: la API key de Claude
  * queda guardada en el servidor y nunca se expone en el navegador.
  *
  * Antes de desplegar:
  * 0. Crea la hoja de cálculo "Chatbot" y abre Extensiones > Apps Script.
- *    Encabezados sugeridos en la fila 1:
- *      Fecha | ID conversación | Pregunta | Respuesta | Página
  * 1. Configuración del proyecto (ícono de engranaje) > "Propiedades del script":
  *      ANTHROPIC_API_KEY = <tu API key de https://console.anthropic.com>
  * 2. Implementar > Nueva implementación > Tipo "Aplicación web"
@@ -48,8 +47,9 @@ var SYSTEM_PROMPT = [
   'Cuando alguien cuente que tiene un proyecto, problema o desafío (o pulse "Tengo un proyecto"):',
   '- Primero entiende el caso conversando: haz UNA pregunta por mensaje, breve y concreta. Averigua, según corresponda: qué problema quiere resolver, en qué contexto u organización, qué ha intentado o con qué cuenta hoy, qué resultado espera y si tiene plazos.',
   '- No propongas una reunión ni menciones agendar hasta tener claro el problema, el contexto y el objetivo (normalmente después de 3 o 4 respuestas de la persona). Si la persona pide reunirse antes, acéptalo.',
-  '- Cuando ya entiendas el caso, resume en una oración lo que entendiste, sugiere conversarlo con el equipo en una reunión breve y termina tu mensaje con la marca [[REUNION]] (exactamente así, al final). El sitio mostrará el botón para agendar.',
-  '- Nunca escribas enlaces de agenda ni URLs de Calendly u otros; usa solo la marca [[REUNION]], y solo una vez por conversación.'
+  '- Cuando ya entiendas el caso, resume en una oración lo que entendiste y propón conversarlo con el equipo en una reunión breve. Antes de dar el botón, pide el nombre de la persona y el nombre de su empresa u organización (si ya los dijo, no los vuelvas a pedir; si no tiene empresa, acepta "Particular").',
+  '- Cuando tengas nombre y empresa, confirma en una oración que puede agendar con el botón y termina tu mensaje con la marca [[REUNION|Nombre|Empresa]] (exactamente con ese formato, al final, sin el carácter | dentro de los datos). Ejemplo: [[REUNION|Ana Pérez|Frutícola Sur]]. El sitio mostrará el botón para agendar.',
+  '- Nunca escribas enlaces de agenda ni URLs de Calendly u otros; usa solo la marca, y solo una vez por conversación.'
 ].join('\n');
 
 function doPost(e) {
@@ -133,19 +133,65 @@ function callClaude_(messages) {
     .join('');
 }
 
-// Guarda una fila por mensaje. Si falla, no se interrumpe la respuesta al usuario.
+// Registro: UNA FILA POR CONVERSACIÓN (pestaña "Conversaciones").
+// Cada mensaje actualiza la fila de su sesión: se agrega la pregunta y la
+// respuesta al texto de la conversación. Si la IA ofrece la reunión con la
+// marca [[REUNION|Nombre|Empresa]], se completan Nombre, Empresa y Reunión.
+// Si el registro falla, no se interrumpe la respuesta al usuario.
+var LOG_SHEET = 'Conversaciones';
+var LOG_HEADERS = ['Inicio', 'Última actividad', 'ID conversación', 'Página',
+  'Nombre', 'Empresa', 'Reunión ofrecida', 'Mensajes', 'Conversación'];
+var MEETING_RE = /\[\[REUNION(?:\|([^|\]]*))?(?:\|([^\]]*))?\]\]/;
+
 function logConversation_(body, question, reply) {
+  var lock = LockService.getScriptLock();
   try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    sheet.appendRow([
-      new Date(),
-      String(body.sessionId || '').slice(0, 40),
-      question,
-      reply,
-      String(body.page || '').slice(0, 200)
-    ]);
+    lock.waitLock(10000);
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName(LOG_SHEET);
+    if (!sheet) {
+      sheet = ss.insertSheet(LOG_SHEET, 0);
+      sheet.appendRow(LOG_HEADERS);
+      sheet.setFrozenRows(1);
+    }
+
+    var sessionId = String(body.sessionId || '').slice(0, 40) || 'sin-id';
+    var now = new Date();
+    var meeting = String(reply).match(MEETING_RE);
+    var cleanReply = String(reply).replace(MEETING_RE, '').trim();
+    var turn = 'Persona: ' + question + '\nAsistente: ' + cleanReply;
+
+    var found = sheet.getRange('C:C').createTextFinder(sessionId)
+      .matchEntireCell(true).findNext();
+
+    if (!found) {
+      sheet.appendRow([
+        now, now, sessionId, String(body.page || '').slice(0, 200),
+        meeting ? (meeting[1] || '').trim() : '',
+        meeting ? (meeting[2] || '').trim() : '',
+        meeting ? now : '',
+        1,
+        turn
+      ]);
+      return;
+    }
+
+    var row = found.getRow();
+    var values = sheet.getRange(row, 1, 1, LOG_HEADERS.length).getValues()[0];
+    values[1] = now;
+    if (meeting) {
+      if (meeting[1]) values[4] = meeting[1].trim();
+      if (meeting[2]) values[5] = meeting[2].trim();
+      if (!values[6]) values[6] = now;
+    }
+    values[7] = Number(values[7] || 0) + 1;
+    // Una celda admite ~50.000 caracteres: se conserva lo más reciente.
+    values[8] = (String(values[8] || '') + '\n\n' + turn).slice(-49000);
+    sheet.getRange(row, 1, 1, LOG_HEADERS.length).setValues([values]);
   } catch (err) {
     console.error(err);
+  } finally {
+    lock.releaseLock();
   }
 }
 

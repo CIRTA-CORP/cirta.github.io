@@ -40,7 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var LANG = (document.documentElement.lang || "es").slice(0, 2);
     var T = I18N[LANG] || I18N.es;
     var LANG_PREFIX = (LANG === "en" || LANG === "pt") ? "/" + LANG : "";
-    var PROJECT_REPLY = T.quickReplies[2]; // "Tengo un proyecto"
+    // Marca que agrega la IA cuando ya entendió el caso y corresponde ofrecer reunión.
+    var MEETING_MARKER = "[[REUNION]]";
     var meetingOffered = false;
     var ERROR_MESSAGE = T.error;
     var QUICK_REPLIES = T.quickReplies;
@@ -69,7 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return el;
     }
 
-    // Al final del flujo "Tengo un proyecto": botón para agendar reunión (o ir al formulario).
+    // Botón para agendar reunión (o ir al formulario). Solo se muestra cuando la IA,
+    // tras entender el problema, agrega la marca [[REUNION]] a su respuesta.
     function offerMeeting() {
         if (meetingOffered) return;
         meetingOffered = true;
@@ -125,10 +127,16 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(function (res) { return res.json(); })
             .then(function (data) {
                 if (data.result !== "success") throw new Error(data.message || ERROR_MESSAGE);
-                history.push({ role: "assistant", content: data.reply });
+                var reply = String(data.reply || "");
+                var wantsMeeting = reply.indexOf(MEETING_MARKER) !== -1;
+                // Se quita la marca y cualquier enlace de agenda que la IA haya escrito.
+                reply = reply.split(MEETING_MARKER).join("")
+                    .replace(/https?:\/\/(www\.)?calendly\.com\/\S*/gi, "")
+                    .trim();
+                history.push({ role: "assistant", content: reply });
                 typing.remove();
-                addMessage(data.reply, "bot");
-                if (text === PROJECT_REPLY) offerMeeting();
+                addMessage(reply, "bot");
+                if (wantsMeeting) offerMeeting();
             })
             .catch(function (err) {
                 // Se descarta la pregunta sin respuesta para mantener roles alternados.

@@ -102,8 +102,25 @@ function verifyTurnstile_(token) {
     if (json.success === true) return '';
     return (json['error-codes'] || []).join(',') || 'rechazado';
   } catch (err) {
-    return 'error-conexion-cloudflare';
+    return 'error-conexion-cloudflare: ' + String(err && err.message || err).slice(0, 150);
   }
+}
+
+/**
+ * Ejecutar UNA VEZ desde el editor (seleccionar "autorizar" > Ejecutar)
+ * para conceder el permiso de conectarse a servicios externos
+ * (UrlFetchApp), necesario para verificar Turnstile con Cloudflare.
+ * Luego publicar una nueva versión de la implementación.
+ */
+function autorizar() {
+  var r = UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'post',
+    payload: { secret: 'x', response: 'x' },
+    muteHttpExceptions: true
+  });
+  Logger.log('Conexión con Cloudflare OK (HTTP ' + r.getResponseCode() + ')');
+  var secret = PropertiesService.getScriptProperties().getProperty('TURNSTILE_SECRET_KEY');
+  Logger.log(secret ? 'TURNSTILE_SECRET_KEY configurada (' + secret.trim().length + ' caracteres)' : 'FALTA TURNSTILE_SECRET_KEY');
 }
 
 function respond_(obj) {

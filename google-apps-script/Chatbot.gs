@@ -63,8 +63,8 @@ function doPost(e) {
       return respond_({ result: 'error', message: 'El asistente está muy ocupado. Intenta en unos minutos.' });
     }
     var reply = callClaude_(messages);
-    logConversation_(body, messages[messages.length - 1].content, reply);
-    return respond_({ result: 'success', reply: reply });
+    var logStatus = logConversation_(body, messages[messages.length - 1].content, reply);
+    return respond_({ result: 'success', reply: reply, log: logStatus });
   } catch (err) {
     console.error(err);
     return respond_({ result: 'error', message: 'No pude responder ahora. Intenta más tarde.' });
@@ -147,7 +147,11 @@ function logConversation_(body, question, reply) {
   var lock = LockService.getScriptLock();
   try {
     lock.waitLock(10000);
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    // Planilla: la vinculada al proyecto, o la indicada en la propiedad
+    // del script CHATBOT_SHEET_ID (si el proyecto no está vinculado a una hoja).
+    var sheetId = PropertiesService.getScriptProperties().getProperty('CHATBOT_SHEET_ID');
+    var ss = sheetId ? SpreadsheetApp.openById(sheetId.trim()) : SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) return 'error: el proyecto no está vinculado a una planilla (define CHATBOT_SHEET_ID)';
     var sheet = ss.getSheetByName(LOG_SHEET);
     if (!sheet) {
       sheet = ss.insertSheet(LOG_SHEET, 0);
@@ -173,7 +177,7 @@ function logConversation_(body, question, reply) {
         1,
         turn
       ]);
-      return;
+      return 'ok';
     }
 
     var row = found.getRow();
@@ -188,8 +192,10 @@ function logConversation_(body, question, reply) {
     // Una celda admite ~50.000 caracteres: se conserva lo más reciente.
     values[8] = (String(values[8] || '') + '\n\n' + turn).slice(-49000);
     sheet.getRange(row, 1, 1, LOG_HEADERS.length).setValues([values]);
+    return 'ok';
   } catch (err) {
     console.error(err);
+    return 'error: ' + String(err && err.message || err).slice(0, 200);
   } finally {
     lock.releaseLock();
   }

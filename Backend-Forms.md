@@ -111,4 +111,4 @@ Pasos para aplicarlo:
 2. En **Configuración del proyecto > Propiedades del script**, agrega `TURNSTILE_SECRET_KEY` con el Secret Key de Cloudflare Turnstile (nunca lo pongas directo en el código).
 3. **Implementar > Gestionar implementaciones > editar (ícono lápiz) > Nueva versión > Implementar**, para que el cambio quede en producción.
 
-El Site Key público (`0x4AAAAAAEqr-65jKB4O4o8M`) ya está configurado en `contact.html` y `volunteer.html`; el Secret Key correspondiente es el que debe guardarse en las Propiedades del script de cada proyecto Apps Script.
+El Site Key público (`0x4AAAAAAF8NSQ-C73Uttc28`) ya está configurado en `contact.html` y `volunteer.html`; el Secret Key correspondiente es el que debe guardarse en las Propiedades del script de cada proyecto Apps Script.

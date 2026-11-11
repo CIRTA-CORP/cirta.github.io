@@ -14,8 +14,8 @@ Revisa el sitio EN VIVO y genera un informe:
   6. Certificado HTTPS: días hasta que vence.
   7. robots.txt y sitemap.xml accesibles.
 
-Si existen las variables SMTP_*, envía el informe por correo. Sale con código 1
-si hay errores, para que GitHub marque la ejecución como fallida.
+El informe queda en el resumen de la ejecución en GitHub. Sale con código 1 si
+hay errores: GitHub marca la ejecución como fallida y envía su aviso por correo.
 
 Solo usa la biblioteca estándar de Python.
 """
@@ -24,7 +24,6 @@ import html.parser
 import json
 import os
 import re
-import smtplib
 import socket
 import ssl
 import sys
@@ -32,7 +31,6 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
-from email.message import EmailMessage
 
 SITE = os.environ.get("SITE_URL", "https://www.cirta.cl").rstrip("/")
 HOST = urllib.parse.urlparse(SITE).hostname
@@ -307,42 +305,18 @@ def build_report():
     return estado, "\n".join(lines)
 
 
-def send_email(subject, body):
-    server = os.environ.get("SMTP_SERVER")
-    if not server:
-        print("SMTP_SERVER no configurado: no se envía correo.")
-        return
-    msg = EmailMessage()
-    msg["Subject"] = subject
-    msg["From"] = os.environ.get("MAIL_FROM") or os.environ["SMTP_USERNAME"]
-    msg["To"] = os.environ.get("MAIL_TO", "contacto@cirta.cl")
-    msg.set_content(body)
-    port = int(os.environ.get("SMTP_PORT", "465"))
-    if port == 465:
-        with smtplib.SMTP_SSL(server, port, timeout=TIMEOUT) as s:
-            s.login(os.environ["SMTP_USERNAME"], os.environ["SMTP_PASSWORD"])
-            s.send_message(msg)
-    else:
-        with smtplib.SMTP(server, port, timeout=TIMEOUT) as s:
-            s.starttls()
-            s.login(os.environ["SMTP_USERNAME"], os.environ["SMTP_PASSWORD"])
-            s.send_message(msg)
-    print(f"Correo enviado a {msg['To']}")
-
-
 def main():
     for check in (check_site, check_forms, check_newsletter, check_chatbot, check_cert, check_seo_files):
         try:
             check()
         except Exception as e:
             errors.append(f"La revisión {check.__name__} falló inesperadamente: {e}")
-    estado, report = build_report()
+    _, report = build_report()
     print(report)
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
         with open(summary, "a", encoding="utf-8") as f:
             f.write("```\n" + report + "\n```\n")
-    send_email(f"[cirta.cl] {estado}", report)
     sys.exit(1 if errors else 0)
 
 

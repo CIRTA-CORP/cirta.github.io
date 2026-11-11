@@ -23,8 +23,9 @@ function doPost(e) {
 
   // 2) Verificación de Turnstile.
   var turnstileToken = params['cf-turnstile-response'];
-  if (!verifyTurnstile_(turnstileToken)) {
-    return respond_({ result: 'error', message: 'Verificación de seguridad fallida.' });
+  var turnstileError = verifyTurnstile_(turnstileToken);
+  if (turnstileError) {
+    return respond_({ result: 'error', message: 'Verificación de seguridad fallida (' + turnstileError + ').' });
   }
 
   // 3) Revalidación de campos en servidor (no confiar solo en el JS del navegador).
@@ -76,23 +77,33 @@ function doPost(e) {
   return respond_({ result: 'success' });
 }
 
+/**
+ * Verifica el token de Turnstile con Cloudflare.
+ * Devuelve '' si es válido, o un código con el motivo del rechazo
+ * (p. ej. 'falta-TURNSTILE_SECRET_KEY', 'invalid-input-secret').
+ * Los códigos no revelan el secreto y sirven para diagnosticar.
+ */
 function verifyTurnstile_(token) {
-  if (!token) return false;
+  if (!token) return 'sin-token';
 
   var secret = PropertiesService.getScriptProperties().getProperty('TURNSTILE_SECRET_KEY');
-  if (!secret) return false;
+  if (!secret || !secret.trim()) return 'falta-TURNSTILE_SECRET_KEY';
 
-  var response = UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-    method: 'post',
-    payload: {
-      secret: secret,
-      response: token
-    },
-    muteHttpExceptions: true
-  });
-
-  var json = JSON.parse(response.getContentText());
-  return json.success === true;
+  try {
+    var response = UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'post',
+      payload: {
+        secret: secret.trim(),
+        response: token
+      },
+      muteHttpExceptions: true
+    });
+    var json = JSON.parse(response.getContentText());
+    if (json.success === true) return '';
+    return (json['error-codes'] || []).join(',') || 'rechazado';
+  } catch (err) {
+    return 'error-conexion-cloudflare';
+  }
 }
 
 function respond_(obj) {

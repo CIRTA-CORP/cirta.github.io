@@ -37,7 +37,6 @@ var SYSTEM_PROMPT = [
   '- Voluntariado: completar el formulario en la sección "Participa"; el equipo contacta según intereses y disponibilidad. Se buscan personas autodidactas y dispuestas al aprendizaje dirigido, principalmente en los proyectos; la dedicación depende de cada persona y cada uno se pone sus metas.',
   '- Equipo: sección "Nosotros" > "Equipo".',
   '- Contacto: formulario de "Contacto" o contacto@cirta.cl.',
-  '- Dirección postal: Av. Rodelillo 4299, Valparaíso, Chile.',
   '- Donaciones: página "Dona" (menú "Participa"). Por seguridad los datos bancarios no se publican: se piden por el formulario de "Contacto" con motivo "Donaciones"; para aportes mensuales, de empresas o comprobantes, formulario de "Contacto" con motivo "Donaciones".',
   '- Servicios (página "Servicios"): tres modalidades. (1) Consultoría e integración para empresas (diagnóstico tecnológico, integración de robótica, visión computacional e IA, capacitación de equipos): servicio pagado, con cotización según el alcance. (2) Proyectos en colaboración de I+D con universidades, organismos públicos e instituciones, con financiamiento conjunto (fondos concursables, cofinanciamiento o aportes de los socios). (3) Desafíos para la comunidad CIRTA: ONG y startups que recién comienzan envían un desafío y un equipo de voluntarios en formación, guiado por profesionales de CIRTA y con la garantía de la corporación de que el prototipo funcionará como se acordó, lo trabaja como proyecto formativo (cupos limitados); se pide un aporte para materiales básicos y una donación a la corporación; respondemos en 2 días con una estimación de tiempo, pero como lo hacen voluntarios no hay plazo de desarrollo fijo; el código es de CIRTA, la organización recibe el prototipo y CIRTA puede mostrarlo en su portafolio; si hay interés puede pasar a colaboración. Áreas: prototipos robóticos, visión computacional, inspección submarina con ROV y formación.',
   '- La conversación inicial con CIRTA es sin costo hasta definir juntos el problema y las necesidades del proyecto.',
@@ -206,4 +205,17 @@ function logConversation_(body, question, reply) {
 function respond_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * Ejecutar UNA VEZ desde el editor (seleccionar "autorizar" > Ejecutar) para
+ * conceder los permisos de Hojas de cálculo y de conexión externa (API de Claude).
+ * Luego publicar una nueva versión de la implementación.
+ */
+function autorizar() {
+  var sheetId = PropertiesService.getScriptProperties().getProperty('CHATBOT_SHEET_ID');
+  var ss = sheetId ? SpreadsheetApp.openById(sheetId.trim()) : SpreadsheetApp.getActiveSpreadsheet();
+  Logger.log(ss ? 'Planilla OK: ' + ss.getName() : 'No hay planilla: define CHATBOT_SHEET_ID');
+  UrlFetchApp.fetch('https://api.anthropic.com/v1/models', { muteHttpExceptions: true });
+  Logger.log('Conexión externa OK');
 }

@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Si está vacío, el chatbot ofrece el formulario de contacto con el motivo "proyecto".
     var MEETING_URL = "https://calendly.com/lmmartiner/30min";
 
-    var CHATBOT_ENDPOINT = "https://script.google.com/macros/s/AKfycbyS3XfPfrcaUDNvJvU6MRdm7rEWDLn52DqdcaCtLPYE398GxMWiIq0yuu9Eoi6YWpnq/exec";
+    var CHATBOT_ENDPOINT = "https://script.google.com/macros/s/AKfycbwsIGDWX6NE2BgdIlLIrpc8D_ea_TqP_aJVWykZtLgtGBEfl3AnjhXvxmQhcUR6b9Rchw/exec";
 
     // Textos según el idioma de la página (<html lang="es|en|pt">).
     var I18N = {

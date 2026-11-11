@@ -25,8 +25,9 @@ function doPost(e) {
     }
 
     // 2) Verificación de Turnstile.
-    if (!verifyTurnstile_(params['cf-turnstile-response'])) {
-      return ContentService.createTextOutput(JSON.stringify({ result: 'error', message: 'Verificación de seguridad fallida.' }))
+    var turnstileError = verifyTurnstile_(params['cf-turnstile-response']);
+    if (turnstileError) {
+      return ContentService.createTextOutput(JSON.stringify({ result: 'error', message: 'Verificación de seguridad fallida (' + turnstileError + ').' }))
         .setMimeType(ContentService.MimeType.JSON);
     }
 
@@ -119,21 +120,48 @@ function doPost(e) {
   }
 }
 
+/**
+ * Verifica el token de Turnstile con Cloudflare.
+ * Devuelve '' si es válido, o un código con el motivo del rechazo
+ * (p. ej. 'falta-TURNSTILE_SECRET_KEY', 'invalid-input-secret').
+ * Los códigos no revelan el secreto y sirven para diagnosticar.
+ */
 function verifyTurnstile_(token) {
-  if (!token) return false;
+  if (!token) return 'sin-token';
 
   var secret = PropertiesService.getScriptProperties().getProperty('TURNSTILE_SECRET_KEY');
-  if (!secret) return false;
+  if (!secret || !secret.trim()) return 'falta-TURNSTILE_SECRET_KEY';
 
-  var response = UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+  try {
+    var response = UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'post',
+      payload: {
+        secret: secret.trim(),
+        response: token
+      },
+      muteHttpExceptions: true
+    });
+    var json = JSON.parse(response.getContentText());
+    if (json.success === true) return '';
+    return (json['error-codes'] || []).join(',') || 'rechazado';
+  } catch (err) {
+    return 'error-conexion-cloudflare: ' + String(err && err.message || err).slice(0, 150);
+  }
+}
+
+/**
+ * Ejecutar UNA VEZ desde el editor (seleccionar "autorizar" > Ejecutar)
+ * para conceder el permiso de conectarse a servicios externos
+ * (UrlFetchApp), necesario para verificar Turnstile con Cloudflare.
+ * Luego publicar una nueva versión de la implementación.
+ */
+function autorizar() {
+  var r = UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
     method: 'post',
-    payload: {
-      secret: secret,
-      response: token
-    },
+    payload: { secret: 'x', response: 'x' },
     muteHttpExceptions: true
   });
-
-  var json = JSON.parse(response.getContentText());
-  return json.success === true;
+  Logger.log('Conexión con Cloudflare OK (HTTP ' + r.getResponseCode() + ')');
+  var secret = PropertiesService.getScriptProperties().getProperty('TURNSTILE_SECRET_KEY');
+  Logger.log(secret ? 'TURNSTILE_SECRET_KEY configurada (' + secret.trim().length + ' caracteres)' : 'FALTA TURNSTILE_SECRET_KEY');
 }

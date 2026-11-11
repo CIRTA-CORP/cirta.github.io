@@ -1,0 +1,40 @@
+name: Monitor semanal del sitio
+
+# Revisa www.cirta.cl todos los domingos y envía el informe a contacto@cirta.cl.
+# También se puede ejecutar a mano: pestaña Actions > "Monitor semanal del sitio" > Run workflow.
+#
+# Secretos necesarios (Settings > Secrets and variables > Actions):
+#   SMTP_SERVER    p. ej. smtp.hostinger.com
+#   SMTP_PORT      465 (SSL) o 587 (STARTTLS)
+#   SMTP_USERNAME  la cuenta que envía, p. ej. contacto@cirta.cl
+#   SMTP_PASSWORD  la contraseña de esa cuenta
+
+on:
+  schedule:
+    - cron: "0 12 * * 0"   # domingos 12:00 UTC (9:00 en Chile)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Revisar el sitio y enviar informe
+        env:
+          SITE_URL: https://www.cirta.cl
+          MAIL_TO: contacto@cirta.cl
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python3 -I .github/scripts/monitor.py

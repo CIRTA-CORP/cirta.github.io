@@ -17,6 +17,8 @@
     {% assign nav_education = "Education" %}
     {% assign nav_participate = "Get involved" %}
     {% assign nav_volunteer = "Volunteer" %}
+    {% assign nav_internship = "Internships" %}
+    {% assign nav_project = "Projects (thesis, research)" %}
     {% assign nav_contact = "Contact" %}
 {% when "pt" %}
     {% assign nav_donate = "Doe" %}
@@ -32,6 +34,8 @@
     {% assign nav_education = "Educação" %}
     {% assign nav_participate = "Participe" %}
     {% assign nav_volunteer = "Voluntariado" %}
+    {% assign nav_internship = "Estágios" %}
+    {% assign nav_project = "Projetos (TCC, pesquisa)" %}
     {% assign nav_contact = "Contato" %}
 {% else %}
     {% assign nav_donate = "Dona" %}
@@ -47,6 +51,8 @@
     {% assign nav_education = "Educación" %}
     {% assign nav_participate = "Participa" %}
     {% assign nav_volunteer = "Voluntariado" %}
+    {% assign nav_internship = "Prácticas" %}
+    {% assign nav_project = "Proyectos (tesis, investigación)" %}
     {% assign nav_contact = "Contactar" %}
 {% endcase %}
 
@@ -104,6 +110,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nav_participate }}<span class="caret"></span></a>
                     <ul class="dropdown-menu" id="dropdown-participa">
                         <li><a href="{{ prefix }}/volunteer.html">{{ nav_volunteer }}</a></li>
+                        <li><a href="{{ prefix }}/volunteer.html?tipo=practica#formularioVoluntario">{{ nav_internship }}</a></li>
+                        <li><a href="{{ prefix }}/volunteer.html?tipo=proyecto#formularioVoluntario">{{ nav_project }}</a></li>
                         <li><a href="{{ prefix }}/donate.html">{{ nav_donate }}</a></li>
                     </ul>
                 </li>

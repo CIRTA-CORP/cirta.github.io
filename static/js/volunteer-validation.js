@@ -220,3 +220,10 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+// Preselecciona el tipo de participación según ?tipo= (enlaces del menú Participa).
+(function () {
+    var mapa = { voluntariado: 'Voluntariado', practica: 'Práctica', proyecto: 'Proyecto' };
+    var valor = mapa[(new URLSearchParams(window.location.search).get('tipo') || '').toLowerCase()];
+    var select = document.getElementById('tipo');
+    if (valor && select) select.value = valor;
+})();

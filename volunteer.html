@@ -54,7 +54,7 @@ description: "Súmate como voluntario o voluntaria en CIRTA y participa en proye
                 </ol>
                 <hr>
 
-                <form id="formularioVoluntario" action="https://script.google.com/macros/s/AKfycbwX_zG6qCxq-yUC2azUQTDRFGDcSWOjCu7Rq6BAWqmOpUADank4NvU2rYoFpNA_Bd2O/exec" method="POST">
+                <form id="formularioVoluntario" action="https://script.google.com/macros/s/AKfycbwiWX2IR3Q_jpX3P4yuk9QKGCo2qOJg1k01mdE621aBQK-I6KMP9kpfq7Xw0PgfK5fn/exec" method="POST">
                     
                     <input type="hidden" name="_subject" value="Nuevo registro de Voluntariado CIRTA">
 
@@ -80,6 +80,15 @@ description: "Súmate como voluntario o voluntaria en CIRTA y participa en proye
                          <label>Ciudad / Región</label>
                          <input type="text" class="form-control" name="ubicacion" id="ubicacion" placeholder="Ej: Santiago, Región Metropolitana">
                          <small id="error-ubicacion" class="error-msg" style="color: red; display: none; margin-top: 5px;"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo">Tipo de participación</label>
+                        <select class="form-control" name="tipo" id="tipo">
+                            <option value="Voluntariado" selected>Voluntariado</option>
+                            <option value="Práctica">Práctica profesional</option>
+                            <option value="Proyecto">Proyecto (tesis, investigación u otro)</option>
+                        </select>
                     </div>
 
                     <div class="form-group">

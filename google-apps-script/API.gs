@@ -37,6 +37,8 @@ function doPost(e) {
     var email = (params.email || '').trim();
     var disponibilidad = (params.disponibilidad || '').trim();
     var horas = Number(params.horas_semanales);
+    // Tipo de participación: solo valores conocidos; por defecto Voluntariado.
+    var tipo = ['Voluntariado', 'Práctica', 'Proyecto'].indexOf(params.tipo) >= 0 ? params.tipo : 'Voluntariado';
 
     if (nombre.length < 4 || nombre.length > 50) {
       return ContentService.createTextOutput(JSON.stringify({ result: 'error', message: 'Nombre inválido.' }))
@@ -87,15 +89,17 @@ function doPost(e) {
     rowData.push("");
     rowData.push("Pendiente de revisión");
     rowData.push("");
+    rowData.push(tipo); // columna Q: tipo de participación (al final para no mover columnas existentes)
 
     sheet.appendRow(rowData);
 
     // Enviar correo automático a los administradores
     var correoDestino = "contacto@cirta.cl";
-    var asunto = "Postulante a Voluntariado: " + nombre;
+    var asunto = "Postulante (" + tipo + "): " + nombre;
     var cuerpo = "Tienes una nueva postulación de voluntariado desde la web:\n\n" +
                  "Nombre: " + nombre + "\n" +
                  "Email: " + email + "\n" +
+                 "Tipo de participación: " + tipo + "\n" +
                  "Ubicación: " + (params.ubicacion || "") + "\n" +
                  "Intereses: " + intereses + "\n" +
                  "Disponibilidad: " + disponibilidad + " (" + (params.horas_semanales || "0") + " horas semanales)\n\n" +
